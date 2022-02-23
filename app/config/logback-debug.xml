@@ -16,6 +16,9 @@
     <logger name="com.aspectran" level="debug" additivity="false">
         <appender-ref ref="APP-LOG"/>
     </logger>
+    <logger name="com.aspectran.mybatis.SqlSessionTxAdvice" level="info" additivity="false">
+        <appender-ref ref="APP-LOG"/>
+    </logger>
     <logger name="com.aspectran.core.scheduler.service.JobActivityReport" level="debug" additivity="false">
         <appender-ref ref="APP-LOG"/>
     </logger>
@@ -38,6 +41,9 @@
         </encoder>
     </appender>
     <logger name="com.aspectran" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="com.aspectran.mybatis.SqlSessionTxAdvice" level="info" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
     <logger name="com.aspectran.core.scheduler.service.JobActivityReport" level="debug" additivity="false">
