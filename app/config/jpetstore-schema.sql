@@ -67,7 +67,7 @@ create table bannerdata (
 create table orders (
     orderid int not null,
     userid varchar(80) not null,
-    orderdate date not null,
+    orderdate datetime not null,
     shipaddr1 varchar(80) not null,
     shipaddr2 varchar(80) null,
     shipcity varchar(80) not null,
@@ -96,7 +96,7 @@ create table orders (
 create table orderstatus (
     orderid int not null,
     linenum int not null,
-    timestamp date not null,
+    timestamp datetime not null,
     status varchar(2) not null,
     constraint pk_orderstatus primary key (orderid, linenum)
 );
