@@ -86,6 +86,7 @@ daemon: {
 web: {
     uriDecoding: utf-8
     defaultServletName: default
+    trailingSlashRedirect: true
     exposals: {
         +: /**
         -: /assets/**
