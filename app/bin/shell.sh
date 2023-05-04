@@ -38,7 +38,7 @@ fi
 while [ ".$1" != . ]; do
   case "$1" in
   --debug)
-    LOGGING_CONFIG="$BASE_DIR/config/logback-debug.xml"
+    LOGGING_CONFIG="$BASE_DIR/config/logging/logback-debug.xml"
     shift
     continue
     ;;
@@ -52,7 +52,7 @@ if [ -z "$JAVA_OPTS" ]; then
 fi
 CLASSPATH="$BASE_DIR/lib/*"
 if [ -z "$LOGGING_CONFIG" ] || [ ! -f "$LOGGING_CONFIG" ]; then
-  LOGGING_CONFIG="$BASE_DIR/config/logback.xml"
+  LOGGING_CONFIG="$BASE_DIR/config/logging/logback.xml"
 fi
 TMP_DIR="$BASE_DIR/temp"
 ASPECTRAN_CONFIG="$BASE_DIR/config/aspectran-config.apon"

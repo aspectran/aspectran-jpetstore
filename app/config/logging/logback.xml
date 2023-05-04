@@ -2,8 +2,7 @@
 <configuration>
 
     <include file="${aspectran.basePath}/config/logging/logback-default.xml"/>
-    <include file="${aspectran.basePath}/config/logging/logback-console.xml"/>
 
-    <logger name="com.aspectran.jpetstore" level="debug"/>
+    <logger name="com.aspectran.jpetstore" level="info"/>
 
 </configuration>
