@@ -4,7 +4,7 @@
 <aspectran>
 
     <description>
-        Configuration for Database Transactions.
+        Configuration for database transactions
     </description>
 
     <!-- Environment properties for using HSQLDB Database -->
@@ -36,7 +36,7 @@
 
     <bean id="sqlSessionTxAdvice" class="com.aspectran.mybatis.SqlSessionTxAdvice" scope="prototype">
         <description>
-            Advice for Database Transactions.
+            An advice bean that handles database transactions.
         </description>
         <arguments>
             <item>#{sqlSessionFactory}</item>
