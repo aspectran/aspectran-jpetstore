@@ -7,29 +7,18 @@
         Configuration for database transactions
     </description>
 
-    <!-- Environment properties for using HSQLDB Database -->
-    <environment>
-        <properties>
-            <item name="mybatis.environment" value="default"/>
-            <item name="mybatis.db.driver" value="%{classpath:jpetstore.db.properties^driver}"/>
-            <item name="mybatis.db.url" value="%{classpath:jpetstore.db.properties^url}"/>
-            <item name="mybatis.db.username" value="%{classpath:jpetstore.db.properties^username}"/>
-            <item name="mybatis.db.password" value="%{classpath:jpetstore.db.properties^password}"/>
-        </properties>
-    </environment>
-
     <bean id="sqlSessionFactory" class="com.aspectran.mybatis.SqlSessionFactoryBean">
         <description>
             FactoryBean that creates an MyBatis SqlSessionFactory using default MyBatis Configuration.
         </description>
         <properties>
-            <item name="configLocation" value="/config/mybatis/mybatis-config.xml"/>
-            <item name="environment" value="%{mybatis.environment}"/>
+            <item name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+            <item name="environment" value="default"/>
             <item name="properties" type="properties">
-                <entry name="driver">%{mybatis.db.driver}</entry>
-                <entry name="url">%{mybatis.db.url}</entry>
-                <entry name="username">%{mybatis.db.username}</entry>
-                <entry name="password">%{mybatis.db.password}</entry>
+                <entry name="driver">%{classpath:mybatis/jpetstore.db.properties^driver}</entry>
+                <entry name="url">%{classpath:mybatis/jpetstore.db.properties^url}</entry>
+                <entry name="username">%{classpath:mybatis/jpetstore.db.properties^username}</entry>
+                <entry name="password">%{classpath:mybatis/jpetstore.db.properties^password}</entry>
             </item>
         </properties>
     </bean>

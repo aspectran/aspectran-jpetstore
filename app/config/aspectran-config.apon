@@ -6,7 +6,7 @@ system: {
 context: {
     rules: /config/app-context.xml
     resources: [
-        /config
+        /lib/ext
     ]
     scan: [
         com.aspectran.jpetstore
