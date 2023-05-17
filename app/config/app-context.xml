@@ -42,6 +42,6 @@
     <append file="/config/server/server.xml"/>
     <append file="/config/error-report-dev.xml" profile="dev"/>
     <append file="/config/mybatis/mybatis.xml"/>
-    <append file="/config/web/web.xml"/>
+    <append resource="web/web.xml"/>
 
 </aspectran>

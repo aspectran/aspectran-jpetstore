@@ -1,3 +1,3 @@
 CREATE SCHEMA IF NOT EXISTS jpetstore;
-RUNSCRIPT FROM 'classpath:jpetstore-schema.sql';
-RUNSCRIPT FROM 'classpath:jpetstore-dataload.sql';
+RUNSCRIPT FROM 'classpath:mybatis/jpetstore-schema.sql';
+RUNSCRIPT FROM 'classpath:mybatis/jpetstore-dataload.sql';

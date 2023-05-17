@@ -42,17 +42,9 @@
         </advice>
     </aspect>
 
-    <append file="/config/web/common/xss-prevent.xml"/>
-    <append file="/config/web/common/static-codes.xml"/>
-    <append file="/config/web/common/user.xml"/>
-    <append file="/config/web/apm/apm.xml"/>
-
-    <translet name="/">
-        <transform format="text">
-            <template style="apon">
-                |Hello~
-            </template>
-        </transform>
-    </translet>
+    <append resource="web/common/xss-prevent.xml"/>
+    <append resource="web/common/static-codes.xml"/>
+    <append resource="web/common/user.xml"/>
+    <append resource="web/apm/apm.xml"/>
 
 </aspectran>
