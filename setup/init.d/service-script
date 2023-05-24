@@ -12,8 +12,8 @@
 
 . /home/aspectran/jpetstore/app.conf
 
-DAEMON_OUT="$DEPLOY_DIR/logs/daemon.out"
-DAEMON_ERR="$DEPLOY_DIR/logs/daemon.err"
+DAEMON_OUT="$DEPLOY_DIR/logs/daemon-stdout.log"
+DAEMON_ERR="$DEPLOY_DIR/logs/daemon-stderr.log"
 
 case "$1" in
 start)
