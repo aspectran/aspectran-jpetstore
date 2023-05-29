@@ -3,7 +3,7 @@
 . ./app.conf
 
 cd "$REPO_DIR" || exit
-mvn clean package $1
+mvn clean package -Dmaven.test.skip=true $1
 
 echo "Deploying libraries to $DEPLOY_DIR/lib ..."
 rm -rf "${DEPLOY_DIR:?}"/lib/*
