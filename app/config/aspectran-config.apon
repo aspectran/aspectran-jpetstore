@@ -69,7 +69,6 @@ shell: {
         com.aspectran.shell.command.builtins.RestartCommand
         com.aspectran.shell.command.builtins.QuitCommand
     ]
-    workingDir: /work
     historyFile: /logs/history.log
     verbose: true
     exposals: {
