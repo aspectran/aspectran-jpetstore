@@ -3,11 +3,10 @@
         "http://aspectran.github.io/dtd/aspectran-7.dtd">
 <aspectran>
 
-    <aspect id="checkUserAuthenticatedAspect" order="1">
+    <aspect id="checkUserAuthenticationAspect" order="1">
         <description>
-            Retrieves UserSession from the session
-            and stores it as a request attribute.
-            The attribute name is "user".
+            Check whether the user is authenticated.
+            If the user is not logged in, redirect to the sign-on screen.
         </description>
         <joinpoint>
             pointcut: {
@@ -17,7 +16,7 @@
         </joinpoint>
         <advice bean="userSessionManager">
             <before>
-                <invoke method="checkUserAuthenticated"/>
+                <invoke method="checkUserAuthentication"/>
             </before>
         </advice>
         <exception>

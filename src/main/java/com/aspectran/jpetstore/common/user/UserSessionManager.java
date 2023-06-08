@@ -43,7 +43,7 @@ public class UserSessionManager implements ActivityContextAware {
         getSessionAdapter().invalidate();
     }
 
-    public void checkUserAuthenticated() {
+    public void checkUserAuthentication() {
         UserSession userSession = getUserSession();
         if (!userSession.isAuthenticated()) {
             throw new UserAuthenticationRequiredException();
