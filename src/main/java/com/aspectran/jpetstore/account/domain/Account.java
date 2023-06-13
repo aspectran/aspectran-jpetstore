@@ -34,7 +34,7 @@ import java.io.Serializable;
         field = "repeatedPassword",
         dependField = "password",
         dependFieldName = "Password",
-        message = "{validation.confirmPassword.message}"
+        message = "{common.validation.confirmPassword.message}"
 )
 public class Account implements Serializable {
 
@@ -45,7 +45,7 @@ public class Account implements Serializable {
     private String username;
 
     @NotBlank(groups = Create.class)
-    @Pattern(regexp = "(^$|.{4,20})", message = "{validation.password.message}")
+    @Pattern(regexp = "(^$|.{4,20})", message = "{common.validation.password.message}")
     private String password;
 
     private String repeatedPassword;
