@@ -23,7 +23,7 @@
             Defines a bean for multilingual processing.
         </description>
         <properties>
-            <item name="basename">locale.messages</item>
+            <item name="basename">web/locale.messages</item>
         </properties>
     </bean>
 
