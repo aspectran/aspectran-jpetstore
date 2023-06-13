@@ -84,6 +84,9 @@ public class LogtailEndpoint extends InstantActivitySupport {
 
     @OnClose
     public void onClose(Session session, CloseReason reason) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Websocket session " + session.getId() + " has been closed. Reason: " + reason);
+        }
         removeSession(session);
     }
 
