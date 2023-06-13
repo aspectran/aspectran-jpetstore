@@ -43,14 +43,20 @@ import java.util.List;
 @Bean
 public class AccountActivity {
 
-    @Autowired
     public AccountService accountService;
 
-    @Autowired
     public CatalogService catalogService;
 
-    @Autowired
     public UserSessionManager sessionManager;
+
+    @Autowired
+    public AccountActivity(AccountService accountService,
+                           CatalogService catalogService,
+                           UserSessionManager sessionManager) {
+        this.accountService = accountService;
+        this.catalogService = catalogService;
+        this.sessionManager = sessionManager;
+    }
 
     @Request("/account/newAccountForm")
     @Dispatch("account/NewAccountForm")

@@ -17,6 +17,7 @@ package com.aspectran.jpetstore.cart;
 
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.component.bean.annotation.Action;
+import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.Dispatch;
@@ -40,6 +41,7 @@ public class CartActivity {
 
     private final CartService cartService;
 
+    @Autowired
     public CartActivity(CartService cartService) {
         this.cartService = cartService;
     }

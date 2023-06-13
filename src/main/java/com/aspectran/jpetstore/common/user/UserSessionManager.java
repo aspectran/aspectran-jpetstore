@@ -15,6 +15,7 @@
  */
 package com.aspectran.jpetstore.common.user;
 
+import com.aspectran.core.activity.Translet;
 import com.aspectran.core.adapter.SessionAdapter;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Bean;
@@ -22,6 +23,8 @@ import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.aware.ActivityContextAware;
 import com.aspectran.core.context.ActivityContext;
 import com.aspectran.core.util.Assert;
+
+import java.util.HashMap;
 
 @Component
 @Bean("userSessionManager")
@@ -43,17 +46,24 @@ public class UserSessionManager implements ActivityContextAware {
         getSessionAdapter().invalidate();
     }
 
-    public void checkUserAuthentication() {
-        UserSession userSession = getUserSession();
-        if (!userSession.isAuthenticated()) {
-            throw new UserAuthenticationRequiredException();
+    public void checkUserAuthentication(Translet translet) {
+        UserSession userSession = getUserSession(false);
+        if (userSession == null || !userSession.isAuthenticated()) {
+            //throw new UserAuthenticationRequiredException();
+            translet.redirect("/account/signonForm", new HashMap<>() {{
+                put("referer", translet.getRequestName());
+            }});
         }
     }
 
     public UserSession getUserSession() {
+        return getUserSession(true);
+    }
+
+    public UserSession getUserSession(boolean create) {
         try {
             UserSession userSession = getSessionAdapter().getAttribute(USER_SESSION_KEY);
-            if (userSession == null) {
+            if (userSession == null && create) {
                 synchronized (USER_SESSION_KEY) {
                     userSession = getSessionAdapter().getAttribute(USER_SESSION_KEY);
                     if (userSession == null) {

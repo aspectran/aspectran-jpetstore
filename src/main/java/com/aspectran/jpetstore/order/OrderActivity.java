@@ -44,14 +44,20 @@ import java.util.List;
 @Bean
 public class OrderActivity {
 
-    @Autowired
-    public OrderService orderService;
+    private final OrderService orderService;
+
+    private final CartService cartService;
+
+    private final UserSessionManager sessionManager;
 
     @Autowired
-    public CartService cartService;
-
-    @Autowired
-    public UserSessionManager sessionManager;
+    public OrderActivity(OrderService orderService,
+                         CartService cartService,
+                         UserSessionManager sessionManager) {
+        this.orderService = orderService;
+        this.cartService = cartService;
+        this.sessionManager = sessionManager;
+    }
 
     /**
      * List orders.
