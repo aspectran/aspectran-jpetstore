@@ -40,7 +40,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Pattern(regexp = "^(\\d+-\\d+-\\d+|\\d+ \\d+ \\d+|\\d+)$")
 public @interface TelephoneNumber {
 
-    String message() default "{validation.TelephoneNumber.message}";
+    String message() default "{common.validation.TelephoneNumber.message}";
 
     Class<?>[] groups() default {};
 

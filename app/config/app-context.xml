@@ -23,7 +23,9 @@
             Defines a bean for multilingual processing.
         </description>
         <properties>
-            <item name="basename">web/locale.messages</item>
+            <item name="basenames" type="array">
+                <value>web.locale.ValidationMessages</value>
+            </item>
         </properties>
     </bean>
 
