@@ -75,8 +75,14 @@ public class UserSessionManager implements ActivityContextAware {
             return userSession;
         } catch (ClassCastException e) {
             // Exception that can occur if the UserSession class changes during development.
-            expire();
-            return null;
+            if (create) {
+                UserSession userSession = new UserSession();
+                save(userSession);
+                return userSession;
+            } else {
+                expire();
+                return null;
+            }
         }
     }
 

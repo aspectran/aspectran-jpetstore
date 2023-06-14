@@ -33,7 +33,7 @@ public class UserSession implements Serializable {
 
     private boolean authenticated;
 
-    private Cart cart = new Cart();
+    private final Cart cart = new Cart();
 
     private Order order;
 
@@ -63,10 +63,6 @@ public class UserSession implements Serializable {
 
     public Cart getCart() {
         return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
     }
 
     public Order getOrder() {
