@@ -18,17 +18,6 @@
     <bean id="currentTranslet" class="com.aspectran.core.support.CurrentTransletFactoryBean" scope="request"/>
     <bean id="currentActivityData" class="com.aspectran.core.support.CurrentActivityDataFactoryBean" scope="request"/>
 
-    <bean id="messageSource" class="com.aspectran.core.support.i18n.message.ResourceBundleMessageSource">
-        <description>
-            Defines a bean for multilingual processing.
-        </description>
-        <properties>
-            <item name="basenames" type="array">
-                <value>web.locale.ValidationMessages</value>
-            </item>
-        </properties>
-    </bean>
-
     <aspect id="defaultTransletSettings">
         <description>
             Define an aspect to inject the default settings into all translets.

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -22,7 +23,7 @@
 <div id="Welcome">
 	<div id="WelcomeContent">
 		<c:if test="${not empty user.account}">
-			Welcome ${user.account.firstName}!
+			<aspectran:message code='welcome' arguments="${user.account.firstName}"/>
 		</c:if>
 	</div>
 </div>
