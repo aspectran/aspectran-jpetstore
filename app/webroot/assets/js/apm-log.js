@@ -1,92 +1,10 @@
-function SessionStats(endpoint, refreshInterval) {
-    this.endpoint = endpoint;
-    this.refreshInterval = refreshInterval;
-    this.socket = null;
-    this.heartbeatTimer = null;
-
-    this.openSocket = function() {
-        if (this.socket) {
-            this.socket.close();
-        }
-        let url = new URL(this.endpoint, location.href);
-        url.protocol = url.protocol.replace('https:', 'wss:');
-        url.protocol = url.protocol.replace('http:', 'ws:');
-        this.socket = new WebSocket(url.href);
-        let self = this;
-        this.socket.onopen = function (event) {
-            self.socket.send("JOIN:" + self.refreshInterval);
-            self.heartbeatPing();
-        };
-        this.socket.onmessage = function (event) {
-            if (typeof event.data === "string") {
-                if (event.data === "--heartbeat-pong--") {
-                    self.heartbeatPing();
-                    return;
-                }
-                let stats = JSON.parse(event.data);
-                self.printStats(stats);
-            }
-        };
-        this.socket.onclose = function (event) {
-            self.closeSocket();
-        };
-        this.socket.onerror = function (event) {
-            console.error("WebSocket error observed:", event);
-            setTimeout(function () {
-                self.openSocket();
-            }, 60000);
-        };
-    };
-
-    this.closeSocket = function() {
-        if (this.socket) {
-            this.socket.close();
-            this.socket = null;
-        }
-    };
-
-    this.heartbeatPing = function() {
-        if (this.heartbeatTimer) {
-            clearTimeout(this.heartbeatTimer);
-        }
-        let self = this;
-        this.heartbeatTimer = setTimeout(function () {
-            if (self.socket) {
-                self.socket.send("--heartbeat-ping--");
-                self.heartbeatTimer = null;
-                self.heartbeatPing();
-            }
-        }, 57000);
-    };
-
-    this.printStats = function(stats) {
-        $(".activeSessionCount").text(stats.activeSessionCount);
-        $(".highestSessionCount").text(stats.highestSessionCount);
-        $(".createdSessionCount").text(stats.createdSessionCount);
-        $(".expiredSessionCount").text(stats.expiredSessionCount);
-        $(".rejectedSessionCount").text(stats.rejectedSessionCount);
-        if (stats.currentUsers) {
-            $(".users").empty();
-            stats.currentUsers.forEach(function(username) {
-                let status = $("<div/>").addClass("status");
-                if (username.indexOf("0:") === 0) {
-                    status.addClass("logged-out")
-                }
-                username = username.substr(2);
-                let name = $("<span/>").addClass("name").text(username);
-                let li = $("<li/>").append(status).append(name);
-                $(".users").append(li);
-            });
-        }
-    };
-}
-
 function LogTailer(endpoint, tailers) {
     this.endpoint = endpoint;
     this.tailers = tailers;
     this.socket = null;
     this.heartbeatTimer = null;
     this.scrollTimer = null;
+    this.oldDateTime = null;
 
     this.openSocket = function() {
         if (this.socket) {
@@ -214,17 +132,16 @@ function LogTailer(endpoint, tailers) {
         }
     };
 
-    this.pattern1 = /^Session ([\w.]+) complete, active requests=(\d+)/i;
-    this.pattern2 = /^Invalidate session id=([\w.]+)/i;
-    this.pattern3 = /^Session ([\w.]+) accessed, stopping timer, active requests=(\d+)/i;
-    this.pattern4 = /^Create new session id=([\w.]+)/i;
+    // this.pattern1 = /^Session ([\w.]+) complete, active requests=(\d+)/i;
+    this.pattern1 = /^DEBUG (.+) \[(.+)] Session (\S+) complete, active requests=(\d+)/;
+    // this.pattern2 = /^Invalidate session id=([\w.]+)/i;
+    this.pattern2 = /^DEBUG (.+) \[(.+)] Invalidate session id=(\S+)/;
+    // this.pattern3 = /^Session ([\w.]+) accessed, stopping timer, active requests=(\d+)/i;
+    this.pattern3 = /^DEBUG (.+) \[(.+)] Session (\S+) accessed, stopping timer, active requests=(\d+)/;
+    // this.pattern4 = /^Create new session id=([\w.]+)/i;
+    this.pattern4 = /^DEBUG (.+) \[(.+)] Create new session id=(\S+)/;
 
     this.launchMissile = function(line) {
-        let idx = line.indexOf("] ");
-        if (idx !== -1) {
-            line = line.substring(idx + 2);
-        }
-
         let matches1 = this.pattern1.exec(line);
         let matches2 = this.pattern2.exec(line);
         let matches3 = this.pattern3.exec(line);
@@ -236,14 +153,17 @@ function LogTailer(endpoint, tailers) {
         console.log('matches3', matches3);
         console.log('matches4', matches4);
 
+        let dateTime = "";
         let sessionId = "";
         let requests = 0;
         if (matches1 || matches2) {
             if (matches1) {
-                sessionId = matches1[1];
-                requests = matches1[2];
+                dateTime = matches1[1];
+                sessionId = matches1[3];
+                requests = matches1[4];
             } else {
-                sessionId = matches2[1];
+                dateTime = matches2[1];
+                sessionId = matches2[3];
             }
             if (requests > 3) {
                 requests = 3;
@@ -261,18 +181,24 @@ function LogTailer(endpoint, tailers) {
                     mis.remove();
                 }, dur);
             }
+            let dt = moment(dateTime);
+            console.log(dt);
+
             return;
         }
         if (matches3 || matches4) {
             if (matches3) {
-                sessionId = matches3[1];
-                requests = matches3[2];
+                dateTime = matches3[1];
+                sessionId = matches3[3];
+                requests = matches3[4];
             } else {
-                sessionId = matches4[1];
+                dateTime = matches4[1];
+                sessionId = matches4[3];
             }
             if (requests > 3) {
                 requests = 3;
             }
+            this.oldDateTime = moment(dateTime);
         }
         if (requests > 0) {
             let mis = $("<div/>").attr("sessionId", sessionId + requests);
