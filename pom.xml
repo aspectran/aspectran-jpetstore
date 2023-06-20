@@ -33,7 +33,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aspectran.version>7.3.2</aspectran.version>
+        <aspectran.version>7.3.3-SNAPSHOT</aspectran.version>
         <slf4j.version>2.0.7</slf4j.version>
         <logback.version>1.4.8</logback.version>
     </properties>
