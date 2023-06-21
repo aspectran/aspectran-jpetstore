@@ -14,7 +14,7 @@
 --    limitations under the License.
 --
 
-create table supplier (
+create table if not exists supplier (
     suppid int not null,
     name varchar(80) null,
     status varchar(2) not null,
@@ -27,13 +27,13 @@ create table supplier (
     constraint pk_supplier primary key (suppid)
 );
 
-create table signon (
+create table if not exists signon (
     username varchar(25) not null,
     password varchar(25)  not null,
     constraint pk_signon primary key (username)
 );
 
-create table account (
+create table if not exists account (
     userid varchar(80) not null,
     email varchar(80) not null,
     firstname varchar(80) not null,
@@ -49,7 +49,7 @@ create table account (
     constraint pk_account primary key (userid)
 );
 
-create table profile (
+create table if not exists profile (
     userid varchar(80) not null,
     langpref varchar(80) not null,
     favcategory varchar(30),
@@ -58,16 +58,16 @@ create table profile (
     constraint pk_profile primary key (userid)
 );
 
-create table bannerdata (
+create table if not exists bannerdata (
     favcategory varchar(80) not null,
     bannername varchar(255)  null,
     constraint pk_bannerdata primary key (favcategory)
 );
 
-create table orders (
+create table if not exists orders (
     orderid int not null,
     userid varchar(80) not null,
-    orderdate date not null,
+    orderdate datetime not null,
     shipaddr1 varchar(80) not null,
     shipaddr2 varchar(80) null,
     shipcity varchar(80) not null,
@@ -93,15 +93,15 @@ create table orders (
     constraint pk_orders primary key (orderid)
 );
 
-create table orderstatus (
+create table if not exists orderstatus (
     orderid int not null,
     linenum int not null,
-    timestamp date not null,
+    timestamp datetime not null,
     status varchar(2) not null,
     constraint pk_orderstatus primary key (orderid, linenum)
 );
 
-create table lineitem (
+create table if not exists lineitem (
     orderid int not null,
     linenum int not null,
     itemid varchar(10) not null,
@@ -110,14 +110,14 @@ create table lineitem (
     constraint pk_lineitem primary key (orderid, linenum)
 );
 
-create table category (
+create table if not exists category (
 	catid varchar(10) not null,
 	name varchar(80) null,
 	descn varchar(255) null,
 	constraint pk_category primary key (catid)
 );
 
-create table product (
+create table if not exists product (
     productid varchar(10) not null,
     category varchar(10) not null,
     name varchar(80) null,
@@ -127,10 +127,10 @@ create table product (
         references category (catid)
 );
 
-create index productCat on product (category);
-create index productName on product (name);
+create index if not exists productCat on product (category);
+create index if not exists productName on product (name);
 
-create table item (
+create table if not exists item (
     itemid varchar(10) not null,
     productid varchar(10) not null,
     listprice decimal(10,2) null,
@@ -149,15 +149,15 @@ create table item (
         references supplier (suppid)
 );
 
-create index itemProd on item (productid);
+create index if not exists itemProd on item (productid);
 
-create table inventory (
+create table if not exists inventory (
     itemid varchar(10) not null,
     qty int not null,
     constraint pk_inventory primary key (itemid)
 );
 
-create table sequence
+create table if not exists sequence
 (
     name               varchar(30)  not null,
     nextid             int          not null,

@@ -1,0 +1,5 @@
+# Variables required for execution can be explicitly specified here.
+#JAVA_HOME=
+JVM_MS=64
+JVM_MX=128
+#JVM_SS=1024

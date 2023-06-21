@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# Copyright (c) 2008-2021 The Aspectran Project
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -35,6 +33,11 @@ BASE_DIR="$(
   cd "$BASE_DIR" || exit
   pwd
 )"
+
+set -a
+. "$BASE_DIR/bin/run.options"
+set +a
+
 while [ ".$1" != . ]; do
   case "$1" in
   --base-dir)
@@ -75,18 +78,31 @@ else
   JAVA_BIN="$JAVA_HOME/bin/java"
 fi
 
-DAEMON_OUT="$BASE_DIR/logs/daemon.out"
+if [ ! -z "$JVM_MS" ]; then
+  JVM_MS_OPT="-Xms${JVM_MS}m"
+fi
+if [ ! -z "$JVM_MX" ]; then
+  JVM_MX_OPT="-Xmx${JVM_MX}m"
+fi
+if [ ! -z "$JVM_SS" ]; then
+  JVM_SS_OPT="-Xss${JVM_SS}k"
+fi
+
+DAEMON_OUT="$BASE_DIR/logs/daemon-stdout.log"
 DAEMON_MAIN="com.aspectran.daemon.DefaultDaemon"
 LOCK_FILE="$BASE_DIR/.lock"
 CLASSPATH="$BASE_DIR/lib/*"
 TMP_DIR="$BASE_DIR/temp"
-LOGGING_CONFIG="$BASE_DIR/config/logback.xml"
 ASPECTRAN_CONFIG="$BASE_DIR/config/aspectran-config.apon"
+LOGGING_CONFIG="$BASE_DIR/config/logging/logback.xml"
 
 start_daemon() {
   rm -f "$DAEMON_OUT"
   nohup "$JAVA_BIN" \
-    $JAVA_OPTS \
+    $JVM_MS_OPT \
+    $JVM_MX_OPT \
+    $JVM_SS_OPT \
+    -server \
     -classpath "$CLASSPATH" \
     -Djava.awt.headless=true \
     -Djava.net.preferIPv4Stack=true \
@@ -104,7 +120,7 @@ start_daemon() {
     line=$(head -n 1 "$DAEMON_OUT")
   done
   fail_str="Failed to initialize daemon"
-  if [ "${line#*$fail_str}" != "$line" ]; then
+  if [ "$fail_str" != "$line" ]; then
     return 0
   else
     return 1
@@ -112,7 +128,7 @@ start_daemon() {
 }
 
 stop_daemon() {
-  echo "command: quit" >"$BASE_DIR/inbound/99-quit.apon"
+  echo "command: quit" >"$BASE_DIR/cmd/incoming/99-quit.apon"
   return $?
 }
 

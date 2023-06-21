@@ -68,7 +68,7 @@
   </select>
 
   <select id="getInventoryQuantity" resultType="int">
-    SELECT QTY AS value
+    SELECT QTY
     FROM INVENTORY
     WHERE ITEMID = #{itemId}
   </select>

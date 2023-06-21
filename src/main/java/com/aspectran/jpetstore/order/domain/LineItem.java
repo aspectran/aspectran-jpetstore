@@ -38,6 +38,9 @@ public class LineItem implements Serializable {
     private Item item;
     private BigDecimal total;
 
+    public LineItem() {
+    }
+
     /**
      * Instantiates a new line item.
      * @param lineNumber
