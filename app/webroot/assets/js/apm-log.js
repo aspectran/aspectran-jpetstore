@@ -78,10 +78,7 @@ function LogTailer(endpoint, tailers) {
 
     this.printMessage = function(tailer, text, visualize) {
         if (visualize) {
-            let self = this;
-            setTimeout(function () {
-                self.launchMissile(text);
-            }, 1);
+            this.launchMissile(text);
         }
         let line = $("<p/>").text(text);
         let logtail = $("#" + tailer);
@@ -132,13 +129,9 @@ function LogTailer(endpoint, tailers) {
         }
     };
 
-    // this.pattern1 = /^Session ([\w.]+) complete, active requests=(\d+)/i;
     this.pattern1 = /^DEBUG (.+) \[(.+)] Session (\S+) complete, active requests=(\d+)/;
-    // this.pattern2 = /^Invalidate session id=([\w.]+)/i;
     this.pattern2 = /^DEBUG (.+) \[(.+)] Invalidate session id=(\S+)/;
-    // this.pattern3 = /^Session ([\w.]+) accessed, stopping timer, active requests=(\d+)/i;
     this.pattern3 = /^DEBUG (.+) \[(.+)] Session (\S+) accessed, stopping timer, active requests=(\d+)/;
-    // this.pattern4 = /^Create new session id=([\w.]+)/i;
     this.pattern4 = /^DEBUG (.+) \[(.+)] Create new session id=(\S+)/;
 
     this.launchMissile = function(line) {
@@ -147,22 +140,23 @@ function LogTailer(endpoint, tailers) {
         let matches3 = this.pattern3.exec(line);
         let matches4 = this.pattern4.exec(line);
 
-        console.log(line);
-        console.log('matches1', matches1);
-        console.log('matches2', matches2);
-        console.log('matches3', matches3);
-        console.log('matches4', matches4);
+        if (matches1 || matches2 || matches3 || matches4) {
+            console.log(line);
+            console.log('matches1', matches1);
+            console.log('matches2', matches2);
+            console.log('matches3', matches3);
+            console.log('matches4', matches4);
+        }
 
         let dateTime = "";
         let sessionId = "";
         let requests = 0;
+        let delay = 0;
         if (matches1 || matches2) {
             if (matches1) {
-                dateTime = matches1[1];
                 sessionId = matches1[3];
                 requests = matches1[4];
             } else {
-                dateTime = matches2[1];
                 sessionId = matches2[3];
             }
             if (requests > 3) {
@@ -170,8 +164,9 @@ function LogTailer(endpoint, tailers) {
             }
             requests++;
             let mis = $(".missile-route").find(".missile[sessionId='" + (sessionId + requests) + "']");
+            console.log("remove delay:", mis.data("delay")||0);
             if (mis.length > 0) {
-                let dur = 850;
+                let dur = 850 + mis.data("delay")||0;
                 if (mis.hasClass("mis-2")) {
                     dur += 250;
                 } else if (mis.hasClass("mis-3")) {
@@ -181,9 +176,6 @@ function LogTailer(endpoint, tailers) {
                     mis.remove();
                 }, dur);
             }
-            let dt = moment(dateTime);
-            console.log(dt);
-
             return;
         }
         if (matches3 || matches4) {
@@ -198,12 +190,30 @@ function LogTailer(endpoint, tailers) {
             if (requests > 3) {
                 requests = 3;
             }
-            this.oldDateTime = moment(dateTime);
+            let dt = moment(dateTime);
+            if (this.oldDateTime) {
+                delay = dt.diff(this.oldDateTime);
+                console.log("diff:", delay);
+                if (delay > 1000) {
+                    delay = 0;
+                }
+            }
+            this.oldDateTime = dt;
         }
         if (requests > 0) {
             let mis = $("<div/>").attr("sessionId", sessionId + requests);
             mis.css("top", this.generateRandom(3, 90 - (requests * 2)) + "%");
-            mis.appendTo($(".missile-route")).addClass("missile mis-" + requests);
+            mis.appendTo($(".missile-route")).addClass("hidden missile");
+            mis.data("delay", delay);
+            if (delay > 0) {
+                console.log("launched!", delay);
+                setTimeout(function () {
+                    mis.addClass("mis-" + requests).removeClass("hidden");
+                }, delay);
+            } else {
+                console.log("launched!", delay);
+                mis.addClass("mis-" + requests).removeClass("hidden");
+            }
         }
     };
 
