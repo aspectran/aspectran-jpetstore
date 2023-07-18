@@ -4,7 +4,7 @@ function LogTailer(endpoint, tailers) {
     this.socket = null;
     this.heartbeatTimer = null;
     this.scrollTimer = null;
-    this.oldDateTime = null;
+    this.prevDateTime = null;
 
     this.openSocket = function() {
         if (this.socket) {
@@ -25,19 +25,8 @@ function LogTailer(endpoint, tailers) {
             if (typeof event.data === "string") {
                 if (event.data === "--heartbeat-pong--") {
                     self.heartbeatPing();
-                    return;
-                }
-                let msg = event.data;
-                let idx = msg.indexOf(":");
-                if (idx !== -1) {
-                    let tailerName = msg.substring(0, idx);
-                    let text = msg.substring(idx + 1);
-                    if (text.startsWith("last:")) {
-                        text = text.substring(5);
-                        self.printMessage(tailerName, text, false);
-                    } else {
-                        self.printMessage(tailerName, text, true);
-                    }
+                } else {
+                    self.parseMessage(event.data);
                 }
             }
         };
@@ -76,10 +65,21 @@ function LogTailer(endpoint, tailers) {
         }, 57000);
     };
 
-    this.printMessage = function(tailer, text, visualize) {
-        if (visualize) {
-            this.launchMissile(text);
+    this.parseMessage = function(msg) {
+        let idx = msg.indexOf(":");
+        if (idx !== -1) {
+            let tailerName = msg.substring(0, idx);
+            let text = msg.substring(idx + 1);
+            if (text.startsWith("last:")) {
+                text = text.substring(5);
+            } else {
+                this.launchMissile(text);
+            }
+            this.printMessage(tailerName, text);
         }
+    };
+
+    this.printMessage = function(tailer, text) {
         let line = $("<p/>").text(text);
         let logtail = $("#" + tailer);
         logtail.append(line);
@@ -134,14 +134,14 @@ function LogTailer(endpoint, tailers) {
     this.pattern3 = /^DEBUG (.+) \[(.+)] Session (\S+) accessed, stopping timer, active requests=(\d+)/;
     this.pattern4 = /^DEBUG (.+) \[(.+)] Create new session id=(\S+)/;
 
-    this.launchMissile = function(line) {
-        let matches1 = this.pattern1.exec(line);
-        let matches2 = this.pattern2.exec(line);
-        let matches3 = this.pattern3.exec(line);
-        let matches4 = this.pattern4.exec(line);
+    this.launchMissile = function(text) {
+        let matches1 = this.pattern1.exec(text);
+        let matches2 = this.pattern2.exec(text);
+        let matches3 = this.pattern3.exec(text);
+        let matches4 = this.pattern4.exec(text);
 
         if (matches1 || matches2 || matches3 || matches4) {
-            console.log(line);
+            console.log(text);
             console.log('matches1', matches1);
             console.log('matches2', matches2);
             console.log('matches3', matches3);
@@ -164,7 +164,6 @@ function LogTailer(endpoint, tailers) {
             }
             requests++;
             let mis = $(".missile-route").find(".missile[sessionId='" + (sessionId + requests) + "']");
-            console.log("remove delay:", mis.data("delay")||0);
             if (mis.length > 0) {
                 let dur = 850 + mis.data("delay")||0;
                 if (mis.hasClass("mis-2")) {
@@ -174,7 +173,7 @@ function LogTailer(endpoint, tailers) {
                 }
                 setTimeout(function () {
                     mis.remove();
-                }, dur);
+                }, dur + 800);
             }
             return;
         }
@@ -192,27 +191,26 @@ function LogTailer(endpoint, tailers) {
                 requests = 3;
             }
             let dt = moment(dateTime);
-            if (this.oldDateTime) {
-                delay = dt.diff(this.oldDateTime);
-                console.log("diff:", delay);
-                if (delay > 1000) {
+            if (this.prevDateTime) {
+                delay = dt.diff(this.prevDateTime);
+                if (delay >= 1000 || delay < 0) {
                     delay = 0;
                 }
             }
-            this.oldDateTime = dt;
+            delay += 1000;
+            this.prevDateTime = dt;
         }
         if (requests > 0) {
+            console.log('delay:', delay);
             let mis = $("<div/>").attr("sessionId", sessionId + requests);
             mis.css("top", this.generateRandom(3, 90 - (requests * 2)) + "%");
             mis.appendTo($(".missile-route")).addClass("hidden missile");
             mis.data("delay", delay);
             if (delay > 0) {
-                console.log("launched!", delay);
                 setTimeout(function () {
                     mis.addClass("mis-" + requests).removeClass("hidden");
                 }, delay);
             } else {
-                console.log("launched!", delay);
                 mis.addClass("mis-" + requests).removeClass("hidden");
             }
         }
