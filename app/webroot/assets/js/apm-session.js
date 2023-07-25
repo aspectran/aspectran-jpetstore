@@ -19,7 +19,7 @@ function SessionStats(endpoint, refreshInterval) {
         };
         this.socket.onmessage = function (event) {
             if (typeof event.data === "string") {
-                if (event.data === "--heartbeat-pong--") {
+                if (event.data === "--pong--") {
                     self.heartbeatPing();
                     return;
                 }
@@ -52,7 +52,7 @@ function SessionStats(endpoint, refreshInterval) {
         let self = this;
         this.heartbeatTimer = setTimeout(function () {
             if (self.socket) {
-                self.socket.send("--heartbeat-ping--");
+                self.socket.send("--ping--");
                 self.heartbeatTimer = null;
                 self.heartbeatPing();
             }

@@ -4,7 +4,9 @@ function LogTailer(endpoint, tailers) {
     this.socket = null;
     this.heartbeatTimer = null;
     this.scrollTimer = null;
-    this.prevDateTime = null;
+    this.prevLogTime = null;
+    this.prevSentTime = new Date().getTime();
+    this.prevPosition = 0;
 
     this.openSocket = function() {
         if (this.socket) {
@@ -23,7 +25,7 @@ function LogTailer(endpoint, tailers) {
         };
         this.socket.onmessage = function (event) {
             if (typeof event.data === "string") {
-                if (event.data === "--heartbeat-pong--") {
+                if (event.data === "--pong--") {
                     self.heartbeatPing();
                 } else {
                     self.parseMessage(event.data);
@@ -31,12 +33,12 @@ function LogTailer(endpoint, tailers) {
             }
         };
         this.socket.onclose = function (event) {
-            self.printEventMessage('Socket connection closed. Please refresh this page to try again!');
+            self.printEventMessage("Socket connection closed. Please refresh this page to try again!");
             self.closeSocket();
         };
         this.socket.onerror = function (event) {
             console.error("WebSocket error observed:", event);
-            self.printErrorMessage('Could not connect to WebSocket server');
+            self.printErrorMessage("Could not connect to WebSocket server");
             self.switchTailBite(false, false);
             setTimeout(function () {
                 self.openSocket();
@@ -58,7 +60,7 @@ function LogTailer(endpoint, tailers) {
         let self = this;
         this.heartbeatTimer = setTimeout(function () {
             if (self.socket) {
-                self.socket.send("--heartbeat-ping--");
+                self.socket.send("--ping--");
                 self.heartbeatTimer = null;
                 self.heartbeatPing();
             }
@@ -140,13 +142,13 @@ function LogTailer(endpoint, tailers) {
         let matches3 = this.pattern3.exec(text);
         let matches4 = this.pattern4.exec(text);
 
-        if (matches1 || matches2 || matches3 || matches4) {
-            console.log(text);
-            console.log('matches1', matches1);
-            console.log('matches2', matches2);
-            console.log('matches3', matches3);
-            console.log('matches4', matches4);
-        }
+        // if (matches1 || matches2 || matches3 || matches4) {
+        //     console.log(text);
+        //     console.log('matches1', matches1);
+        //     console.log('matches2', matches2);
+        //     console.log('matches3', matches3);
+        //     console.log('matches4', matches4);
+        // }
 
         let dateTime = "";
         let sessionId = "";
@@ -165,7 +167,7 @@ function LogTailer(endpoint, tailers) {
             requests++;
             let mis = $(".missile-route").find(".missile[sessionId='" + (sessionId + requests) + "']");
             if (mis.length > 0) {
-                let dur = 850 + mis.data("delay")||0;
+                let dur = 650 + mis.data("delay")||0;
                 if (mis.hasClass("mis-2")) {
                     dur += 250;
                 } else if (mis.hasClass("mis-3")) {
@@ -190,29 +192,38 @@ function LogTailer(endpoint, tailers) {
             if (requests > 3) {
                 requests = 3;
             }
-            let dt = moment(dateTime);
-            if (this.prevDateTime) {
-                delay = dt.diff(this.prevDateTime);
-                if (delay >= 1000 || delay < 0) {
+            let logTime = moment(dateTime);
+            let currTime = new Date().getTime();
+            let spentTime = currTime - this.prevSentTime;
+            if (this.prevLogTime) {
+                delay = logTime.diff(this.prevLogTime);
+                if (delay >= 1000 || delay < 0 || spentTime >= delay + 1000) {
                     delay = 0;
                 }
             }
-            delay += 1000;
-            this.prevDateTime = dt;
+            this.prevLogTime = logTime;
+            this.prevSentTime = currTime;
         }
         if (requests > 0) {
-            console.log('delay:', delay);
-            let mis = $("<div/>").attr("sessionId", sessionId + requests);
-            mis.css("top", this.generateRandom(3, 90 - (requests * 2)) + "%");
-            mis.appendTo($(".missile-route")).addClass("hidden missile");
-            mis.data("delay", delay);
-            if (delay > 0) {
-                setTimeout(function () {
-                    mis.addClass("mis-" + requests).removeClass("hidden");
-                }, delay);
-            } else {
-                mis.addClass("mis-" + requests).removeClass("hidden");
+            //console.log('delay:', delay);
+            let position = this.generateRandom(3, 120 - 3 - (requests * 4 + 8));
+            //console.log('position:', position);
+            if (delay < 1000 && this.prevPosition) {
+                if (Math.abs(position - this.prevPosition) <= 20) {
+                    position = this.generateRandom(3, 120 - 3 - (requests * 4 + 8));
+                    if (Math.abs(position - this.prevPosition) <= 20) {
+                        position = this.generateRandom(3, 120 - 3 - (requests * 4 + 8));
+                    }
+                }
             }
+            this.prevPosition = position;
+            let mis = $("<div/>").attr("sessionId", sessionId + requests);
+            mis.data("delay", 1000 + delay);
+            setTimeout(function () {
+                mis.addClass("mis-" + requests).removeClass("hidden");
+            }, 1000 + delay);
+            mis.css("top", position + "px");
+            mis.appendTo($(".missile-route")).addClass("hidden missile");
         }
     };
 
