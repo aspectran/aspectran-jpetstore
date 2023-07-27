@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="/assets/css/apm.css?20200111">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
-<script src="/assets/js/apm-log.js?20230719"></script>
+<script src="/assets/js/apm-log.js?20230727"></script>
 <script src="/assets/js/apm-session.js?20230608"></script>
 <div class="grid-x grid-padding-x">
     <div class="cell t20">
