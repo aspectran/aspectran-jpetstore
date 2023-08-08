@@ -20,6 +20,7 @@ import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.util.logging.Logger;
 import com.aspectran.core.util.logging.LoggerFactory;
+import com.aspectran.jpetstore.common.user.UserSession;
 import com.aspectran.undertow.server.TowServer;
 import com.aspectran.websocket.jsr356.AspectranConfigurator;
 import io.undertow.server.session.SessionManager;
@@ -45,6 +46,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static com.aspectran.jpetstore.common.user.UserSessionManager.USER_SESSION_KEY;
 
 @Component
 @ServerEndpoint(
@@ -177,15 +180,18 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
         stats.setRejectedSessionCount(statistics.getRejectedSessions());
 
         // Current Users
-        List<String> currentUsers = new ArrayList<>();
+        List<String> currentSessions = new ArrayList<>();
         Set<String> sessionIds = sessionManager.getActiveSessions();
         for (String sessionId : sessionIds) {
             io.undertow.server.session.Session session = sessionManager.getSession(sessionId);
             if (session != null) {
-                currentUsers.add("1:Session " + session.getId() + " created at " + formatTime(session.getCreationTime()));
+                UserSession userSession = (UserSession)session.getAttribute(USER_SESSION_KEY);
+                String loggedIn = (userSession != null && userSession.isAuthenticated() ? "1" : "0");
+                currentSessions.add(loggedIn + ":Session " + session.getId() + " created at " +
+                        formatTime(session.getCreationTime()));
             }
         }
-        stats.setCurrentUsers(currentUsers.toArray(new String[0]));
+        stats.setCurrentSessions(currentSessions.toArray(new String[0]));
         return stats;
     }
 

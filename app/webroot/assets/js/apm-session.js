@@ -65,17 +65,17 @@ function SessionStats(endpoint, refreshInterval) {
         $(".createdSessionCount").text(stats.createdSessionCount);
         $(".expiredSessionCount").text(stats.expiredSessionCount);
         $(".rejectedSessionCount").text(stats.rejectedSessionCount);
-        if (stats.currentUsers) {
-            $(".users").empty();
-            stats.currentUsers.forEach(function(username) {
+        if (stats.currentSessions) {
+            $(".sessions").empty();
+            stats.currentSessions.forEach(function(username) {
                 let status = $("<div/>").addClass("status");
                 if (username.indexOf("0:") === 0) {
                     status.addClass("logged-out")
                 }
-                username = username.substr(2);
+                username = username.substring(2);
                 let name = $("<span/>").addClass("name").text(username);
                 let li = $("<li/>").append(status).append(name);
-                $(".users").append(li);
+                $(".sessions").append(li);
             });
         }
     };
