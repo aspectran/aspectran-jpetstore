@@ -143,7 +143,6 @@
                             maxIdleSeconds: 600
                             evictionIdleSeconds: 300
                             scavengingIntervalSeconds: 180
-                            removeUnloadableSessions: true
                             clusterEnabled: false
                         </item>
                     </arguments>
