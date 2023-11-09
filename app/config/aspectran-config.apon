@@ -69,6 +69,16 @@ shell: {
         com.aspectran.shell.command.builtins.RestartCommand
         com.aspectran.shell.command.builtins.QuitCommand
     ]
+    session: {
+        workerName: sn0
+        maxSessions: 1
+        maxIdleSeconds: 1800
+        scavengingIntervalSeconds: 600
+        fileStore: {
+            storeDir: /work/_sessions/shell
+        }
+        enabled: true
+    }
     historyFile: /logs/history.log
     verbose: true
     exposals: {
