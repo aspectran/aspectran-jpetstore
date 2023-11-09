@@ -3,6 +3,6 @@
 
     <include file="${aspectran.basePath}/config/logging/logback-default.xml"/>
 
-    <logger name="com.aspectran.jpetstore" level="info"/>
+    <logger name="com.aspectran.jpetstore" level="debug"/>
 
 </configuration>
