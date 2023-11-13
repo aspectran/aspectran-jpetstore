@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.aspectran.jpetstore.apm.stats;
+package com.aspectran.jpetstore.monitoring.stats;
 
 import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
@@ -51,7 +51,7 @@ import static com.aspectran.jpetstore.common.user.UserSessionManager.USER_SESSIO
 
 @Component
 @ServerEndpoint(
-        value = "/apm/stats",
+        value = "/monitoring/stats",
         configurator = AspectranConfigurator.class
 )
 @AvoidAdvice

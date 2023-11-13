@@ -82,6 +82,6 @@
     <append resource="web/common/xss-prevent.xml"/>
     <append resource="web/common/static-codes.xml"/>
     <append resource="web/common/user.xml"/>
-    <append resource="web/apm/apm.xml"/>
+    <append resource="web/monitoring/monitoring.xml"/>
 
 </aspectran>
