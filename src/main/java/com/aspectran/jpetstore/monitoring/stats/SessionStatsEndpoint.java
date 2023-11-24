@@ -18,16 +18,14 @@ package com.aspectran.jpetstore.monitoring.stats;
 import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.core.component.session.DefaultSession;
 import com.aspectran.core.component.session.SessionHandler;
 import com.aspectran.core.component.session.SessionStatistics;
 import com.aspectran.core.util.logging.Logger;
 import com.aspectran.core.util.logging.LoggerFactory;
 import com.aspectran.jpetstore.common.user.UserSession;
 import com.aspectran.undertow.server.TowServer;
-import com.aspectran.undertow.server.session.TowSessionManager;
 import com.aspectran.websocket.jsr356.AspectranConfigurator;
-import io.undertow.server.session.SessionManager;
-import io.undertow.servlet.api.DeploymentManager;
 import jakarta.websocket.CloseReason;
 import jakarta.websocket.OnClose;
 import jakarta.websocket.OnError;
@@ -170,9 +168,7 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
 
     public SessionStatsPayload getSessionStats() {
         TowServer towServer = getBeanRegistry().getBean("tow.server");
-        DeploymentManager deploymentManager = towServer.getServletContainer().getDeployment("root.war");
-        SessionManager sessionManager = deploymentManager.getDeployment().getSessionManager();
-        SessionHandler sessionHandler = ((TowSessionManager)sessionManager).getSessionHandler();
+        SessionHandler sessionHandler = towServer.getSessionHandler("root.war");
         SessionStatistics statistics = sessionHandler.getStatistics();
 
         SessionStatsPayload stats = new SessionStatsPayload();
@@ -186,11 +182,11 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
 
         // Current Users
         List<String> currentSessions = new ArrayList<>();
-        Set<String> sessionIds = sessionManager.getActiveSessions();
+        Set<String> sessionIds = sessionHandler.getActiveSessions();
         for (String sessionId : sessionIds) {
-            io.undertow.server.session.Session session = sessionManager.getSession(sessionId);
+            DefaultSession session = sessionHandler.getSession(sessionId);
             if (session != null) {
-                UserSession userSession = (UserSession)session.getAttribute(USER_SESSION_KEY);
+                UserSession userSession = session.getAttribute(USER_SESSION_KEY);
                 String loggedIn = (userSession != null && userSession.isAuthenticated() ? "1" : "0");
                 String username = (userSession != null && userSession.getAccount() != null ?
                         "(" + userSession.getAccount().getUsername() + ") " : "");
