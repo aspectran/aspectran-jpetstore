@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="/assets/css/monitoring.css?20230808">
+<link rel="stylesheet" href="/assets/css/monitoring.css?20231121">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
-<script src="/assets/js/monitoring-log.js?20231110"></script>
-<script src="/assets/js/monitoring-session.js?20231110"></script>
+<script src="/assets/js/monitoring-log.js?20231121"></script>
+<script src="/assets/js/monitoring-session.js?20231121"></script>
 <div class="grid-x grid-padding-x">
     <div class="cell t20">
         <h3>Server Logs
@@ -32,8 +32,10 @@
             <dl>
                 <dt>Current Active Sessions</dt>
                 <dd><span class="number activeSessionCount">0</span></dd>
-                <dt>Max Active Sessions</dt>
-                <dd><span class="number highestSessionCount">0</span></dd>
+                <dt>Current Inactive Sessions</dt>
+                <dd><span class="number evictedSessionCount">0</span></dd>
+                <dt>Highest Active Sessions</dt>
+                <dd><span class="number highestActiveSessionCount">0</span></dd>
                 <dt title="Number of sessions created since system bootup">Created Sessions</dt>
                 <dd><span class="number createdSessionCount">0</span></dd>
                 <dt>Expired Sessions</dt>
@@ -42,6 +44,7 @@
                 <dd><span class="number rejectedSessionCount">0</span></dd>
             </dl>
         </div>
+        <p class="text-right"><i>Since <span class="startTime"></span></i></p>
     </div>
     <div class="cell small-12 large-7 t20">
         <h3>Current Sessions
