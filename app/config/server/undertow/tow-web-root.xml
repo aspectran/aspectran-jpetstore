@@ -139,16 +139,16 @@
                     <arguments>
                         <item>
                             workerName: n0
-                            maxActiveSessions: 99
-                            maxIdleSeconds: 600
-                            evictionIdleSeconds: 300
+                            maxActiveSessions: 911
+                            maxIdleSeconds: 489
+                            evictionIdleSeconds: 258
                             scavengingIntervalSeconds: 180
                             clusterEnabled: false
                         </item>
                     </arguments>
                 </bean>
             </item>
-            <item name="sessionStoreFactory">
+            <item name="sessionStore">
                 <bean class="com.aspectran.core.component.session.FileSessionStoreFactory">
                     <properties>
                         <item name="storeDir">/work/_sessions/tow</item>
