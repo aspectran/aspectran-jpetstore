@@ -139,7 +139,7 @@
                     <arguments>
                         <item>
                             workerName: n0
-                            maxActiveSessions: 911
+                            maxActiveSessions: 99
                             maxIdleSeconds: 489
                             evictionIdleSeconds: 258
                             scavengingIntervalSeconds: 180
