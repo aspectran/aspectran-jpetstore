@@ -7,7 +7,7 @@
         Servlet context configuration for H2 Console.
     </description>
 
-    <bean id="tow.web.h2console.servletContext" class="com.aspectran.undertow.server.servlet.TowServletContext"
+    <bean id="tow.context.h2console.servletContext" class="com.aspectran.undertow.server.servlet.TowServletContext"
           scope="prototype">
         <properties>
             <item name="deploymentName">h2console.war</item>

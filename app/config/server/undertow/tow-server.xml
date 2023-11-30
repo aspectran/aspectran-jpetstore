@@ -45,8 +45,8 @@
                 <bean class="com.aspectran.undertow.server.servlet.TowServletContainer">
                     <properties>
                         <item name="servletContexts" type="array">
-                            <value>#{tow.web.root.servletContext}</value>
-                            <!--<value>#{tow.web.h2console.servletContext}</value>-->
+                            <value>#{tow.context.root.servletContext}</value>
+                            <!--<value>#{tow.context.h2console.servletContext}</value>-->
                         </item>
                     </properties>
                 </bean>
@@ -54,7 +54,7 @@
             <item name="handler">
                 <bean class="io.undertow.server.handlers.GracefulShutdownHandler">
                     <arguments>
-                        <item>#{tow.web.root.servletHybridHandler}</item>
+                        <item>#{tow.context.root.servletHybridHandler}</item>
                     </arguments>
                 </bean>
             </item>
