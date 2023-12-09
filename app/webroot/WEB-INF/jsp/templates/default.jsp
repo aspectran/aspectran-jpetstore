@@ -63,6 +63,12 @@
                         <a href="/">JPetStore Demo</a>
                     </li>
                     <li>
+                        <a>Get Involved</a>
+                        <ul class="submenu menu vertical" data-submenu>
+                            <li><a href="https://github.com/aspectran/aspectran-jpetstore">GitHub</a></li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="/monitoring/">Monitoring</a>
                     </li>
                 </ul>
