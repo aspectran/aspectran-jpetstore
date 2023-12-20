@@ -62,7 +62,6 @@
                         <arg>-Xlint:-try,-path,-options</arg>
                     </compilerArgs>
                     <debug>true</debug>
-                    <fork>true</fork>
                     <parameters>true</parameters>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
@@ -83,7 +82,7 @@
                 <version>3.6.1</version>
                 <executions>
                     <execution>
-                        <id>copy-dependencies-1</id>
+                        <id>copy-dependencies</id>
                         <phase>package</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
