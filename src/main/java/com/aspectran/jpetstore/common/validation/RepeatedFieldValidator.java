@@ -15,7 +15,7 @@
  */
 package com.aspectran.jpetstore.common.validation;
 
-import com.aspectran.core.util.BeanUtils;
+import com.aspectran.utils.BeanUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

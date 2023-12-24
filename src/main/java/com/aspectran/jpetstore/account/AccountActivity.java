@@ -23,7 +23,6 @@ import com.aspectran.core.component.bean.annotation.Dispatch;
 import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
-import com.aspectran.core.util.StringUtils;
 import com.aspectran.jpetstore.account.domain.Account;
 import com.aspectran.jpetstore.account.service.AccountService;
 import com.aspectran.jpetstore.catalog.domain.Product;
@@ -31,6 +30,7 @@ import com.aspectran.jpetstore.catalog.service.CatalogService;
 import com.aspectran.jpetstore.common.user.UserSession;
 import com.aspectran.jpetstore.common.user.UserSessionManager;
 import com.aspectran.jpetstore.common.validation.BeanValidator;
+import com.aspectran.utils.StringUtils;
 
 import java.util.List;
 

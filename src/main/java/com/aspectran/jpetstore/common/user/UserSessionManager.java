@@ -22,7 +22,7 @@ import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.aware.ActivityContextAware;
 import com.aspectran.core.context.ActivityContext;
-import com.aspectran.core.util.Assert;
+import com.aspectran.utils.Assert;
 
 import java.util.HashMap;
 

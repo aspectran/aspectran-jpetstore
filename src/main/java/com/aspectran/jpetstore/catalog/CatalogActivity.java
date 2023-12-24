@@ -23,11 +23,11 @@ import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.Dispatch;
 import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
-import com.aspectran.core.util.StringUtils;
 import com.aspectran.jpetstore.catalog.domain.Category;
 import com.aspectran.jpetstore.catalog.domain.Product;
 import com.aspectran.jpetstore.catalog.service.CatalogService;
 import com.aspectran.jpetstore.order.domain.Item;
+import com.aspectran.utils.StringUtils;
 
 import java.util.List;
 

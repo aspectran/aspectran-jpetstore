@@ -4,8 +4,8 @@ import com.aspectran.core.activity.Translet;
 import com.aspectran.core.adapter.RequestAdapter;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.aware.ClassLoaderAware;
-import com.aspectran.core.util.ClassUtils;
-import com.aspectran.core.util.apon.ArrayParameters;
+import com.aspectran.utils.ClassUtils;
+import com.aspectran.utils.apon.ArrayParameters;
 import org.owasp.esapi.Encoder;
 import org.owasp.esapi.reference.DefaultEncoder;
 
