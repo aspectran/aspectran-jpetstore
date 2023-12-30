@@ -9,7 +9,7 @@
         |Since Undertow Server is running, have your web browser point to:
         |   {{81}}http://localhost:8081/{{reset}}
         |
-        |Current profile: #{currentEnvironment^activeProfiles}
+        |Current profiles: #{currentEnvironment^currentProfiles}
         |
     </description>
 
