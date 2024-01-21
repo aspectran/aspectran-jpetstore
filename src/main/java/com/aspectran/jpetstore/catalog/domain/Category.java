@@ -24,6 +24,7 @@ import java.io.Serializable;
  */
 public class Category implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 3992469837058393712L;
 
     private String categoryId;

@@ -28,6 +28,7 @@ import java.util.Optional;
  */
 public class LineItem implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 6804536240033522156L;
 
     private int orderId;

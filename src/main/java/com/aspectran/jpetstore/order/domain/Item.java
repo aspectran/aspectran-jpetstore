@@ -27,6 +27,7 @@ import java.math.BigDecimal;
  */
 public class Item implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -2159121673445254631L;
 
     private String itemId;

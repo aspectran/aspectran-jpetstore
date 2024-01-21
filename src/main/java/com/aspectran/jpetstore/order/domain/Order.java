@@ -37,6 +37,7 @@ import java.util.List;
  */
 public class Order implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 6321792448424424931L;
 
     private int orderId;

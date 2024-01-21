@@ -25,6 +25,7 @@ import java.util.List;
 
 public class UserSession implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 7058892251493063652L;
 
     private Account account;

@@ -38,6 +38,7 @@ import java.io.Serializable;
 )
 public class Account implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 8751282105532159742L;
 
     @NotBlank(groups = Create.class)
