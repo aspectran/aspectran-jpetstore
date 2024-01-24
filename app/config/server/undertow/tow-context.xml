@@ -93,13 +93,13 @@
         </properties>
         <properties profile="prod">
             <item name="outerHandlerChainWrappers" type="array">
-                <value>#{tow.encodingHandlerWrapper}</value>
-                <value>#{tow.accessLogHandlerWrapper}</value>
+                <value>#{tow.server.encodingHandlerWrapper}</value>
+                <value>#{tow.server.accessLogHandlerWrapper}</value>
             </item>
         </properties>
         <properties profile="!prod">
             <item name="outerHandlerChainWrappers" type="array">
-                <value>#{tow.encodingHandlerWrapper}</value>
+                <value>#{tow.server.encodingHandlerWrapper}</value>
             </item>
         </properties>
     </bean>
