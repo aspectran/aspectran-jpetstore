@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=initial-scale=1.0, user-scalable=no"/>
     <meta name="google" content="notranslate">
     <title>JPetStore Demo</title>
-    <meta name="description" content="JPetStore is a full web application built on top of MyBatis 3, Aspectran 7."/>
+    <meta name="description" content="JPetStore is a full web application built on top of MyBatis 3, Aspectran 8."/>
     <link rel="stylesheet" type="text/css" href="https://aspectran.com/assets/css/aspectran.css"/>
     <link rel="stylesheet" type="text/css" href="/css/jpetstore.css"/>
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,500i,700" rel="stylesheet">
@@ -116,7 +116,7 @@
                         <p class="subheadline" itemprop="alternativeHeadline">${page.subheadline}</p>
                         <h1 itemprop="headline">JPetStore Demo</h1>
                         <p class="teaser" itemprop="description">
-                            JPetStore is a full web application built on top of MyBatis 3, Aspectran 7.
+                            JPetStore is a full web application built on top of MyBatis 3, Aspectran 8.
                         </p>
                     </header>
                     <div class="hexagons">
