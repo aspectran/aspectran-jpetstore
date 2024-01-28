@@ -23,7 +23,7 @@
 <div id="Welcome">
 	<div id="WelcomeContent">
 		<c:if test="${not empty user.account}">
-			<aspectran:message code='welcome' arguments="${user.account.firstName}"/>
+			<aspectran:message code='welcome' arguments="${user.account.firstName}" htmlEscape="true" javaScriptEscape="true"/>
 		</c:if>
 	</div>
 </div>
