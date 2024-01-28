@@ -15,6 +15,7 @@
  */
 package com.aspectran.jpetstore.catalog.domain;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**

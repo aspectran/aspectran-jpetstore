@@ -17,6 +17,7 @@ package com.aspectran.jpetstore.order.domain;
 
 import com.aspectran.jpetstore.catalog.domain.Product;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 

@@ -23,6 +23,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.groups.Default;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**

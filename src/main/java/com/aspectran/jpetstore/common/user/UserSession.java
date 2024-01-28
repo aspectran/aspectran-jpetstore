@@ -20,6 +20,7 @@ import com.aspectran.jpetstore.cart.domain.Cart;
 import com.aspectran.jpetstore.catalog.domain.Product;
 import com.aspectran.jpetstore.order.domain.Order;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
