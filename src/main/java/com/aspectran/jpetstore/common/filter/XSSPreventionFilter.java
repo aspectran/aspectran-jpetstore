@@ -3,8 +3,6 @@ package com.aspectran.jpetstore.common.filter;
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.adapter.RequestAdapter;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
-import com.aspectran.core.component.bean.aware.ClassLoaderAware;
-import com.aspectran.utils.ClassUtils;
 import com.aspectran.utils.apon.ArrayParameters;
 import org.owasp.esapi.Encoder;
 import org.owasp.esapi.reference.DefaultEncoder;
@@ -20,9 +18,7 @@ import java.util.regex.Pattern;
  * This filter escapes all parameters and headers of a HttpServletRequest.
  */
 @AvoidAdvice
-public class XSSPreventionFilter implements ClassLoaderAware {
-
-    private ClassLoader classLoader;
+public class XSSPreventionFilter {
 
     private boolean canonicalize;
 
@@ -33,11 +29,6 @@ public class XSSPreventionFilter implements ClassLoaderAware {
     private Encoder esapiEncoder;
 
     private Pattern[] patterns;
-
-    @Override
-    public void setClassLoader(ClassLoader classLoader) {
-        this.classLoader = classLoader;
-    }
 
     /**
      * It is recommended to canonicalize using the ESAPI library to avoid encoded attacks.
@@ -51,13 +42,7 @@ public class XSSPreventionFilter implements ClassLoaderAware {
             // possible codecs: CSSCodec, HTMLEntityCodec, JavaScriptCodec, MySQLCodec,
             //                  OracleCodec, PercentCodec, UnixCodec, VBScriptCodec, WindowsCodec
             List<String> codecList = Arrays.asList("HTMLEntityCodec", "PercentCodec", "JavaScriptCodec");
-
-            ClassLoader originalClassLoader = ClassUtils.overrideThreadContextClassLoader(classLoader);
-            try {
-                this.esapiEncoder = new DefaultEncoder(codecList);
-            } finally {
-                ClassUtils.restoreThreadContextClassLoader(originalClassLoader);
-            }
+            this.esapiEncoder = new DefaultEncoder(codecList);
         } else {
             this.esapiEncoder = null;
         }
