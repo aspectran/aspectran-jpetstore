@@ -15,9 +15,11 @@
  */
 package com.aspectran.jpetstore.monitoring.log;
 
+import com.aspectran.utils.annotation.jsr305.NonNull;
 import jakarta.websocket.Session;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -27,61 +29,76 @@ public class LogTailerManager {
 
     private static final String TAILERS_PROPERTY = "tailers";
 
-    private final Map<String, LogTailer> tailers;
+    private final Map<String, LogTailer> tailers = new HashMap<>();
 
     private final LogtailEndpoint endpoint;
 
-    public LogTailerManager(LogtailEndpoint endpoint, LogTailer[] tailers) {
+    public LogTailerManager(@NonNull LogtailEndpoint endpoint, LogTailer[] tailers) {
         this.endpoint = endpoint;
-        this.tailers = new HashMap<>();
         endpoint.setLogTailerManager(this);
         addLogTailer(tailers);
     }
 
-    public void addLogTailer(LogTailer... tailers) {
+    public synchronized void addLogTailer(LogTailer... tailers) {
         if (tailers != null) {
             for (LogTailer tailer : tailers) {
                 tailer.setEndpoint(endpoint);
-                this.tailers.put(tailer.getName(), tailer);
+                LogTailer old = this.tailers.put(tailer.getName(), tailer);
+                if (old != null) {
+                    stopTailer(old);
+                }
             }
         }
     }
 
-    void join(Session session, String[] names) {
+    void join(@NonNull Session session, String[] names) {
         List<String> list = new ArrayList<>();
         String[] existingNames = (String[])session.getUserProperties().get(TAILERS_PROPERTY);
         if (existingNames != null) {
             Collections.addAll(list, existingNames);
         }
-        for (String name : names) {
-            LogTailer tailer = tailers.get(name);
-            if (tailer != null) {
+        List<String> newNames = Arrays.asList(names);
+        for (Map.Entry<String, LogTailer> entry : tailers.entrySet()) {
+            String name = entry.getKey();
+            if (newNames.isEmpty() || newNames.contains(name)) {
+                endpoint.broadcast("joined:" + name);
+                LogTailer tailer = entry.getValue();
                 tailer.readLastLines();
+                startTailer(tailer);
                 list.add(name);
-                if (!tailer.isRunning()) {
-                    try {
-                        tailer.start();
-                    } catch (Exception e) {
-                        // ignore
-                    }
-                }
             }
         }
         session.getUserProperties().put(TAILERS_PROPERTY, list.toArray(new String[0]));
     }
 
-    void release(Session session) {
+    void release(@NonNull Session session) {
         String[] names = (String[])session.getUserProperties().get(TAILERS_PROPERTY);
         if (names != null) {
             for (String name : names) {
                 LogTailer tailer = tailers.get(name);
-                if (tailer != null && tailer.isRunning() && !isUsingTailer(name)) {
-                    try {
-                        tailer.stop();
-                    } catch (Exception e) {
-                        // ignore
-                    }
+                if (!isUsingTailer(name)) {
+                    stopTailer(tailer);
                 }
+            }
+        }
+    }
+
+    private void startTailer(LogTailer tailer) {
+        if (tailer != null && !tailer.isRunning()) {
+            try {
+                tailer.start();
+            } catch (Exception e) {
+                // ignore
+            }
+        }
+    }
+
+    private void stopTailer(LogTailer tailer) {
+        if (tailer != null && tailer.isRunning()) {
+            try {
+                tailer.stop();
+            } catch (Exception e) {
+                // ignore
             }
         }
     }
