@@ -31,15 +31,15 @@
 <div id="Main">
 	<div id="Sidebar">
 		<div id="SidebarContent">
-			<a href="/catalog/categories/FISH">Fish</a><br/>
+			<a href="<aspectran:url value="/catalog/categories/FISH"/>">Fish</a><br/>
 			Saltwater, Freshwater<br />
-			<a href="/catalog/categories/DOGS">Dogs</a><br/>
+			<a href="<aspectran:url value="/catalog/categories/DOGS"/>">Dogs</a><br/>
 			Various Breeds<br />
-			<a href="/catalog/categories/CATS">Cats</a><br/>
+			<a href="<aspectran:url value="/catalog/categories/CATS"/>">Cats</a><br/>
 			Various Breeds, Exotic Varieties<br />
-			<a href="/catalog/categories/REPTILES">Reptiles</a><br/>
+			<a href="<aspectran:url value="/catalog/categories/REPTILES"/>">Reptiles</a><br/>
 			Lizards, Turtles, Snakes<br />
-			<a href="/catalog/categories/BIRDS">Birds</a><br/>
+			<a href="<aspectran:url value="/catalog/categories/BIRDS"/>">Birds</a><br/>
 			Exotic Varieties<br />
 		</div>
 	</div>
@@ -47,19 +47,19 @@
 		<div id="MainImageContent">
 		  <map name="estoremap">
 			<area alt="Birds" coords="72,2,280,250"
-				href="/catalog/categories/BIRDS" shape="RECT"/>
+				href="<aspectran:url value="/catalog/categories/BIRDS"/>" shape="RECT"/>
 			<area alt="Fish" coords="2,180,72,250"
-				href="/catalog/categories/FISH" shape="RECT"/>
+				href="<aspectran:url value="/catalog/categories/FISH"/>" shape="RECT"/>
 			<area alt="Dogs" coords="60,250,130,320"
-				href="/catalog/categories/DOGS" shape="RECT"/>
+				href="<aspectran:url value="/catalog/categories/DOGS"/>" shape="RECT"/>
 			<area alt="Reptiles" coords="140,270,210,340"
-				href="/catalog/categories/REPTILES" shape="RECT"/>
+				href="<aspectran:url value="/catalog/categories/REPTILES"/>" shape="RECT"/>
 			<area alt="Cats" coords="225,240,295,310"
-				href="/catalog/categories/CATS" shape="RECT"/>
+				href="<aspectran:url value="/catalog/categories/CATS"/>" shape="RECT"/>
 			<area alt="Birds" coords="280,180,350,250"
-				href="/catalog/categories/BIRDS" shape="RECT"/>
+				href="<aspectran:url value="/catalog/categories/BIRDS"/>" shape="RECT"/>
 		  </map>
-		  <img height="355" src="../images/splash.gif" align="middle" usemap="#estoremap" width="350"/>
+		  <img height="355" src="<aspectran:url value="/images/splash.gif"/>" align="middle" usemap="#estoremap" width="350"/>
 		</div>
 	</div>
 	<div id="RightSidebar">
@@ -76,4 +76,3 @@
 </div>
 
 <%@ include file="../common/IncludeBottom.jsp"%>
-

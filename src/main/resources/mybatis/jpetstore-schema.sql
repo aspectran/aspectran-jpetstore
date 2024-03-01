@@ -113,6 +113,7 @@ create table if not exists lineitem (
 create table if not exists category (
 	catid varchar(10) not null,
 	name varchar(80) null,
+	image varchar(128) null,
 	descn varchar(255) null,
 	constraint pk_category primary key (catid)
 );
@@ -121,6 +122,7 @@ create table if not exists product (
     productid varchar(10) not null,
     category varchar(10) not null,
     name varchar(80) null,
+    image varchar(128) null,
     descn varchar(255) null,
     constraint pk_product primary key (productid),
         constraint fk_product_1 foreign key (category)

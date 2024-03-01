@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -27,7 +28,7 @@
 
 <div id="CenterForm">
 
-	<form method="post" action="/account/editAccount">
+	<form method="post" action="<aspectran:url value="/account/editAccount"/>">
 
 		<h3>User Information</h3>
 		<table>

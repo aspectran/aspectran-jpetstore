@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -27,7 +28,7 @@
 </c:if>
 
 <div id="BackLink">
-	<a href="/catalog/">Return to Main Menu</a>
+	<a href="<aspectran:url value="/catalog/"/>">Return to Main Menu</a>
 </div>
 
 <div id="CenterForm">
@@ -171,7 +172,7 @@
 		<c:forEach var="lineItem" items="${order.lineItems}">
 			<tr>
 				<td align="center">
-					<a href="/catalog/items/${lineItem.item.itemId}">${lineItem.item.itemId}</a>
+					<a href="<aspectran:url value="/catalog/items/${lineItem.item.itemId}"/>">${lineItem.item.itemId}</a>
 				</td>
 				<td>
 					<c:if test="${not empty lineItem.item}">
@@ -201,7 +202,7 @@
 	</table>
 
 	<div class="button-bar">
-		<button type="button" class="button" onclick="location.href='/order/deleteOrder/${order.orderId}';">Delete Order</button>
+		<button type="button" class="button" onclick="location.href='<aspectran:url value="/order/deleteOrder/${order.orderId}"/>';">Delete Order</button>
 	</div>
 
 </div>

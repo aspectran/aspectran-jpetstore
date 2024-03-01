@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -25,7 +27,7 @@
 
 <div id="Signon">
 
-	<form method="post" action="../account/signon">
+	<form method="post" action="<aspectran:url value="/account/signon"/>">
 		<input type="hidden" name="referer" value="${param.referer}"/>
 
 		<div class="panel">
@@ -45,11 +47,10 @@
 	</form>
 
 	<div class="panel register">
-		Need a user name and password?
-		<a href="../account/newAccountForm">Register Now!</a>
+		Need a username and password?
+		<a href="<aspectran:url value="/account/newAccountForm"/>">Register Now!</a>
 	</div>
 
 </div>
 
 <%@ include file="../common/IncludeBottom.jsp"%>
-

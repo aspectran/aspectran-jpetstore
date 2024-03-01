@@ -20,12 +20,12 @@
 <div id="Footer">
 	<div id="PoweredBy">
 		<a href="https://aspectran.com/en/">aspectran.com</a><br/>
-		<a href="http://www.mybatis.org">mybatis.org</a>
+		<a href="https://www.mybatis.org">mybatis.org</a>
 	</div>
 	<div id="Banner">
 		<c:if test="${not empty user.account}">
 			<c:if test="${user.account.bannerOption}">
-				${user.account.bannerName}
+				<img src="<aspectran:url value="${user.account.bannerName}"/>"/>
 			</c:if>
 		</c:if>
 	</div>

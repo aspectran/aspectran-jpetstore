@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -21,7 +22,7 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
 <div id="BackLink">
-	<a href="/catalog/products/${product.productId}">Return to ${product.productId}</a>
+	<a href="<aspectran:url value="/catalog/products/${product.productId}"/>">Return to ${product.productId}</a>
 </div>
 
 <div id="CenterForm">
@@ -30,7 +31,10 @@
 
 	<table>
 		<tr>
-			<td>${product.description}</td>
+			<td>
+				<img src="<aspectran:url value="${product.image}"/>"/>
+				${product.description}
+			</td>
 		</tr>
 		<tr>
 			<td><strong>${item.itemId}</strong></td>
@@ -52,10 +56,9 @@
 		</tr>
 	</table>
 	<div class="button-bar">
-		<a class="button" href="/cart/addItemToCart?itemId=${item.itemId}">Add to Cart</a>
+		<a class="button" href="<aspectran:url value="/cart/addItemToCart?itemId=${item.itemId}"/>">Add to Cart</a>
 	</div>
 
 </div>
 
 <%@ include file="../common/IncludeBottom.jsp"%>
-

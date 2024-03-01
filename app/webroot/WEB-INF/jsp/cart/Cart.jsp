@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -21,7 +22,7 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
 <div id="BackLink">
-	<a href="/catalog/">Return to Main Menu</a>
+	<a href="<aspectran:url value="/catalog/"/>">Return to Main Menu</a>
 </div>
 
 <div id="Catalog">
@@ -30,7 +31,7 @@
 
 		<h3>Shopping Cart</h3>
 
-		<form method="post" action="/cart/updateCartQuantities">
+		<form method="post" action="<aspectran:url value="/cart/updateCartQuantities"/>">
 			<table>
 				<tr>
 					<th><b>Item ID</b></th>
@@ -50,7 +51,7 @@
 				<c:forEach var="cartItem" items="${cart.cartItems}">
 					<tr>
 						<td>
-							<a href="/catalog/items/${cartItem.item.itemId}">${cartItem.item.itemId}</a>
+							<a href="<aspectran:url value="/catalog/items/${cartItem.item.itemId}"/>">${cartItem.item.itemId}</a>
 						</td>
 						<td>${cartItem.item.product.productId}</td>
 						<td align="left">
@@ -63,7 +64,7 @@
 						<td><fmt:formatNumber value="${cartItem.item.listPrice}" pattern="$#,##0.00"/></td>
 						<td><fmt:formatNumber value="${cartItem.total}" pattern="$#,##0.00"/></td>
 						<td>
-							<a class="button" href="/cart/removeItemFromCart?cartItem=${cartItem.item.itemId}">Remove</a>
+							<a class="button" href="<aspectran:url value="/cart/removeItemFromCart?cartItem=${cartItem.item.itemId}"/>">Remove</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -78,7 +79,7 @@
 					<td><strong><fmt:formatNumber value="${cart.subTotal}" pattern="$#,##0.00"/></strong></td>
 					<td>
 						<c:if test="${cart.numberOfItems gt 0}">
-							<a class="button" href="/cart/removeAllItemsFromCart">Remove All</a>
+							<a class="button" href="<aspectran:url value="/cart/removeAllItemsFromCart"/>">Remove All</a>
 						</c:if>
 					</td>
 				</tr>
@@ -87,7 +88,7 @@
 		</form>
 
 		<c:if test="${cart.numberOfItems gt 0}">
-			<a href="/order/newOrderForm" class="button">Proceed to Checkout</a>
+			<a href="<aspectran:url value="/order/newOrderForm"/>" class="button">Proceed to Checkout</a>
 		</c:if>
 	</div>
 

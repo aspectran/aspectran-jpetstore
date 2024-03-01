@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -20,7 +21,7 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
 <div id="BackLink">
-	<a href="/catalog/">Return to Main Menu</a>
+	<a href="<aspectran:url value="/catalog/"/>">Return to Main Menu</a>
 </div>
 
 <div id="Catalog">
@@ -35,7 +36,7 @@
 		<c:forEach var="product" items="${productList}">
 			<tr>
 				<td>
-					<a href="/catalog/products/${product.productId}">${product.productId}</a>
+					<a href="<aspectran:url value="/catalog/products/${product.productId}"/>">${product.productId}</a>
 				</td>
 				<td>${product.name}</td>
 			</tr>
@@ -45,4 +46,3 @@
 </div>
 
 <%@ include file="../common/IncludeBottom.jsp"%>
-

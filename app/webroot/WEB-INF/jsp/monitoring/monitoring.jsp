@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="/assets/css/monitoring.css?20231125">
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
+<link rel="stylesheet" href="<aspectran:url value="/assets/css/monitoring.css?20231125"/>"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js"></script>
-<script src="/assets/js/monitoring-log.js?20231125"></script>
-<script src="/assets/js/monitoring-session.js?20231125"></script>
+<script src="<aspectran:url value="/assets/js/monitoring-log.js?20231125"/>"></script>
+<script src="<aspectran:url value="/assets/js/monitoring-session.js?20231125"/>"></script>
 <div class="grid-x grid-padding-x">
     <div class="cell t20">
         <h3>Server Logs
@@ -57,7 +58,7 @@
 </div>
 <script>
     $(function() {
-        let sessionStats = new SessionStats("/monitoring/stats", 5);
+        let sessionStats = new SessionStats("<aspectran:url value="/monitoring/jpetstore/stats"/>", 5);
         try {
             sessionStats.openSocket();
             $(".stats-wrap").fadeIn();
@@ -68,7 +69,7 @@
 </script>
 <script>
     $(function() {
-        let logTailer = new LogTailer("/monitoring/logtail", "app-log");
+        let logTailer = new LogTailer("<aspectran:url value="/monitoring/jpetstore/logtail"/>", "app-log");
         $(".bite-tail").click(function() {
             let logtail = $(this).closest(".log-container").find(".log-tail");
             logTailer.switchTailBite(!logtail.data("bite"), logtail);

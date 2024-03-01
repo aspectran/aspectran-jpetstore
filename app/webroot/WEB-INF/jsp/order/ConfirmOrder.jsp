@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -25,11 +26,11 @@
 </div>
 
 <div id="BackLink">
-	<a href="/catalog/">Return to Main Menu</a>
+	<a href="<aspectran:url value="/catalog/"/>">Return to Main Menu</a>
 </div>
 
 <div id="CenterForm">
-	<form method="post" action="/order/submitOrder">
+	<form method="post" action="<aspectran:url value="/order/submitOrder"/>">
 		<input type="hidden" name="confirmed" value="true"/>
 
 		<h3>Order</h3>
@@ -135,8 +136,3 @@
 </div>
 
 <%@ include file="../common/IncludeBottom.jsp"%>
-
-
-
-
-

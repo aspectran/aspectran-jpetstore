@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -21,7 +22,7 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
 <div id="BackLink">
-	<a href="/catalog/categories/${product.categoryId}">Return to ${product.categoryId}</a>
+	<a href="<aspectran:url value="/catalog/categories/${product.categoryId}"/>">Return to ${product.categoryId}</a>
 </div>
 
 <div id="Catalog">
@@ -39,7 +40,7 @@
 		<c:forEach var="item" items="${itemList}">
 			<tr>
 				<td>
-					<a href="/catalog/items/${item.itemId}">${item.itemId}</a>
+					<a href="<aspectran:url value="/catalog/items/${item.itemId}"/>">${item.itemId}</a>
 				</td>
 				<td>${item.product.productId}</td>
 				<td>
@@ -48,7 +49,7 @@
 				</td>
 				<td><fmt:formatNumber value="${item.listPrice}" pattern="$#,##0.00"/></td>
 				<td>
-					<a class="button" href="/cart/addItemToCart?itemId=${item.itemId}">Add to Cart</a>
+					<a class="button" href="<aspectran:url value="/cart/addItemToCart?itemId=${item.itemId}"/>">Add to Cart</a>
 				</td>
 			</tr>
 		</c:forEach>
@@ -57,4 +58,3 @@
 </div>
 
 <%@ include file="../common/IncludeBottom.jsp"%>
-

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -32,7 +33,7 @@
 		<c:forEach var="order" items="${orderList}">
 			<tr>
 				<td>
-					<a href="/order/viewOrder?orderId=${order.orderId}">${order.orderId}</a>
+					<a href="<aspectran:url value="/order/viewOrder?orderId=${order.orderId}"/>">${order.orderId}</a>
 				</td>
 				<td><fmt:formatDate value="${order.orderDate}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
 				<td><fmt:formatNumber value="${order.totalPrice}" pattern="$#,##0.00"/></td>
@@ -50,5 +51,3 @@
 </div>
 
 <%@ include file="../common/IncludeBottom.jsp"%>
-
-

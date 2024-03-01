@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -19,7 +21,7 @@
 
 <div id="CenterForm">
 
-	<form method="post" action="/account/newAccount">
+	<form method="post" action="<aspectran:url value="/account/newAccount"/>">
 
 		<h3>User Information</h3>
 		<table>

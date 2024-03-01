@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -19,7 +21,7 @@
 
 <div id="CenterForm">
 
-	<form method="post" action="/order/newOrder">
+	<form method="post" action="<aspectran:url value="/order/newOrder"/>">
 		<input type="hidden" name="shippingForm" value="true"/>
 
 		<h3>Shipping Address</h3>
@@ -72,7 +74,7 @@
 
 		<div class="button-bar">
 			<button type="submit" class="button">Continue</button>
-			<button type="button" class="button" onclick="location.href='/order/newOrderForm';">Back</button>
+			<button type="button" class="button" onclick="location.href='<aspectran:url value="/order/newOrderForm"/>';">Back</button>
 		</div>
 
 	</form>

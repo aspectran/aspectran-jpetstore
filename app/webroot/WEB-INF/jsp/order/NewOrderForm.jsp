@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -114,7 +115,7 @@
 		<c:if test="${not empty order}">
 		<div class="button-bar">
 			<button type="submit" class="button">Continue</button>
-			<button type="button" class="button" onclick="location.href='/cart/viewCart';">Cancel</button>
+			<button type="button" class="button" onclick="location.href='<aspectran:url value="/cart/viewCart"/>';">Cancel</button>
 		</div>
 		</c:if>
 

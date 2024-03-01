@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -24,7 +25,7 @@
 		<ul>
 			<c:forEach var="product" items="${user.products}">
 				<li>
-					<a href="/catalog/products/${product.productId}">${product.name}</a>
+					<a href="<aspectran:url value="/catalog/products/${product.productId}"/>">${product.name}</a>
 				</li>
 			</c:forEach>
 		</ul>

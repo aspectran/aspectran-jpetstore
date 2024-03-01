@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <%--
 
        Copyright 2010-2016 the original author or authors.
@@ -22,35 +23,35 @@
 
 	<div id="Logo">
 		<div id="LogoContent">
-			<a href="/catalog/"><img src="/images/logo-topbar.gif"/></a>
+			<a href="<aspectran:url value="/catalog/"/>"><img src="<aspectran:url value="/images/logo-topbar.gif"/>"/></a>
 		</div>
 	</div>
 
 	<div id="Menu">
 		<div id="MenuContent">
-			<a href="/cart/viewCart"><img align="middle" name="img_cart" src="/images/cart.gif"/></a>
+			<a href="<aspectran:url value="/cart/viewCart"/>"><img align="middle" name="img_cart" src="<aspectran:url value="/images/cart.gif"/>"/></a>
 			<c:if test="${not user.authenticated}">
-				<img align="middle" src="/images/separator.gif"/>
-				<a href="/account/signonForm">Sign In</a>
-				<img align="middle" src="/images/separator.gif"/>
-				<a href="/account/newAccountForm">Sign Up</a>
+				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
+				<a href="<aspectran:url value="/account/signonForm"/>">Sign In</a>
+				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
+				<a href="<aspectran:url value="/account/newAccountForm"/>">Sign Up</a>
 			</c:if>
 			<c:if test="${user.authenticated}">
-				<img align="middle" src="/images/separator.gif"/>
-				<a href="/order/listOrders">My Orders</a>
-				<img align="middle" src="/images/separator.gif"/>
-				<a href="/account/editAccountForm">My Account</a>
-				<img align="middle" src="/images/separator.gif"/>
-				<a href="/account/signoff">Sign Out</a>
+				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
+				<a href="<aspectran:url value="/order/listOrders"/>">My Orders</a>
+				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
+				<a href="<aspectran:url value="/account/editAccountForm"/>">My Account</a>
+				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
+				<a href="<aspectran:url value="/account/signoff"/>">Sign Out</a>
 			</c:if>
-			<img align="middle" src="/images/separator.gif"/>
-			<a href="/help.html">?</a>
+			<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
+			<a href="<aspectran:url value="/help.html"/>">?</a>
 		</div>
 	</div>
 
 	<div id="Search" data-hide-for="large">
 		<div id="SearchContent">
-			<form action="/catalog/searchProducts">
+			<form action="<aspectran:url value="/catalog/searchProducts"/>">
 				<div class="input-group">
 					<input class="input-group-field" type="text" name="keyword" placeholder="Product Search">
 					<div class="input-group-button">
@@ -63,7 +64,7 @@
 
 	<div id="QuickLinks">
 	<c:forEach var="entry" items="${staticCodes.categories}">
-		<a href="/catalog/categories/${entry.key}">${entry.value}</a>
+		<a href="<aspectran:url value="/catalog/categories/${entry.key}"/>">${entry.value}</a>
 	</c:forEach>
 	</div>
 </div>

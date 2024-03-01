@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://aspectran.com/tags" prefix="aspectran" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -9,7 +10,7 @@
     <title>JPetStore Demo</title>
     <meta name="description" content="JPetStore is a full web application built on top of MyBatis 3, Aspectran 8."/>
     <link rel="stylesheet" type="text/css" href="https://aspectran.com/assets/css/aspectran.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/jpetstore.css"/>
+    <link rel="stylesheet" type="text/css" href="<aspectran:url value="/css/jpetstore.css"/>"/>
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,500i,700" rel="stylesheet">
     <script src="https://aspectran.com/assets/js/modernizr-custom.js"></script>
     <script src="https://aspectran.com/assets/js/jquery.min.js"></script>
@@ -41,7 +42,7 @@
 <nav id="navigation" class="no-js">
     <div class="title-bar" data-responsive-toggle="gnb-menu" data-hide-for="large" style="display:none">
         <div class="title-bar-left">
-            <a class="logo" href="/" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
+            <a class="logo" href="<aspectran:url value="/"/>" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
         </div>
         <div class="title-bar-center">
             <a href="#top-of-page">Aspectran</a>
@@ -60,9 +61,6 @@
             <div class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu>
                     <li>
-                        <a href="/">JPetStore Demo</a>
-                    </li>
-                    <li>
                         <a>Get Involved</a>
                         <ul class="submenu menu vertical" data-submenu>
                             <li><a href="https://github.com/aspectran/aspectran-jpetstore">GitHub</a></li>
@@ -73,13 +71,12 @@
             <div class="top-bar-right">
                 <ul class="dropdown menu" data-dropdown-menu>
                     <li>
-                        <a href="/monitoring/">Monitoring</a>
-                    </li>
-                    <li>
                         <a title="Demo Applications made with Aspectran">More Demo Apps</a>
                         <ul class="submenu menu vertical" data-submenu>
-                            <li><a href="https://demo.aspectran.com">Aspectran Demo</a></li>
-                            <li><a href="https://log-relay.aspectran.com">Log Relay</a></li>
+                            <%--                            <li><a href="https://demo.aspectran.com">Aspectran Demo</a></li>--%>
+                            <%--                            <li><a href="https://jpetstore.aspectran.com">JPetStore Demo</a></li>--%>
+                                <li><a href="/demo/">Aspectran Demo</a></li>
+                                <li><a href="/jpetstore/">JPetStore Demo</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -99,8 +96,8 @@
             <div class="grid-container ${page.style}">
                 <nav role="navigation" aria-label="You are here:">
                     <ul class="breadcrumbs" itemprop="breadcrumb">
-                        <li><a href="/">Demo Apps</a></li>
-                        <li><a href="/">JPetStore Demo</a></li>
+                        <li><a href="<aspectran:url value="/"/>">Demo Apps</a></li>
+                        <li><a href="<aspectran:url value="/"/>">JPetStore Demo</a></li>
                     </ul>
                 </nav>
             </div>
@@ -133,8 +130,8 @@
             <div class="cell">
                 <nav role="navigation" aria-label="You are here:">
                     <ul class="breadcrumbs" itemprop="breadcrumb">
-                        <li><a href="/">Demo Apps</a></li>
-                        <li><a href="/">JPetStore Demo</a></li>
+                        <li><a href="<aspectran:url value="/"/>">Demo Apps</a></li>
+                        <li><a href="<aspectran:url value="/"/>">JPetStore Demo</a></li>
                     </ul>
                 </nav>
             </div>
