@@ -71,12 +71,13 @@
             <div class="top-bar-right">
                 <ul class="dropdown menu" data-dropdown-menu>
                     <li>
+                        <a href="<aspectran:url value="/monitoring/"/>">Monitoring</a>
+                    </li>
+                    <li>
                         <a title="Demo Applications made with Aspectran">More Demo Apps</a>
                         <ul class="submenu menu vertical" data-submenu>
-                            <%--                            <li><a href="https://demo.aspectran.com">Aspectran Demo</a></li>--%>
-                            <%--                            <li><a href="https://jpetstore.aspectran.com">JPetStore Demo</a></li>--%>
-                                <li><a href="/demo/">Aspectran Demo</a></li>
-                                <li><a href="/jpetstore/">JPetStore Demo</a></li>
+                            <li><a href="https://demo.aspectran.com">Aspectran Demo</a></li>
+                            <li><a href="https://jpetstore.aspectran.com">JPetStore Demo</a></li>
                         </ul>
                     </li>
                 </ul>
