@@ -29,6 +29,7 @@ fi
 [ ! -d "$DEPLOY_DIR/temp" ] && mkdir "$DEPLOY_DIR/temp"
 [ ! -d "$DEPLOY_DIR/work" ] && mkdir "$DEPLOY_DIR/work"
 [ -d "$REPO_DIR/app/webroot" ] && [ ! -d "$DEPLOY_DIR/webroot" ] && mkdir "$DEPLOY_DIR/webroot"
+[ -d "$REPO_DIR/app/webapps" ] && [ ! -d "$DEPLOY_DIR/webapps" ] && mkdir "$DEPLOY_DIR/webapps"
 
 rm -rf "${DEPLOY_DIR:?}"/bin/*
 [ -d "$REPO_DIR/app/bin" ] && cp -pR "$REPO_DIR"/app/bin/* "$DEPLOY_DIR/bin"
