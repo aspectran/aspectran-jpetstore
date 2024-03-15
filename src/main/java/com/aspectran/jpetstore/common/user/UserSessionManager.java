@@ -23,6 +23,7 @@ import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.aware.ActivityContextAware;
 import com.aspectran.core.context.ActivityContext;
 import com.aspectran.utils.Assert;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 
 import java.util.HashMap;
 
@@ -86,6 +87,7 @@ public class UserSessionManager implements ActivityContextAware {
         }
     }
 
+    @NonNull
     private SessionAdapter getSessionAdapter() {
         Assert.state(context != null, "No ActivityContext injected");
         SessionAdapter sessionAdapter = context.getCurrentActivity().getSessionAdapter();
@@ -98,7 +100,7 @@ public class UserSessionManager implements ActivityContextAware {
 
     @Override
     @AvoidAdvice
-    public void setActivityContext(ActivityContext context) {
+    public void setActivityContext(@NonNull ActivityContext context) {
         this.context = context;
     }
 
