@@ -16,6 +16,7 @@
 package com.aspectran.jpetstore.common.mybatis.mapper;
 
 import com.aspectran.jpetstore.catalog.domain.Category;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.List;
  */
 public interface CategoryMapper {
 
-    static CategoryMapper getMapper(SqlSession sqlSession) {
+    static CategoryMapper getMapper(@NonNull SqlSession sqlSession) {
         return sqlSession.getMapper(CategoryMapper.class);
     }
 

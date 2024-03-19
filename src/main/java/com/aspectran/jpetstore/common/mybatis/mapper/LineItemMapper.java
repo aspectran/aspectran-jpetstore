@@ -16,6 +16,7 @@
 package com.aspectran.jpetstore.common.mybatis.mapper;
 
 import com.aspectran.jpetstore.order.domain.LineItem;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.List;
  */
 public interface LineItemMapper {
 
-    static LineItemMapper getMapper(SqlSession sqlSession) {
+    static LineItemMapper getMapper(@NonNull SqlSession sqlSession) {
         return sqlSession.getMapper(LineItemMapper.class);
     }
 
