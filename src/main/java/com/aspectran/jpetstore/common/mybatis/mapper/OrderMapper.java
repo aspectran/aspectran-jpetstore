@@ -17,7 +17,7 @@ package com.aspectran.jpetstore.common.mybatis.mapper;
 
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.jpetstore.common.mybatis.SqlMapper;
+import com.aspectran.jpetstore.common.mybatis.SqlMapperAgent;
 import com.aspectran.jpetstore.order.domain.Order;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -46,41 +46,41 @@ public interface OrderMapper {
     @Component
     class Dao implements OrderMapper {
 
-        private final SqlMapper sqlMapper;
+        private final SqlMapperAgent mapperAgent;
 
         @Autowired
-        public Dao(SqlMapper sqlMapper) {
-            this.sqlMapper = sqlMapper;
+        public Dao(SqlMapperAgent mapperAgent) {
+            this.mapperAgent = mapperAgent;
         }
 
         @Override
         public List<Order> getOrdersByUsername(String username) {
-            return sqlMapper.simple(OrderMapper.class).getOrdersByUsername(username);
+            return mapperAgent.simple(OrderMapper.class).getOrdersByUsername(username);
         }
 
         @Override
         public Order getOrder(int orderId) {
-            return sqlMapper.simple(OrderMapper.class).getOrder(orderId);
+            return mapperAgent.simple(OrderMapper.class).getOrder(orderId);
         }
 
         @Override
         public void insertOrder(Order order) {
-            sqlMapper.simple(OrderMapper.class).insertOrder(order);
+            mapperAgent.simple(OrderMapper.class).insertOrder(order);
         }
 
         @Override
         public void insertOrderStatus(Order order) {
-            sqlMapper.simple(OrderMapper.class).insertOrderStatus(order);
+            mapperAgent.simple(OrderMapper.class).insertOrderStatus(order);
         }
 
         @Override
         public void deleteOrder(int orderId) {
-            sqlMapper.simple(OrderMapper.class).deleteOrder(orderId);
+            mapperAgent.simple(OrderMapper.class).deleteOrder(orderId);
         }
 
         @Override
         public void deleteOrderStatus(int orderId) {
-            sqlMapper.simple(OrderMapper.class).deleteOrderStatus(orderId);
+            mapperAgent.simple(OrderMapper.class).deleteOrderStatus(orderId);
         }
 
     }

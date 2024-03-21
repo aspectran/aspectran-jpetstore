@@ -21,7 +21,7 @@ import com.aspectran.utils.annotation.jsr305.NonNull;
 import org.apache.ibatis.session.SqlSession;
 
 @Component
-public class SqlMapper {
+public class SqlMapperAgent {
 
     private final SqlSession simpleSqlSession;
 
@@ -30,9 +30,9 @@ public class SqlMapper {
     private final SqlSession reuseSqlSession;
 
     @Autowired
-    public SqlMapper(@NonNull SimpleSqlSession simpleSqlSession,
-                     @NonNull BatchSqlSession batchSqlSession,
-                     @NonNull ReuseSqlSession reuseSqlSession) {
+    public SqlMapperAgent(@NonNull SimpleSqlSession simpleSqlSession,
+                          @NonNull BatchSqlSession batchSqlSession,
+                          @NonNull ReuseSqlSession reuseSqlSession) {
         this.simpleSqlSession = simpleSqlSession;
         this.batchSqlSession = batchSqlSession;
         this.reuseSqlSession = reuseSqlSession;
