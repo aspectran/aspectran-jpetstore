@@ -16,6 +16,7 @@
 package com.aspectran.jpetstore.order.domain;
 
 import com.aspectran.jpetstore.cart.domain.CartItem;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -49,7 +50,7 @@ public class LineItem implements Serializable {
      * @param lineNumber the line number
      * @param cartItem the cart item
      */
-    public LineItem(int lineNumber, CartItem cartItem) {
+    public LineItem(int lineNumber, @NonNull CartItem cartItem) {
         this.lineNumber = lineNumber;
         this.quantity = cartItem.getQuantity();
         this.itemId = cartItem.getItem().getItemId();
@@ -113,7 +114,9 @@ public class LineItem implements Serializable {
     }
 
     private void calculateTotal() {
-        total = Optional.ofNullable(item).map(Item::getListPrice).map(v -> v.multiply(new BigDecimal(quantity)))
+        total = Optional.ofNullable(item)
+                .map(Item::getListPrice)
+                .map(v -> v.multiply(new BigDecimal(quantity)))
                 .orElse(null);
     }
 

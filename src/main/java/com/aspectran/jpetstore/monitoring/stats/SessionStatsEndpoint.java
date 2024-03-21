@@ -23,6 +23,7 @@ import com.aspectran.core.component.session.SessionHandler;
 import com.aspectran.core.component.session.SessionStatistics;
 import com.aspectran.jpetstore.common.user.UserSession;
 import com.aspectran.undertow.server.TowServer;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.utils.logging.Logger;
 import com.aspectran.utils.logging.LoggerFactory;
 import com.aspectran.web.websocket.jsr356.AspectranConfigurator;
@@ -110,7 +111,7 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
     }
 
     @OnError
-    public void onError(Session session, Throwable error) {
+    public void onError(@NonNull Session session, Throwable error) {
         logger.error("Error in websocket session: " + session.getId(), error);
         try {
             removeSession(session);
@@ -199,6 +200,7 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
         return stats;
     }
 
+    @NonNull
     private String formatTime(long time) {
         LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault());
         return date.toString();

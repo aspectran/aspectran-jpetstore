@@ -15,7 +15,12 @@
  */
 package com.aspectran.jpetstore.common.user;
 
+import java.io.Serial;
+
 public class UserAuthenticationRequiredException extends RuntimeException {
+
+    @Serial
+    private static final long serialVersionUID = -6255555873407196205L;
 
     /**
      * Constructs a UserAuthenticationRequiredException.

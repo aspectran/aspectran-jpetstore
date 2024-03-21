@@ -107,7 +107,7 @@ public class CatalogActivity {
     @Action("productList")
     public List<Product> searchProducts(String keyword) {
         if (!StringUtils.isEmpty(keyword)) {
-            return catalogService.searchProductList(keyword.toLowerCase());
+            return catalogService.searchProductList(keyword);
         } else {
             return null;
         }

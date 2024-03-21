@@ -15,9 +15,11 @@
  */
 package com.aspectran.jpetstore.common.mybatis.mapper;
 
+import com.aspectran.core.component.bean.annotation.Autowired;
+import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.jpetstore.common.mybatis.SqlMapper;
 import com.aspectran.jpetstore.order.domain.Item;
-import com.aspectran.utils.annotation.jsr305.NonNull;
-import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -27,11 +29,8 @@ import java.util.Map;
  *
  * @author Juho Jeong
  */
+@Mapper
 public interface ItemMapper {
-
-    static ItemMapper getMapper(@NonNull SqlSession sqlSession) {
-        return sqlSession.getMapper(ItemMapper.class);
-    }
 
     void updateInventoryQuantity(Map<String, Object> param);
 
@@ -40,5 +39,37 @@ public interface ItemMapper {
     List<Item> getItemListByProduct(String productId);
 
     Item getItem(String itemId);
+
+    @Component
+    class Dao implements ItemMapper {
+
+        private final SqlMapper sqlMapper;
+
+        @Autowired
+        public Dao(SqlMapper sqlMapper) {
+            this.sqlMapper = sqlMapper;
+        }
+
+        @Override
+        public void updateInventoryQuantity(Map<String, Object> params) {
+            sqlMapper.simple(ItemMapper.class).updateInventoryQuantity(params);
+        }
+
+        @Override
+        public int getInventoryQuantity(String itemId) {
+            return sqlMapper.simple(ItemMapper.class).getInventoryQuantity(itemId);
+        }
+
+        @Override
+        public List<Item> getItemListByProduct(String productId) {
+            return sqlMapper.simple(ItemMapper.class).getItemListByProduct(productId);
+        }
+
+        @Override
+        public Item getItem(String itemId) {
+            return sqlMapper.simple(ItemMapper.class).getItem(itemId);
+        }
+
+    }
 
 }

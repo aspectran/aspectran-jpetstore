@@ -19,9 +19,7 @@ import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.jpetstore.account.domain.Account;
-import com.aspectran.jpetstore.common.mybatis.SimpleSqlSession;
 import com.aspectran.jpetstore.common.mybatis.mapper.AccountMapper;
-import org.apache.ibatis.session.SqlSession;
 
 import java.util.Optional;
 
@@ -34,19 +32,19 @@ import java.util.Optional;
 @Bean("accountService")
 public class AccountService {
 
-    private final SqlSession sqlSession;
+    private final AccountMapper.Dao dao;
 
     @Autowired
-    public AccountService(SimpleSqlSession sqlSession) {
-        this.sqlSession = sqlSession;
+    public AccountService(AccountMapper.Dao dao) {
+        this.dao = dao;
     }
 
     public Account getAccount(String username) {
-        return AccountMapper.getMapper(sqlSession).getAccountByUsername(username);
+        return dao.getAccountByUsername(username);
     }
 
     public Account getAccount(String username, String password) {
-        return AccountMapper.getMapper(sqlSession).getAccountByUsernameAndPassword(username, password);
+        return dao.getAccountByUsernameAndPassword(username, password);
     }
 
     /**
@@ -54,10 +52,9 @@ public class AccountService {
      * @param account the account
      */
     public void insertAccount(Account account) {
-        AccountMapper accountMapper = AccountMapper.getMapper(sqlSession);
-        accountMapper.insertAccount(account);
-        accountMapper.insertProfile(account);
-        accountMapper.insertSignon(account);
+        dao.insertAccount(account);
+        dao.insertProfile(account);
+        dao.insertSignon(account);
     }
 
     /**
@@ -65,15 +62,14 @@ public class AccountService {
      * @param account the account
      */
     public void updateAccount(Account account) {
-        AccountMapper accountMapper = AccountMapper.getMapper(sqlSession);
-        accountMapper.updateAccount(account);
-        accountMapper.updateProfile(account);
+        dao.updateAccount(account);
+        dao.updateProfile(account);
 
         //j2ee user's password cannot be changed in this demo application
         if (!"j2ee".equals(account.getUsername())) {
             Optional.ofNullable(account.getPassword())
-                    .filter(password -> password.length() > 0)
-                    .ifPresent(password -> accountMapper.updateSignon(account));
+                    .filter(password -> !password.isEmpty())
+                    .ifPresent(password -> dao.updateSignon(account));
         }
     }
 

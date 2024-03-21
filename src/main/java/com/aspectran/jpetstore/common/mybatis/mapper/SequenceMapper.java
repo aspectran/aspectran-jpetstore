@@ -15,23 +15,44 @@
  */
 package com.aspectran.jpetstore.common.mybatis.mapper;
 
+import com.aspectran.core.component.bean.annotation.Autowired;
+import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.jpetstore.common.mybatis.SqlMapper;
 import com.aspectran.jpetstore.order.domain.Sequence;
-import com.aspectran.utils.annotation.jsr305.NonNull;
-import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * The Interface SequenceMapper.
  *
  * @author Juho Jeong
  */
+@Mapper
 public interface SequenceMapper {
-
-    static SequenceMapper getMapper(@NonNull SqlSession sqlSession) {
-        return sqlSession.getMapper(SequenceMapper.class);
-    }
 
     Sequence getSequence(Sequence sequence);
 
     void updateSequence(Sequence sequence);
+
+    @Component
+    class Dao implements SequenceMapper {
+
+        private final SqlMapper sqlMapper;
+
+        @Autowired
+        public Dao(SqlMapper sqlMapper) {
+            this.sqlMapper = sqlMapper;
+        }
+
+        @Override
+        public Sequence getSequence(Sequence sequence) {
+            return sqlMapper.simple(SequenceMapper.class).getSequence(sequence);
+        }
+
+        @Override
+        public void updateSequence(Sequence sequence) {
+            sqlMapper.simple(SequenceMapper.class).updateSequence(sequence);
+        }
+
+    }
 
 }

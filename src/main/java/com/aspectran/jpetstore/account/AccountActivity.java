@@ -31,6 +31,7 @@ import com.aspectran.jpetstore.common.user.UserSession;
 import com.aspectran.jpetstore.common.user.UserSessionManager;
 import com.aspectran.jpetstore.common.validation.BeanValidator;
 import com.aspectran.utils.StringUtils;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class AccountActivity {
     @Redirect("/account/signonForm?created=true")
     public void newAccount(Translet translet,
                            Account account,
-                           BeanValidator beanValidator) {
+                           @NonNull BeanValidator beanValidator) {
         beanValidator.validate(translet, account, Account.Create.class);
         if (beanValidator.hasErrors()) {
             translet.setAttribute("account", account);
@@ -87,7 +88,7 @@ public class AccountActivity {
      */
     @Request("/account/editAccountForm")
     @Dispatch("account/EditAccountForm")
-    public void editAccountForm(Translet translet) {
+    public void editAccountForm(@NonNull Translet translet) {
         if (translet.getAttribute("account") == null) {
             translet.setAttribute("account", sessionManager.getUserSession().getAccount());
         } else {
@@ -103,7 +104,7 @@ public class AccountActivity {
     @Redirect("/account/editAccountForm?updated=true")
     public void editAccount(Translet translet,
                             Account account,
-                            BeanValidator beanValidator) {
+                            @NonNull BeanValidator beanValidator) {
         beanValidator.validate(translet, account);
         if (beanValidator.hasErrors()) {
             translet.setAttribute("account", account);

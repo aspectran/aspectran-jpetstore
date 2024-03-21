@@ -19,6 +19,7 @@ import com.aspectran.jpetstore.account.domain.Account;
 import com.aspectran.jpetstore.cart.domain.Cart;
 import com.aspectran.jpetstore.cart.domain.CartItem;
 import com.aspectran.jpetstore.common.validation.NumericCharacters;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -366,8 +367,7 @@ public class Order implements Serializable {
      * @param account the account
      * @param cart the cart
      */
-    public void initialize(Account account, Cart cart) {
-
+    public void initialize(@NonNull Account account, @NonNull Cart cart) {
         username = account.getUsername();
         orderDate = new Date();
 
@@ -404,7 +404,6 @@ public class Order implements Serializable {
             CartItem cartItem = i.next();
             addLineItem(cartItem);
         }
-
     }
 
     public void addLineItem(CartItem cartItem) {
@@ -416,7 +415,7 @@ public class Order implements Serializable {
         lineItems.add(lineItem);
     }
 
-    public void update(Order order) {
+    public void update(@NonNull Order order) {
         if (order.getShipAddress1() != null) {
             setShipAddress1(order.getShipAddress1());
         }

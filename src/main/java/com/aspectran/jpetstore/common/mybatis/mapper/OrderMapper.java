@@ -15,9 +15,11 @@
  */
 package com.aspectran.jpetstore.common.mybatis.mapper;
 
+import com.aspectran.core.component.bean.annotation.Autowired;
+import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.jpetstore.common.mybatis.SqlMapper;
 import com.aspectran.jpetstore.order.domain.Order;
-import com.aspectran.utils.annotation.jsr305.NonNull;
-import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -26,11 +28,8 @@ import java.util.List;
  *
  * @author Juho Jeong
  */
+@Mapper
 public interface OrderMapper {
-
-    static OrderMapper getMapper(@NonNull SqlSession sqlSession) {
-        return sqlSession.getMapper(OrderMapper.class);
-    }
 
     List<Order> getOrdersByUsername(String username);
 
@@ -43,5 +42,47 @@ public interface OrderMapper {
     void deleteOrder(int orderId);
 
     void deleteOrderStatus(int orderId);
+
+    @Component
+    class Dao implements OrderMapper {
+
+        private final SqlMapper sqlMapper;
+
+        @Autowired
+        public Dao(SqlMapper sqlMapper) {
+            this.sqlMapper = sqlMapper;
+        }
+
+        @Override
+        public List<Order> getOrdersByUsername(String username) {
+            return sqlMapper.simple(OrderMapper.class).getOrdersByUsername(username);
+        }
+
+        @Override
+        public Order getOrder(int orderId) {
+            return sqlMapper.simple(OrderMapper.class).getOrder(orderId);
+        }
+
+        @Override
+        public void insertOrder(Order order) {
+            sqlMapper.simple(OrderMapper.class).insertOrder(order);
+        }
+
+        @Override
+        public void insertOrderStatus(Order order) {
+            sqlMapper.simple(OrderMapper.class).insertOrderStatus(order);
+        }
+
+        @Override
+        public void deleteOrder(int orderId) {
+            sqlMapper.simple(OrderMapper.class).deleteOrder(orderId);
+        }
+
+        @Override
+        public void deleteOrderStatus(int orderId) {
+            sqlMapper.simple(OrderMapper.class).deleteOrderStatus(orderId);
+        }
+
+    }
 
 }

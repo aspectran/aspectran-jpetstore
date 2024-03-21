@@ -18,7 +18,6 @@ package com.aspectran.jpetstore.order.service;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.jpetstore.common.mybatis.SimpleSqlSession;
 import com.aspectran.jpetstore.common.mybatis.mapper.ItemMapper;
 import com.aspectran.jpetstore.common.mybatis.mapper.LineItemMapper;
 import com.aspectran.jpetstore.common.mybatis.mapper.OrderMapper;
@@ -26,7 +25,7 @@ import com.aspectran.jpetstore.common.mybatis.mapper.SequenceMapper;
 import com.aspectran.jpetstore.order.domain.Item;
 import com.aspectran.jpetstore.order.domain.Order;
 import com.aspectran.jpetstore.order.domain.Sequence;
-import org.apache.ibatis.session.SqlSession;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,22 +40,30 @@ import java.util.Map;
 @Bean("orderService")
 public class OrderService {
 
-    private final SqlSession sqlSession;
+    private final ItemMapper.Dao itemDao;
+
+    private final OrderMapper.Dao orderDao;
+
+    private final LineItemMapper.Dao lineItemDao;
+
+    private final SequenceMapper.Dao sequenceDao;
 
     @Autowired
-    public OrderService(SimpleSqlSession sqlSession) {
-        this.sqlSession = sqlSession;
+    public OrderService(ItemMapper.Dao itemDao,
+                        OrderMapper.Dao orderDao,
+                        LineItemMapper.Dao lineItemDao,
+                        SequenceMapper.Dao sequenceDao) {
+        this.itemDao = itemDao;
+        this.orderDao = orderDao;
+        this.lineItemDao = lineItemDao;
+        this.sequenceDao = sequenceDao;
     }
 
     /**
      * Insert order.
      * @param order the order
      */
-    public void insertOrder(Order order) {
-        ItemMapper itemMapper = ItemMapper.getMapper(sqlSession);
-        OrderMapper orderMapper = OrderMapper.getMapper(sqlSession);
-        LineItemMapper lineItemMapper = LineItemMapper.getMapper(sqlSession);
-
+    public void insertOrder(@NonNull Order order) {
         order.setOrderId(getNextId("ordernum"));
         order.getLineItems().forEach(lineItem -> {
             String itemId = lineItem.getItemId();
@@ -64,14 +71,14 @@ public class OrderService {
             Map<String, Object> params = new HashMap<>();
             params.put("itemId", itemId);
             params.put("increment", increment);
-            itemMapper.updateInventoryQuantity(params);
+            itemDao.updateInventoryQuantity(params);
         });
 
-        orderMapper.insertOrder(order);
-        orderMapper.insertOrderStatus(order);
+        orderDao.insertOrder(order);
+        orderDao.insertOrderStatus(order);
         order.getLineItems().forEach(lineItem -> {
             lineItem.setOrderId(order.getOrderId());
-            lineItemMapper.insertLineItem(lineItem);
+            lineItemDao.insertLineItem(lineItem);
         });
     }
 
@@ -80,8 +87,7 @@ public class OrderService {
      * @param orderId the order id
      */
     public void deleteOrder(int orderId) {
-        OrderMapper orderMapper = OrderMapper.getMapper(sqlSession);
-        orderMapper.deleteOrder(orderId);
+        orderDao.deleteOrder(orderId);
     }
 
     /**
@@ -90,16 +96,12 @@ public class OrderService {
      * @return the order
      */
     public Order getOrder(int orderId) {
-        ItemMapper itemMapper = ItemMapper.getMapper(sqlSession);
-        OrderMapper orderMapper = OrderMapper.getMapper(sqlSession);
-        LineItemMapper lineItemMapper = LineItemMapper.getMapper(sqlSession);
-
-        Order order = orderMapper.getOrder(orderId);
+        Order order = orderDao.getOrder(orderId);
         if (order != null) {
-            order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
+            order.setLineItems(lineItemDao.getLineItemsByOrderId(orderId));
             order.getLineItems().forEach(lineItem -> {
-                Item item = itemMapper.getItem(lineItem.getItemId());
-                item.setQuantity(itemMapper.getInventoryQuantity(lineItem.getItemId()));
+                Item item = itemDao.getItem(lineItem.getItemId());
+                item.setQuantity(itemDao.getInventoryQuantity(lineItem.getItemId()));
                 lineItem.setItem(item);
             });
         }
@@ -112,7 +114,7 @@ public class OrderService {
      * @return the orders by username
      */
     public List<Order> getOrdersByUsername(String username) {
-        return OrderMapper.getMapper(sqlSession).getOrdersByUsername(username);
+        return orderDao.getOrdersByUsername(username);
     }
 
     /**
@@ -121,14 +123,13 @@ public class OrderService {
      * @return the next id
      */
     public int getNextId(String name) {
-        SequenceMapper sequenceMapper = SequenceMapper.getMapper(sqlSession);
-        Sequence sequence = sequenceMapper.getSequence(new Sequence(name, -1));
+        Sequence sequence = sequenceDao.getSequence(new Sequence(name, -1));
         if (sequence == null) {
             throw new RuntimeException(
                     "Error: A null sequence was returned from the database (could not get next " + name + " sequence)");
         }
         Sequence parameterObject = new Sequence(name, sequence.getNextId() + 1);
-        sequenceMapper.updateSequence(parameterObject);
+        sequenceDao.updateSequence(parameterObject);
         return sequence.getNextId();
     }
 

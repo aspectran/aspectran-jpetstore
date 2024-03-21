@@ -20,12 +20,10 @@ import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.jpetstore.catalog.domain.Category;
 import com.aspectran.jpetstore.catalog.domain.Product;
-import com.aspectran.jpetstore.common.mybatis.SimpleSqlSession;
 import com.aspectran.jpetstore.common.mybatis.mapper.CategoryMapper;
 import com.aspectran.jpetstore.common.mybatis.mapper.ItemMapper;
 import com.aspectran.jpetstore.common.mybatis.mapper.ProductMapper;
 import com.aspectran.jpetstore.order.domain.Item;
-import org.apache.ibatis.session.SqlSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,27 +37,35 @@ import java.util.List;
 @Bean("catalogService")
 public class CatalogService {
 
-    private final SqlSession sqlSession;
+    private final CategoryMapper.Dao categoryDao;
+    
+    private final ProductMapper.Dao productDao;
+
+    private final ItemMapper.Dao itemDao;
 
     @Autowired
-    public CatalogService(SimpleSqlSession sqlSession) {
-        this.sqlSession = sqlSession;
+    public CatalogService(CategoryMapper.Dao categoryDao,
+                          ProductMapper.Dao productDao,
+                          ItemMapper.Dao itemDao) {
+        this.productDao = productDao;
+        this.categoryDao = categoryDao;
+        this.itemDao = itemDao;
     }
 
     public List<Category> getCategoryList() {
-        return CategoryMapper.getMapper(sqlSession).getCategoryList();
+        return categoryDao.getCategoryList();
     }
 
     public Category getCategory(String categoryId) {
-        return CategoryMapper.getMapper(sqlSession).getCategory(categoryId);
+        return categoryDao.getCategory(categoryId);
     }
 
     public Product getProduct(String productId) {
-        return ProductMapper.getMapper(sqlSession).getProduct(productId);
+        return productDao.getProduct(productId);
     }
 
     public List<Product> getProductListByCategory(String categoryId) {
-        return ProductMapper.getMapper(sqlSession).getProductListByCategory(categoryId);
+        return productDao.getProductListByCategory(categoryId);
     }
 
     /**
@@ -68,24 +74,25 @@ public class CatalogService {
      * @return the list
      */
     public List<Product> searchProductList(String keywords) {
-        ProductMapper productMapper = ProductMapper.getMapper(sqlSession);
         List<Product> products = new ArrayList<>();
-        for (String keyword : keywords.split("\\s+")) {
-            products.addAll(productMapper.searchProductList("%" + keyword.toLowerCase() + "%"));
+        if (keywords != null) {
+            for (String keyword : keywords.split("\\s+")) {
+                products.addAll(productDao.searchProductList("%" + keyword.toLowerCase() + "%"));
+            }
         }
         return products;
     }
 
     public List<Item> getItemListByProduct(String productId) {
-        return ItemMapper.getMapper(sqlSession).getItemListByProduct(productId);
+        return itemDao.getItemListByProduct(productId);
     }
 
     public Item getItem(String itemId) {
-        return ItemMapper.getMapper(sqlSession).getItem(itemId);
+        return itemDao.getItem(itemId);
     }
 
     public boolean isItemInStock(String itemId) {
-        return (ItemMapper.getMapper(sqlSession).getInventoryQuantity(itemId) > 0);
+        return (itemDao.getInventoryQuantity(itemId) > 0);
     }
 
 }

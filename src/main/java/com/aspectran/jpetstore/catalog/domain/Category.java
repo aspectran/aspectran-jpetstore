@@ -15,6 +15,8 @@
  */
 package com.aspectran.jpetstore.catalog.domain;
 
+import com.aspectran.utils.annotation.jsr305.NonNull;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -37,7 +39,7 @@ public class Category implements Serializable {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(@NonNull String categoryId) {
         this.categoryId = categoryId.trim();
     }
 

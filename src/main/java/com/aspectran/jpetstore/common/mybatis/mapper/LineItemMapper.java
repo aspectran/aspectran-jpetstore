@@ -15,9 +15,11 @@
  */
 package com.aspectran.jpetstore.common.mybatis.mapper;
 
+import com.aspectran.core.component.bean.annotation.Autowired;
+import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.jpetstore.common.mybatis.SqlMapper;
 import com.aspectran.jpetstore.order.domain.LineItem;
-import com.aspectran.utils.annotation.jsr305.NonNull;
-import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -26,14 +28,33 @@ import java.util.List;
  *
  * @author Juho Jeong
  */
+@Mapper
 public interface LineItemMapper {
-
-    static LineItemMapper getMapper(@NonNull SqlSession sqlSession) {
-        return sqlSession.getMapper(LineItemMapper.class);
-    }
 
     List<LineItem> getLineItemsByOrderId(int orderId);
 
     void insertLineItem(LineItem lineItem);
+
+    @Component
+    class Dao implements LineItemMapper {
+
+        private final SqlMapper sqlMapper;
+
+        @Autowired
+        public Dao(SqlMapper sqlMapper) {
+            this.sqlMapper = sqlMapper;
+        }
+
+        @Override
+        public List<LineItem> getLineItemsByOrderId(int orderId) {
+            return sqlMapper.simple(LineItemMapper.class).getLineItemsByOrderId(orderId);
+        }
+
+        @Override
+        public void insertLineItem(LineItem lineItem) {
+            sqlMapper.simple(LineItemMapper.class).insertLineItem(lineItem);
+        }
+
+    }
 
 }
