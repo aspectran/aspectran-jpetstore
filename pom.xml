@@ -56,7 +56,6 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <compilerVersion>${java.version}</compilerVersion>
                     <compilerArgs>
                         <arg>-Xlint:-try,-path,-options</arg>
                     </compilerArgs>
