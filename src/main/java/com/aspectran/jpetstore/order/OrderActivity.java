@@ -151,15 +151,16 @@ public class OrderActivity {
             }
     )
     @Action("order")
-    public Order submitOrder() {
-        Account account = sessionManager.getUserSession().getAccount();
-        Cart cart = cartService.getCart();
-
+    public Order submitOrder(Translet translet) {
         Order order = sessionManager.getUserSession().getOrder();
+        if (order == null) {
+            translet.redirect("/cart/viewCart");
+            return null;
+        }
         orderService.insertOrder(order);
 
         sessionManager.getUserSession().clearOrder();
-        cart.clear();
+        cartService.getCart().clear();
 
         return order;
     }

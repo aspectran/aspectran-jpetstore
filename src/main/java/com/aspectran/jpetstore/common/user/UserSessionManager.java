@@ -26,6 +26,7 @@ import com.aspectran.utils.Assert;
 import com.aspectran.utils.annotation.jsr305.NonNull;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @Bean("userSessionManager")
@@ -50,10 +51,7 @@ public class UserSessionManager implements ActivityContextAware {
     public void checkUserAuthentication(Translet translet) {
         UserSession userSession = getUserSession(false);
         if (userSession == null || !userSession.isAuthenticated()) {
-            //throw new UserAuthenticationRequiredException();
-            translet.redirect("/account/signonForm", new HashMap<>() {{
-                put("referer", translet.getRequestName());
-            }});
+            translet.redirect("/account/signonForm", Map.of("referer", translet.getRelativeName()));
         }
     }
 
