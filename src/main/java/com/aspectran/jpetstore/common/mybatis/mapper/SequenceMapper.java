@@ -17,6 +17,7 @@ package com.aspectran.jpetstore.common.mybatis.mapper;
 
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.jpetstore.common.mybatis.AbstractDao;
 import com.aspectran.jpetstore.common.mybatis.SqlMapperAgent;
 import com.aspectran.jpetstore.order.domain.Sequence;
 import org.apache.ibatis.annotations.Mapper;
@@ -34,23 +35,21 @@ public interface SequenceMapper {
     void updateSequence(Sequence sequence);
 
     @Component
-    class Dao implements SequenceMapper {
-
-        private final SqlMapperAgent mapperAgent;
+    class Dao extends AbstractDao<SequenceMapper> implements SequenceMapper {
 
         @Autowired
         public Dao(SqlMapperAgent mapperAgent) {
-            this.mapperAgent = mapperAgent;
+            super(mapperAgent, SequenceMapper.class);
         }
 
         @Override
         public Sequence getSequence(Sequence sequence) {
-            return mapperAgent.simple(SequenceMapper.class).getSequence(sequence);
+            return simple().getSequence(sequence);
         }
 
         @Override
         public void updateSequence(Sequence sequence) {
-            mapperAgent.simple(SequenceMapper.class).updateSequence(sequence);
+            simple().updateSequence(sequence);
         }
 
     }

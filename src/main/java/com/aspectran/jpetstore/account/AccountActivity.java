@@ -67,7 +67,7 @@ public class AccountActivity {
     /**
      * New account.
      */
-    @Request("/account/newAccount")
+    @RequestToPost("/account/newAccount")
     @Redirect("/account/signonForm?created=true")
     public void newAccount(Translet translet,
                            Account account,
@@ -100,7 +100,7 @@ public class AccountActivity {
     /**
      * Edits the account.
      */
-    @Request("/account/editAccount")
+    @RequestToPost("/account/editAccount")
     @Redirect("/account/editAccountForm?updated=true")
     public void editAccount(Translet translet,
                             Account account,

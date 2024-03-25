@@ -17,6 +17,7 @@ package com.aspectran.jpetstore.common.mybatis.mapper;
 
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.jpetstore.common.mybatis.AbstractDao;
 import com.aspectran.jpetstore.common.mybatis.SqlMapperAgent;
 import com.aspectran.jpetstore.order.domain.LineItem;
 import org.apache.ibatis.annotations.Mapper;
@@ -36,23 +37,21 @@ public interface LineItemMapper {
     void insertLineItem(LineItem lineItem);
 
     @Component
-    class Dao implements LineItemMapper {
-
-        private final SqlMapperAgent mapperAgent;
+    class Dao extends AbstractDao<LineItemMapper> implements LineItemMapper {
 
         @Autowired
         public Dao(SqlMapperAgent mapperAgent) {
-            this.mapperAgent = mapperAgent;
+            super(mapperAgent, LineItemMapper.class);
         }
 
         @Override
         public List<LineItem> getLineItemsByOrderId(int orderId) {
-            return mapperAgent.simple(LineItemMapper.class).getLineItemsByOrderId(orderId);
+            return simple().getLineItemsByOrderId(orderId);
         }
 
         @Override
         public void insertLineItem(LineItem lineItem) {
-            mapperAgent.simple(LineItemMapper.class).insertLineItem(lineItem);
+            simple().insertLineItem(lineItem);
         }
 
     }
