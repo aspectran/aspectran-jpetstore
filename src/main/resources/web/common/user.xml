@@ -20,7 +20,7 @@
             </before>
         </advice>
         <exception>
-            <thrown type="com.aspectran.jpetstore.common.user.UserAuthenticationRequiredException">
+            <thrown type="app.jpetstore.common.user.UserAuthenticationRequiredException">
                 <redirect path="/account/signonForm">
                     <parameters>
                         <item name="referer">#{currentTranslet^requestName}</item>

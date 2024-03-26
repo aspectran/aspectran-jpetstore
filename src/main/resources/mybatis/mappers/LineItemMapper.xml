@@ -19,11 +19,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.aspectran.jpetstore.common.mybatis.mapper.LineItemMapper">
+<mapper namespace="app.jpetstore.common.mybatis.mapper.LineItemMapper">
 
   <cache />
 
-  <select id="getLineItemsByOrderId" resultType="com.aspectran.jpetstore.order.domain.LineItem">
+  <select id="getLineItemsByOrderId" resultType="app.jpetstore.order.domain.LineItem">
     SELECT
       ORDERID,
       LINENUM AS lineNumber,

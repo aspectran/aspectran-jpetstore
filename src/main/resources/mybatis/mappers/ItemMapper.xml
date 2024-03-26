@@ -19,11 +19,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.aspectran.jpetstore.common.mybatis.mapper.ItemMapper">
+<mapper namespace="app.jpetstore.common.mybatis.mapper.ItemMapper">
 
   <cache />
 
-  <select id="getItemListByProduct" resultType="com.aspectran.jpetstore.order.domain.Item">
+  <select id="getItemListByProduct" resultType="app.jpetstore.order.domain.Item">
     SELECT
       I.ITEMID,
       LISTPRICE,
@@ -45,7 +45,7 @@
       AND I.PRODUCTID = #{value}
   </select>
 
-  <select id="getItem" resultType="com.aspectran.jpetstore.order.domain.Item">
+  <select id="getItem" resultType="app.jpetstore.order.domain.Item">
     SELECT
       I.ITEMID,
       LISTPRICE,

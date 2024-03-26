@@ -16,11 +16,11 @@
         <dispatch name="monitoring/monitoring"/>
     </translet>
 
-    <bean id="logTailerManager" class="com.aspectran.jpetstore.monitoring.log.LogTailerManager">
+    <bean id="logTailerManager" class="app.jpetstore.monitoring.log.LogTailerManager">
         <arguments>
-            <item>#{class:com.aspectran.jpetstore.monitoring.log.LogtailEndpoint}</item>
+            <item>#{class:app.jpetstore.monitoring.log.LogtailEndpoint}</item>
             <item type="array">
-                <bean class="com.aspectran.jpetstore.monitoring.log.LogTailer">
+                <bean class="app.jpetstore.monitoring.log.LogTailer">
                     <arguments>
                         <item>app-log</item>
                         <item>#{basePath}/logs/app.log</item>

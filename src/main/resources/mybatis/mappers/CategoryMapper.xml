@@ -19,11 +19,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.aspectran.jpetstore.common.mybatis.mapper.CategoryMapper">
+<mapper namespace="app.jpetstore.common.mybatis.mapper.CategoryMapper">
 
   <cache />
   
-  <select id="getCategory" resultType="com.aspectran.jpetstore.catalog.domain.Category">
+  <select id="getCategory" resultType="app.jpetstore.catalog.domain.Category">
     SELECT
       CATID AS categoryId,
       NAME,
@@ -32,7 +32,7 @@
     WHERE CATID = #{categoryId}
   </select>
 
-  <select id="getCategoryList" resultType="com.aspectran.jpetstore.catalog.domain.Category">
+  <select id="getCategoryList" resultType="app.jpetstore.catalog.domain.Category">
     SELECT
       CATID AS categoryId,
       NAME,

@@ -19,11 +19,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.aspectran.jpetstore.common.mybatis.mapper.OrderMapper">
+<mapper namespace="app.jpetstore.common.mybatis.mapper.OrderMapper">
 
   <cache />
 
-  <select id="getOrder" resultType="com.aspectran.jpetstore.order.domain.Order">
+  <select id="getOrder" resultType="app.jpetstore.order.domain.Order">
     select
       BILLADDR1 AS billAddress1,
       BILLADDR2 AS billAddress2,
@@ -56,7 +56,7 @@
       AND ORDERS.ORDERID = ORDERSTATUS.ORDERID
   </select>
 
-  <select id="getOrdersByUsername" resultType="com.aspectran.jpetstore.order.domain.Order">
+  <select id="getOrdersByUsername" resultType="app.jpetstore.order.domain.Order">
     SELECT
       BILLADDR1 AS billAddress1,
       BILLADDR2 AS billAddress2,

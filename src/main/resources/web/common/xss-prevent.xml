@@ -3,7 +3,7 @@
         "http://aspectran.github.io/dtd/aspectran-8.dtd">
 <aspectran>
 
-    <bean id="xssPreventionFilter" class="com.aspectran.jpetstore.common.filter.XSSPreventionFilter">
+    <bean id="xssPreventionFilter" class="app.jpetstore.common.filter.XSSPreventionFilter">
         <description>
             <![CDATA[
             // Avoid anything between script tags

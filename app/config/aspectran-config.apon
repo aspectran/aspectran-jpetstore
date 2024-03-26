@@ -9,7 +9,7 @@ context: {
         /lib/ext
     ]
     scan: [
-        com.aspectran.jpetstore
+        app.jpetstore
     ]
     profiles: {
         default: [
