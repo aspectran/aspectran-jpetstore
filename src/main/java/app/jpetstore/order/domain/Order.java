@@ -15,10 +15,10 @@
  */
 package app.jpetstore.order.domain;
 
+import app.jpetstore.account.domain.Account;
 import app.jpetstore.cart.domain.Cart;
 import app.jpetstore.cart.domain.CartItem;
 import app.jpetstore.common.validation.NumericCharacters;
-import app.jpetstore.account.domain.Account;
 import com.aspectran.utils.annotation.jsr305.NonNull;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

@@ -13,43 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis.mapper;
+package app.jpetstore.mybatis.mapper;
 
+import app.jpetstore.order.domain.LineItem;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
-import app.jpetstore.common.mybatis.AbstractDao;
-import app.jpetstore.common.mybatis.SqlMapperAgent;
-import app.jpetstore.order.domain.Sequence;
+import com.aspectran.mybatis.SqlMapperAgent;
+import com.aspectran.mybatis.SqlMapperDao;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
- * The Interface SequenceMapper.
+ * The Interface LineItemMapper.
  *
  * @author Juho Jeong
  */
 @Mapper
-public interface SequenceMapper {
+public interface LineItemMapper {
 
-    Sequence getSequence(Sequence sequence);
+    List<LineItem> getLineItemsByOrderId(int orderId);
 
-    void updateSequence(Sequence sequence);
+    void insertLineItem(LineItem lineItem);
 
     @Component
-    class Dao extends AbstractDao<SequenceMapper> implements SequenceMapper {
+    class Dao extends SqlMapperDao<LineItemMapper> implements LineItemMapper {
 
         @Autowired
         public Dao(SqlMapperAgent mapperAgent) {
-            super(mapperAgent, SequenceMapper.class);
+            super(mapperAgent, LineItemMapper.class);
         }
 
         @Override
-        public Sequence getSequence(Sequence sequence) {
-            return simple().getSequence(sequence);
+        public List<LineItem> getLineItemsByOrderId(int orderId) {
+            return simple().getLineItemsByOrderId(orderId);
         }
 
         @Override
-        public void updateSequence(Sequence sequence) {
-            simple().updateSequence(sequence);
+        public void insertLineItem(LineItem lineItem) {
+            simple().insertLineItem(lineItem);
         }
 
     }

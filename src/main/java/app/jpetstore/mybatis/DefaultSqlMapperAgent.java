@@ -13,15 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis;
+package app.jpetstore.mybatis;
 
 import com.aspectran.core.component.bean.annotation.Autowired;
+import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.utils.annotation.jsr305.NonNull;
+import com.aspectran.mybatis.SqlMapperAgent;
 import org.apache.ibatis.session.SqlSession;
 
 @Component
-public class SqlMapperAgent {
+@Bean
+public class DefaultSqlMapperAgent implements SqlMapperAgent {
 
     private final SqlSession simpleSqlSession;
 
@@ -30,34 +32,40 @@ public class SqlMapperAgent {
     private final SqlSession reuseSqlSession;
 
     @Autowired
-    public SqlMapperAgent(@NonNull SimpleSqlSession simpleSqlSession,
-                          @NonNull BatchSqlSession batchSqlSession,
-                          @NonNull ReuseSqlSession reuseSqlSession) {
+    public DefaultSqlMapperAgent(SimpleSqlSession simpleSqlSession,
+                                 BatchSqlSession batchSqlSession,
+                                 ReuseSqlSession reuseSqlSession) {
         this.simpleSqlSession = simpleSqlSession;
         this.batchSqlSession = batchSqlSession;
         this.reuseSqlSession = reuseSqlSession;
     }
 
+    @Override
     public SqlSession getSimpleSqlSession() {
         return simpleSqlSession;
     }
 
+    @Override
     public SqlSession getBatchSqlSession() {
         return batchSqlSession;
     }
 
+    @Override
     public SqlSession getReuseSqlSession() {
         return reuseSqlSession;
     }
 
+    @Override
     public <T> T simple(Class<T> type) {
         return getSimpleSqlSession().getMapper(type);
     }
 
+    @Override
     public <T> T batch(Class<T> type) {
         return getBatchSqlSession().getMapper(type);
     }
 
+    @Override
     public <T> T reuse(Class<T> type) {
         return getReuseSqlSession().getMapper(type);
     }

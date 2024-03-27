@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis.mapper;
+package app.jpetstore.mybatis.mapper;
 
+import app.jpetstore.catalog.domain.Product;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
-import app.jpetstore.catalog.domain.Product;
-import app.jpetstore.common.mybatis.AbstractDao;
-import app.jpetstore.common.mybatis.SqlMapperAgent;
+import com.aspectran.mybatis.SqlMapperAgent;
+import com.aspectran.mybatis.SqlMapperDao;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public interface ProductMapper {
     List<Product> searchProductList(String keywords);
 
     @Component
-    class Dao extends AbstractDao<ProductMapper> implements ProductMapper {
+    class Dao extends SqlMapperDao<ProductMapper> implements ProductMapper {
 
         @Autowired
         public Dao(SqlMapperAgent mapperAgent) {

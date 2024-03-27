@@ -15,15 +15,15 @@
  */
 package app.jpetstore.catalog.service;
 
-import app.jpetstore.common.mybatis.mapper.CategoryMapper;
-import app.jpetstore.common.mybatis.mapper.ItemMapper;
-import app.jpetstore.common.mybatis.mapper.ProductMapper;
+import app.jpetstore.catalog.domain.Category;
+import app.jpetstore.catalog.domain.Product;
+import app.jpetstore.mybatis.mapper.CategoryMapper;
+import app.jpetstore.mybatis.mapper.ItemMapper;
+import app.jpetstore.mybatis.mapper.ProductMapper;
 import app.jpetstore.order.domain.Item;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import app.jpetstore.catalog.domain.Category;
-import app.jpetstore.catalog.domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;

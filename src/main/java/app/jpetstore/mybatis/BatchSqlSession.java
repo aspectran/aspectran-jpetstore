@@ -13,29 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis;
+package app.jpetstore.mybatis;
 
-public abstract class AbstractDao<T> {
+import com.aspectran.core.component.bean.annotation.Bean;
+import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.mybatis.SqlSessionAgent;
 
-    private final SqlMapperAgent mapperAgent;
+/**
+ * Advice to handle database transactions in reuse mode.
+ * <ul>
+ * <li>PreparedStatements will be reused.
+ * </ul>
+ */
+@Component
+@Bean("batchSqlSession")
+public class BatchSqlSession extends SqlSessionAgent {
 
-    private final Class<T> mapperInterface;
-
-    public AbstractDao(SqlMapperAgent mapperAgent, Class<T> mapperInterface) {
-        this.mapperAgent = mapperAgent;
-        this.mapperInterface = mapperInterface;
-    }
-
-    public T simple() {
-        return mapperAgent.simple(mapperInterface);
-    }
-
-    public T batch() {
-        return mapperAgent.batch(mapperInterface);
-    }
-
-    public T reuse() {
-        return mapperAgent.reuse(mapperInterface);
+    public BatchSqlSession() {
+        super("batchTxAspect");
     }
 
 }

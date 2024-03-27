@@ -17,6 +17,7 @@ package app.jpetstore.order;
 
 import app.jpetstore.account.domain.Account;
 import app.jpetstore.cart.domain.Cart;
+import app.jpetstore.cart.service.CartService;
 import app.jpetstore.common.user.UserSessionManager;
 import app.jpetstore.common.validation.BeanValidator;
 import app.jpetstore.order.domain.Order;
@@ -32,7 +33,6 @@ import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
 import com.aspectran.core.component.bean.annotation.Required;
-import app.jpetstore.cart.service.CartService;
 
 import java.util.List;
 

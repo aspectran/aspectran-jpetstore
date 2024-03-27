@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis.mapper;
+package app.jpetstore.mybatis.mapper;
 
+import app.jpetstore.account.domain.Account;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
-import app.jpetstore.account.domain.Account;
-import app.jpetstore.common.mybatis.AbstractDao;
-import app.jpetstore.common.mybatis.SqlMapperAgent;
+import com.aspectran.mybatis.SqlMapperAgent;
+import com.aspectran.mybatis.SqlMapperDao;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -47,7 +47,7 @@ public interface AccountMapper {
     void updateSignon(Account account);
 
     @Component
-    class Dao extends AbstractDao<AccountMapper> implements AccountMapper {
+    class Dao extends SqlMapperDao<AccountMapper> implements AccountMapper {
 
         @Autowired
         public Dao(SqlMapperAgent mapperAgent) {

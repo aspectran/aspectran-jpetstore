@@ -15,6 +15,9 @@
  */
 package app.jpetstore.catalog;
 
+import app.jpetstore.catalog.domain.Category;
+import app.jpetstore.catalog.domain.Product;
+import app.jpetstore.catalog.service.CatalogService;
 import app.jpetstore.order.domain.Item;
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.component.bean.annotation.Action;
@@ -24,9 +27,6 @@ import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.Dispatch;
 import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
-import app.jpetstore.catalog.domain.Category;
-import app.jpetstore.catalog.domain.Product;
-import app.jpetstore.catalog.service.CatalogService;
 import com.aspectran.utils.StringUtils;
 
 import java.util.List;

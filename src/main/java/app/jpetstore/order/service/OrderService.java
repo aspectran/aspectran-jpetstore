@@ -15,16 +15,16 @@
  */
 package app.jpetstore.order.service;
 
-import com.aspectran.core.component.bean.annotation.Autowired;
-import com.aspectran.core.component.bean.annotation.Bean;
-import com.aspectran.core.component.bean.annotation.Component;
-import app.jpetstore.common.mybatis.mapper.ItemMapper;
-import app.jpetstore.common.mybatis.mapper.LineItemMapper;
-import app.jpetstore.common.mybatis.mapper.OrderMapper;
-import app.jpetstore.common.mybatis.mapper.SequenceMapper;
+import app.jpetstore.mybatis.mapper.ItemMapper;
+import app.jpetstore.mybatis.mapper.LineItemMapper;
+import app.jpetstore.mybatis.mapper.OrderMapper;
+import app.jpetstore.mybatis.mapper.SequenceMapper;
 import app.jpetstore.order.domain.Item;
 import app.jpetstore.order.domain.Order;
 import app.jpetstore.order.domain.Sequence;
+import com.aspectran.core.component.bean.annotation.Autowired;
+import com.aspectran.core.component.bean.annotation.Bean;
+import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.utils.annotation.jsr305.NonNull;
 
 import java.util.HashMap;

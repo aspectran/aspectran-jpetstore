@@ -15,8 +15,8 @@
  */
 package app.jpetstore.common.user;
 
-import app.jpetstore.cart.domain.Cart;
 import app.jpetstore.account.domain.Account;
+import app.jpetstore.cart.domain.Cart;
 import app.jpetstore.catalog.domain.Product;
 import app.jpetstore.order.domain.Order;
 
