@@ -106,7 +106,7 @@ public class CatalogActivity {
     @Dispatch("catalog/SearchProducts")
     @Action("productList")
     public List<Product> searchProducts(String keyword) {
-        if (!StringUtils.isEmpty(keyword)) {
+        if (StringUtils.hasLength(keyword)) {
             return catalogService.searchProductList(keyword);
         } else {
             return null;
