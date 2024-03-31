@@ -94,15 +94,16 @@
 
   <insert id="insertAccount" parameterType="app.jpetstore.account.domain.Account">
     INSERT INTO ACCOUNT
-      (EMAIL, FIRSTNAME, LASTNAME, STATUS, ADDR1, ADDR2, CITY, STATE, ZIP, COUNTRY, PHONE, USERID)
+      (EMAIL, FIRSTNAME, LASTNAME, STATUS, ADDR1, ADDR2,
+        CITY, STATE, ZIP, COUNTRY, PHONE, USERID)
     VALUES
-      (#{email}, #{firstName}, #{lastName}, #{status}, #{address1},  #{address2,jdbcType=VARCHAR}, #{city}, #{state}, #{zip}, #{country}, #{phone}, #{username})
+      (#{email}, #{firstName}, #{lastName}, #{status}, #{address1}, #{address2,jdbcType=VARCHAR},
+        #{city}, #{state}, #{zip}, #{country}, #{phone}, #{username})
   </insert>
 
   <update id="updateProfile" parameterType="app.jpetstore.account.domain.Account">
     <bind name="listOptionValue" value="_parameter.isListOption() ? 1 : 0" />
     <bind name="bannerOptionValue" value="_parameter.isBannerOption() ? 1 : 0" />
-
     UPDATE PROFILE SET
       LANGPREF = #{languagePreference},
       FAVCATEGORY = #{favouriteCategoryId},
@@ -114,7 +115,6 @@
   <insert id="insertProfile" parameterType="app.jpetstore.account.domain.Account">
     <bind name="listOptionValue" value="_parameter.isListOption() ? 1 : 0" />
     <bind name="bannerOptionValue" value="_parameter.isBannerOption() ? 1 : 0" />
-
     INSERT INTO PROFILE (LANGPREF, FAVCATEGORY, MYLISTOPT, BANNEROPT, USERID)
     VALUES (#{languagePreference}, #{favouriteCategoryId}, #{listOptionValue}, #{bannerOptionValue}, #{username})
   </insert>
@@ -125,8 +125,8 @@
   </update>
 
   <insert id="insertSignon" parameterType="app.jpetstore.account.domain.Account">
-    INSERT INTO SIGNON (PASSWORD,USERNAME)
-    VALUES (#{password}, #{username})
+    INSERT INTO SIGNON (USERNAME, PASSWORD)
+    VALUES (#{username}, #{password})
   </insert>
 
 </mapper>

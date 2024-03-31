@@ -29,7 +29,7 @@ create table if not exists supplier (
 
 create table if not exists signon (
     username varchar(25) not null,
-    password varchar(25)  not null,
+    password varchar(25) not null,
     constraint pk_signon primary key (username)
 );
 
@@ -38,7 +38,7 @@ create table if not exists account (
     email varchar(80) not null,
     firstname varchar(80) not null,
     lastname varchar(80) not null,
-    status varchar(2)  null,
+    status varchar(2) null,
     addr1 varchar(80) not null,
     addr2 varchar(40) null,
     city varchar(80) not  null,
@@ -60,7 +60,7 @@ create table if not exists profile (
 
 create table if not exists bannerdata (
     favcategory varchar(80) not null,
-    bannername varchar(255)  null,
+    bannername varchar(255) null,
     constraint pk_bannerdata primary key (favcategory)
 );
 
@@ -145,10 +145,10 @@ create table if not exists item (
     attr4 varchar(80) null,
     attr5 varchar(80) null,
     constraint pk_item primary key (itemid),
-        constraint fk_item_1 foreign key (productid)
-        references product (productid),
-        constraint fk_item_2 foreign key (supplier)
-        references supplier (suppid)
+    constraint fk_item_1 foreign key (productid)
+    references product (productid),
+    constraint fk_item_2 foreign key (supplier)
+    references supplier (suppid)
 );
 
 create index if not exists itemProd on item (productid);
@@ -159,9 +159,8 @@ create table if not exists inventory (
     constraint pk_inventory primary key (itemid)
 );
 
-create table if not exists sequence
-(
-    name               varchar(30)  not null,
-    nextid             int          not null,
+create table if not exists sequence (
+    name varchar(30) not null,
+    nextid int not null,
     constraint pk_sequence primary key (name)
 );

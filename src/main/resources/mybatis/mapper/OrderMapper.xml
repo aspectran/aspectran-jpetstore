@@ -24,7 +24,7 @@
   <cache />
 
   <select id="getOrder" resultType="app.jpetstore.order.domain.Order">
-    select
+    SELECT
       BILLADDR1 AS billAddress1,
       BILLADDR2 AS billAddress2,
       BILLCITY,
