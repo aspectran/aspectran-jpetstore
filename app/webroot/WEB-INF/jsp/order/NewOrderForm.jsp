@@ -22,7 +22,7 @@
 
 <div id="CenterForm">
 
-	<form method="post" action="/order/newOrder">
+	<form method="post" action="<aspectran:url value="/order/newOrder"/>">
 		<input type="hidden" name="paymentForm" value="true"/>
 		<input type="hidden" name="billingForm" value="true"/>
 
@@ -126,7 +126,7 @@
 <c:if test="${empty order}">
 <script>
 	alert("An order could not be created because a cart could not be found.");
-	location.href = "/catalog/";
+	location.href = "<aspectran:url value="/"/>";
 </script>
 </c:if>
 

@@ -21,7 +21,7 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
 <div id="BackLink">
-	<a href="<aspectran:url value="/catalog/"/>">Return to Main Menu</a>
+	<a href="<aspectran:url value="/"/>">Return to Main Menu</a>
 </div>
 
 <div id="Catalog">
@@ -36,7 +36,7 @@
 		<c:forEach var="product" items="${productList}">
 			<tr>
 				<td>
-					<a href="<aspectran:url value="/catalog/products/${product.productId}"/>">${product.productId}</a>
+					<a href="<aspectran:url value="/products/${product.productId}"/>">${product.productId}</a>
 				</td>
 				<td>${product.name}</td>
 			</tr>

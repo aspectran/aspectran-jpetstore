@@ -25,7 +25,6 @@ import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.Dispatch;
-import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.utils.StringUtils;
 
@@ -48,11 +47,6 @@ public class CatalogActivity {
     }
 
     @Request("/")
-    @Redirect("/catalog/")
-    public void home() {
-    }
-
-    @Request("/catalog/")
     @Dispatch("catalog/Main")
     public void viewMain() {
     }
@@ -60,7 +54,7 @@ public class CatalogActivity {
     /**
      * View category.
      */
-    @Request("/catalog/categories/${categoryId}")
+    @Request("/categories/${categoryId}")
     @Dispatch("catalog/Category")
     public void viewCategory(Translet translet, String categoryId) {
         if (categoryId != null) {
@@ -74,11 +68,15 @@ public class CatalogActivity {
     /**
      * View product.
      */
-    @Request("/catalog/products/${productId}")
+    @Request("/products/${productId}")
     @Dispatch("catalog/Product")
     public void viewProduct(Translet translet, String productId) {
         if (productId != null) {
             Product product = catalogService.getProduct(productId);
+            if (product == null) {
+                translet.redirect("/");
+                return;
+            }
             List<Item> itemList = catalogService.getItemListByProduct(productId);
             translet.setAttribute("product", product);
             translet.setAttribute("itemList", itemList);
@@ -88,14 +86,20 @@ public class CatalogActivity {
     /**
      * View item.
      */
-    @Request("/catalog/items/${itemId}")
+    @Request("/products/${productId}/items/${itemId}")
     @Dispatch("catalog/Item")
-    public void viewItem(Translet translet, String itemId) {
+    public void viewItem(Translet translet, String productId, String itemId) {
         Item item = catalogService.getItem(itemId);
         if (item != null) {
             Product product = item.getProduct();
+            if (product == null || !productId.equals(product.getProductId())) {
+                translet.redirect("/");
+                return;
+            }
             translet.setAttribute("item", item);
             translet.setAttribute("product", product);
+        } else {
+            translet.redirect("/products/${productId}");
         }
     }
 

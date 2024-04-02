@@ -135,7 +135,7 @@ public class AccountActivity {
      * Signon.
      */
     @RequestToPost("/account/signon")
-    @Redirect("/catalog/")
+    @Redirect("/")
     public void signon(Translet translet,
                        String username,
                        String password,
@@ -160,7 +160,7 @@ public class AccountActivity {
      * Signoff.
      */
     @Request("/account/signoff")
-    @Redirect("/catalog/")
+    @Redirect("/")
     public void signoff() {
         sessionManager.expire();
     }

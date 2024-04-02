@@ -22,7 +22,7 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
 <div id="BackLink">
-	<a href="<aspectran:url value="/catalog/products/${product.productId}"/>">Return to ${product.productId}</a>
+	<a href="<aspectran:url value="/products/${not empty product ? product.productId : productId}"/>">Return to ${not empty product ? product.productId : productId}</a>
 </div>
 
 <div id="CenterForm">

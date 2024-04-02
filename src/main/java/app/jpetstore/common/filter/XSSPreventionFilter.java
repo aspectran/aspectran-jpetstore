@@ -108,9 +108,7 @@ public class XSSPreventionFilter {
             RequestAdapter requestAdapter = translet.getRequestAdapter();
             if (requestAdapter.hasHeaders()) {
                 for (List<String> list : requestAdapter.getHeaderMap().values()) {
-                    for (int i = 0; i < list.size(); i++) {
-                        list.set(i, stripXSS(list.get(i)));
-                    }
+                    list.replaceAll(this::stripXSS);
                 }
             }
             if (requestAdapter.hasParameters()) {

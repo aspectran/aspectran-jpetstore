@@ -73,7 +73,8 @@ public class CartItem implements Serializable {
     }
 
     private void calculateTotal() {
-        total = Optional.ofNullable(item).map(Item::getListPrice).map(v -> v.multiply(new BigDecimal(quantity)))
+        total = Optional.ofNullable(item)
+                .map(Item::getListPrice).map(v -> v.multiply(new BigDecimal(quantity)))
                 .orElse(null);
     }
 

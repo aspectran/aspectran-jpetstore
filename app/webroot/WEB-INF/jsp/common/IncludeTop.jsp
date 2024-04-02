@@ -23,7 +23,7 @@
 
 	<div id="Logo">
 		<div id="LogoContent">
-			<a href="<aspectran:url value="/catalog/"/>"><img src="<aspectran:url value="/images/logo-topbar.gif"/>"/></a>
+			<a href="<aspectran:url value="/"/>"><img src="<aspectran:url value="/images/logo-topbar.gif"/>"/></a>
 		</div>
 	</div>
 
@@ -64,7 +64,7 @@
 
 	<div id="QuickLinks">
 	<c:forEach var="entry" items="${staticCodes.categories}">
-		<a href="<aspectran:url value="/catalog/categories/${entry.key}"/>">${entry.value}</a>
+		<a href="<aspectran:url value="/categories/${entry.key}"/>">${entry.value}</a>
 	</c:forEach>
 	</div>
 </div>

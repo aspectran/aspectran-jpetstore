@@ -26,7 +26,7 @@
 </div>
 
 <div id="BackLink">
-	<a href="<aspectran:url value="/catalog/"/>">Return to Main Menu</a>
+	<a href="<aspectran:url value="/"/>">Return to Main Menu</a>
 </div>
 
 <div id="CenterForm">

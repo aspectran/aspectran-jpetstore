@@ -16,6 +16,7 @@
 package app.jpetstore.cart.domain;
 
 import app.jpetstore.order.domain.Item;
+import com.aspectran.utils.annotation.jsr305.NonNull;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -65,7 +66,7 @@ public class Cart implements Serializable {
      * @param item the item
      * @param isInStock the is in stock
      */
-    public void addItem(Item item, boolean isInStock) {
+    public void addItem(@NonNull Item item, boolean isInStock) {
         CartItem cartItem = itemMap.get(item.getItemId());
         if (cartItem == null) {
             cartItem = new CartItem();

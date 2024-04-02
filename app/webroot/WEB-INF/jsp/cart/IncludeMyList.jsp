@@ -25,7 +25,7 @@
 		<ul>
 			<c:forEach var="product" items="${user.products}">
 				<li>
-					<a href="<aspectran:url value="/catalog/products/${product.productId}"/>">${product.name}</a>
+					<a href="<aspectran:url value="/products/${product.productId}"/>">${product.name}</a>
 				</li>
 			</c:forEach>
 		</ul>
