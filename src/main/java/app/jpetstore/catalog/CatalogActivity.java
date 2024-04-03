@@ -74,7 +74,7 @@ public class CatalogActivity {
         if (productId != null) {
             Product product = catalogService.getProduct(productId);
             if (product == null) {
-                translet.redirect("/");
+                translet.forward("/catalog/empty");
                 return;
             }
             List<Item> itemList = catalogService.getItemListByProduct(productId);
@@ -93,7 +93,7 @@ public class CatalogActivity {
         if (item != null) {
             Product product = item.getProduct();
             if (product == null || !productId.equals(product.getProductId())) {
-                translet.redirect("/");
+                translet.forward("/catalog/empty");
                 return;
             }
             translet.setAttribute("item", item);
@@ -115,6 +115,11 @@ public class CatalogActivity {
         } else {
             return null;
         }
+    }
+
+    @Request("/catalog/empty")
+    @Dispatch("catalog/Empty")
+    public void noProducts() {
     }
 
 }
