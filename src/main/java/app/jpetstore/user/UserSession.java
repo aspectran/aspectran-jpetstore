@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.user;
+package app.jpetstore.user;
 
 import app.jpetstore.account.domain.Account;
 import app.jpetstore.cart.domain.Cart;

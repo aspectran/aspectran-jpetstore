@@ -31,7 +31,7 @@
 
 		<h3>Shopping Cart</h3>
 
-		<form method="post" action="<aspectran:url value="/cart/updateCartQuantities"/>">
+		<form method="post" hx-post="<aspectran:url value="/cart/updateCartQuantities"/>" hx-target="#window">
 			<table>
 				<tr>
 					<th><b>Item ID</b></th>
@@ -64,7 +64,7 @@
 						<td><fmt:formatNumber value="${cartItem.item.listPrice}" pattern="$#,##0.00"/></td>
 						<td><fmt:formatNumber value="${cartItem.total}" pattern="$#,##0.00"/></td>
 						<td>
-							<a class="button" href="<aspectran:url value="/cart/removeItemFromCart?cartItem=${cartItem.item.itemId}"/>">Remove</a>
+							<a class="button" hx-post="<aspectran:url value="/cart/removeItemFromCart?cartItem=${cartItem.item.itemId}"/>" hx-target="#window">Remove</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -79,7 +79,7 @@
 					<td><strong><fmt:formatNumber value="${cart.subTotal}" pattern="$#,##0.00"/></strong></td>
 					<td>
 						<c:if test="${cart.numberOfItems gt 0}">
-							<a class="button" href="<aspectran:url value="/cart/removeAllItemsFromCart"/>">Remove All</a>
+							<a class="button" hx-post="<aspectran:url value="/cart/removeAllItemsFromCart"/>" hx-target="#window">Remove All</a>
 						</c:if>
 					</td>
 				</tr>

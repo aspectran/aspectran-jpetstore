@@ -15,8 +15,8 @@
  */
 package app.jpetstore.monitoring.stats;
 
-import app.jpetstore.common.user.UserSession;
-import app.jpetstore.common.user.UserSessionManager;
+import app.jpetstore.user.UserSession;
+import app.jpetstore.user.UserSessionManager;
 import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Component;

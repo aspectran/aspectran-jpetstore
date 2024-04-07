@@ -29,7 +29,9 @@
 
 	<div id="Menu">
 		<div id="MenuContent">
-			<a href="<aspectran:url value="/cart/viewCart"/>"><img align="middle" name="img_cart" src="<aspectran:url value="/images/cart.gif"/>"/></a>
+			<a href="<aspectran:url value="/cart/viewCart"/>">
+				<img align="middle" name="img_cart" src="<aspectran:url value="/images/cart.gif"/>"/>
+				${user.cart.numberOfItems}</a>
 			<c:if test="${not user.authenticated}">
 				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
 				<a href="<aspectran:url value="/account/signonForm"/>">Sign In</a>

@@ -58,7 +58,7 @@
 </div>
 <script>
     $(function() {
-        let sessionStats = new SessionStats("<aspectran:url value="/monitoring/jpetstore/stats"/>", 5);
+        let sessionStats = new SessionStats("<aspectran:url value="/monitoring/stats"/>", 5);
         try {
             sessionStats.openSocket();
             $(".stats-box").fadeIn();
@@ -69,7 +69,7 @@
 </script>
 <script>
     $(function() {
-        let logTailer = new LogTailer("<aspectran:url value="/monitoring/jpetstore/logtail"/>", "app-log");
+        let logTailer = new LogTailer("<aspectran:url value="/monitoring/logtail"/>", "app-log");
         $(".bite-tail").click(function() {
             let logtail = $(this).closest(".log-container").find(".log-tail");
             logTailer.switchTailBite(!logtail.data("bite"), logtail);

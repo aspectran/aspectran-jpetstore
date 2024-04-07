@@ -56,6 +56,16 @@
         </properties>
     </bean>
 
+    <bean id="jspView" class="com.aspectran.web.support.view.JspViewDispatcher">
+        <description>
+            Register a JSP View Dispatcher.
+        </description>
+        <properties>
+            <item name="prefix">/WEB-INF/jsp/</item>
+            <item name="suffix">.jsp</item>
+        </properties>
+    </bean>
+
     <aspect id="webTransletSettings">
         <description>
             This aspect is for injecting default settings into translets running in the web environment.
@@ -81,7 +91,6 @@
 
     <append resource="web/common/xss-prevent.xml"/>
     <append resource="web/common/static-codes.xml"/>
-    <append resource="web/common/user.xml"/>
     <append resource="web/monitoring/monitoring.xml"/>
 
 </aspectran>

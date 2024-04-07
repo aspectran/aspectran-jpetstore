@@ -26,6 +26,7 @@ import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.Dispatch;
 import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
+import com.aspectran.core.component.bean.annotation.RequestToPost;
 import com.aspectran.core.component.bean.annotation.Required;
 
 import java.util.Iterator;
@@ -60,26 +61,30 @@ public class CartActivity {
     /**
      * Removes the item from cart.
      */
-    @Request("/cart/removeItemFromCart")
-    @Redirect("/cart/viewCart")
-    public void removeItemFromCart(@Required String cartItem) {
+    @RequestToPost("/cart/removeItemFromCart")
+    @Dispatch(name = "cart/Cart", dispatcher = "jspView")
+    @Action("cart")
+    public Cart removeItemFromCart(@Required String cartItem) {
         cartService.removeItemFromCart(cartItem);
+        return cartService.getCart();
     }
 
     /**
      * Removes all items from cart.
      */
-    @Request("/cart/removeAllItemsFromCart")
-    @Redirect("/cart/viewCart")
-    public void removeAllItemsFromCart() {
+    @RequestToPost("/cart/removeAllItemsFromCart")
+    @Dispatch(name = "cart/Cart", dispatcher = "jspView")
+    @Action("cart")
+    public Cart removeAllItemsFromCart() {
         cartService.removeAllItemsFormCart();
+        return cartService.getCart();
     }
 
     /**
      * Update cart quantities.
      */
-    @Request("/cart/updateCartQuantities")
-    @Redirect("/cart/viewCart")
+    @RequestToPost("/cart/updateCartQuantities")
+    @Dispatch(name = "cart/Cart", dispatcher = "jspView")
     @Action("cart")
     public Cart updateCartQuantities(Translet translet) {
         Iterator<CartItem> cartItems = cartService.getAllCartItems();

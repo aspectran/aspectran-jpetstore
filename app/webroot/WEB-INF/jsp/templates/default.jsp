@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,500i,700" rel="stylesheet">
     <script src="https://aspectran.com/assets/js/modernizr-custom.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.11"></script>
     <link rel="mask-icon" href="https://aspectran.com/assets/img/aspectran-logo.svg" color="#4B555A"/>
     <link rel="apple-touch-icon" sizes="57x57" href="https://aspectran.com/assets/img/apple-icon-57x57.png"/>
     <link rel="apple-touch-icon" sizes="60x60" href="https://aspectran.com/assets/img/apple-icon-60x60.png"/>
@@ -157,14 +158,14 @@
         </div>
     </div>
     <c:if test="${page.style eq 'fluid'}">
-    <div class="grid-container fluid cell contour">
+    <div id="window" class="grid-container fluid cell contour">
         <c:if test="${not empty INCLUDE_PAGE}">
             <jsp:include page="/WEB-INF/jsp/${INCLUDE_PAGE}.jsp"/>
         </c:if>
     </div>
     </c:if>
     <c:if test="${page.style ne 'fluid'}">
-    <div class="grid-container" style="min-width:900px;padding:0;">
+    <div id="window" class="grid-container" style="min-width:900px;padding:0;">
         <c:if test="${not empty INCLUDE_PAGE}">
             <jsp:include page="/WEB-INF/jsp/${INCLUDE_PAGE}.jsp"/>
         </c:if>

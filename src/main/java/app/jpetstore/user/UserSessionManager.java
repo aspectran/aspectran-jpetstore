@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.user;
+package app.jpetstore.user;
 
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.adapter.SessionAdapter;
@@ -24,8 +24,6 @@ import com.aspectran.core.component.bean.aware.ActivityContextAware;
 import com.aspectran.core.context.ActivityContext;
 import com.aspectran.utils.Assert;
 import com.aspectran.utils.annotation.jsr305.NonNull;
-
-import java.util.Map;
 
 @Component
 @Bean("userSessionManager")
@@ -50,7 +48,8 @@ public class UserSessionManager implements ActivityContextAware {
     public void checkUserAuthentication(Translet translet) {
         UserSession userSession = getUserSession(false);
         if (userSession == null || !userSession.isAuthenticated()) {
-            translet.redirect("/account/signonForm", Map.of("referer", translet.getRequestName()));
+//            translet.redirect("/account/signonForm", Map.of("referer", translet.getRequestName()));
+            throw new UserAuthRequiredException();
         }
     }
 
