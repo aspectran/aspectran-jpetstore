@@ -59,6 +59,10 @@ public class CatalogActivity {
     public void viewCategory(Translet translet, String categoryId) {
         if (categoryId != null) {
             Category category = catalogService.getCategory(categoryId);
+            if (category == null) {
+                translet.forward("/catalog/empty");
+                return;
+            }
             List<Product> productList = catalogService.getProductListByCategory(categoryId);
             translet.setAttribute("category", category);
             translet.setAttribute("productList", productList);
