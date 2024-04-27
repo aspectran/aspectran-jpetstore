@@ -77,8 +77,8 @@
                 <bean class="com.aspectran.undertow.server.servlet.TowJasperInitializer">
                     <properties>
                         <item name="tldResources" type="array">
-                            <value>/webroot/WEB-INF/taglibs/</value>
                             <value>classpath:com/aspectran/web/support/tags/aspectran.tld</value>
+                            <value>%{tow.context.root.baseDir}/WEB-INF/taglibs/</value>
                         </item>
                     </properties>
                 </bean>
@@ -115,7 +115,7 @@
             <item name="sessionStore">
                 <bean class="com.aspectran.core.component.session.FileSessionStoreFactory">
                     <properties>
-                        <item name="storeDir">/work/_sessions/tow</item>
+                        <item name="storeDir">/work/_sessions/%{tow.context.root.name}</item>
                         <item name="gracePeriodSecs" valueType="int">10</item>
                         <item name="nonPersistentAttributes" type="array">
                             <value>io.undertow.websocket.current-connections</value>
