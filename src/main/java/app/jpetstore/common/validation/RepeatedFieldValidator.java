@@ -31,12 +31,14 @@ public class RepeatedFieldValidator implements ConstraintValidator<RepeatedField
 
 	private String message;
 
+	@Override
 	public void initialize(@NonNull RepeatedField constraintAnnotation) {
 		this.field = constraintAnnotation.field();
 		this.dependField = constraintAnnotation.dependField();
 		this.message = constraintAnnotation.message();
 	}
 
+	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 		if (value == null) {
 			return true;
