@@ -11,7 +11,7 @@
     <meta name="description" content="JPetStore is a full web application built on top of MyBatis 3, Aspectran 8."/>
     <link rel="stylesheet" type="text/css" href="https://aspectran.com/assets/css/aspectran.css"/>
     <link rel="stylesheet" type="text/css" href="<aspectran:url value="/css/jpetstore.css"/>"/>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:500,500i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap">
     <script src="https://aspectran.com/assets/js/modernizr-custom.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.11"></script>
@@ -389,7 +389,7 @@
         /* Add 'external' CSS class to all external links */
         $('a:external').addClass('external');
         /* turn target into target=_blank for elements w external class */
-        $(".external").attr('target','_blank');
+        $('.external').attr('target','_blank');
     })
 </script>
 <script>
