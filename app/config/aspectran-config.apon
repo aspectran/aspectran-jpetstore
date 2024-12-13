@@ -81,7 +81,7 @@ shell: {
     }
     historyFile: /logs/history.log
     verbose: true
-    acceptables: {
+    acceptable: {
         -: /**
     }
 }
@@ -104,7 +104,7 @@ daemon: {
         com.aspectran.daemon.command.builtins.RestartCommand
         com.aspectran.daemon.command.builtins.QuitCommand
     ]
-    acceptables: {
+    acceptable: {
         -: /**
     }
 }
@@ -113,7 +113,7 @@ web: {
     defaultServletName: none
     trailingSlashRedirect: true
     legacyHeadHandling: true
-    acceptables: {
+    acceptable: {
         +: /**
         -: /assets/**
         -: /css/**
