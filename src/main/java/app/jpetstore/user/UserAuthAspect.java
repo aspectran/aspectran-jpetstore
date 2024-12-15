@@ -50,8 +50,8 @@ public class UserAuthAspect {
     }
 
     @Before
-    public void before(Translet translet) {
-        userSessionManager.checkUserAuthentication(translet);
+    public void before() {
+        userSessionManager.checkUserAuthentication();
     }
 
     @ExceptionThrown(UserAuthRequiredException.class)

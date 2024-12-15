@@ -15,7 +15,6 @@
  */
 package app.jpetstore.user;
 
-import com.aspectran.core.activity.Translet;
 import com.aspectran.core.adapter.SessionAdapter;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Bean;
@@ -37,7 +36,19 @@ public class UserSessionManager implements ActivityContextAware {
 
     private ActivityContext context;
 
-    protected void save(UserSession userSession) {
+    @NonNull
+    protected ActivityContext getActivityContext() {
+        Assert.state(context != null, "No ActivityContext injected");
+        return context;
+    }
+
+    @Override
+    @AvoidAdvice
+    public void setActivityContext(@NonNull ActivityContext context) {
+        this.context = context;
+    }
+
+    public void save(UserSession userSession) {
         getSessionAdapter().setAttribute(USER_SESSION_KEY, userSession);
     }
 
@@ -45,10 +56,9 @@ public class UserSessionManager implements ActivityContextAware {
         getSessionAdapter().invalidate();
     }
 
-    public void checkUserAuthentication(Translet translet) {
+    public void checkUserAuthentication() {
         UserSession userSession = getUserSession(false);
         if (userSession == null || !userSession.isAuthenticated()) {
-//            translet.redirect("/account/signonForm", Map.of("referer", translet.getRequestName()));
             throw new UserAuthRequiredException();
         }
     }
@@ -85,18 +95,7 @@ public class UserSessionManager implements ActivityContextAware {
 
     @NonNull
     private SessionAdapter getSessionAdapter() {
-        Assert.state(context != null, "No ActivityContext injected");
-        SessionAdapter sessionAdapter = context.getCurrentActivity().getSessionAdapter();
-        if (sessionAdapter == null) {
-            throw new IllegalStateException("No SessionAdapter found in " + context.getCurrentActivity());
-        }
-        return sessionAdapter;
-    }
-
-    @Override
-    @AvoidAdvice
-    public void setActivityContext(@NonNull ActivityContext context) {
-        this.context = context;
+        return getActivityContext().getCurrentActivity().getSessionAdapter();
     }
 
 }

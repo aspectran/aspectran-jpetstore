@@ -15,6 +15,7 @@
  */
 package app.jpetstore.monitoring.log;
 
+import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.utils.lifecycle.AbstractLifeCycle;
 import org.apache.commons.io.input.ReversedLinesFileReader;
 import org.apache.commons.io.input.Tailer;
@@ -72,6 +73,7 @@ public class LogTailer extends AbstractLifeCycle {
         }
     }
 
+    @NonNull
     private String[] readLastLines(File file, int lastLines) {
         List<String> list = new ArrayList<>();
         try (ReversedLinesFileReader reversedLinesFileReader = ReversedLinesFileReader.builder()
@@ -92,6 +94,7 @@ public class LogTailer extends AbstractLifeCycle {
         return list.toArray(new String[0]);
     }
 
+    @Override
     protected void doStart() throws Exception {
         if (tailerListener == null) {
             throw new IllegalStateException("No TailerListener configured");
@@ -104,6 +107,7 @@ public class LogTailer extends AbstractLifeCycle {
                 .get();
     }
 
+    @Override
     protected void doStop() throws Exception {
         if (tailer != null) {
             tailer.close();
