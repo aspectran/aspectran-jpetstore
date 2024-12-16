@@ -44,7 +44,7 @@ create table if not exists account (
     city varchar(80) not  null,
     state varchar(80) not null,
     zip varchar(20) not null,
-    country varchar(20) not null,
+    country varchar(30) not null,
     phone varchar(80) not null,
     constraint pk_account primary key (userid)
 );
