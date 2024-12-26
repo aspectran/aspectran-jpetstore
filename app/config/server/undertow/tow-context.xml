@@ -113,7 +113,7 @@
                 </bean>
             </item>
             <item name="sessionStore">
-                <bean class="com.aspectran.core.component.session.FileSessionStoreFactory">
+                <bean class="com.aspectran.core.component.session.FileSessionStoreFactoryBean">
                     <properties>
                         <item name="storeDir">/work/_sessions/%{tow.context.root.name}</item>
                         <item name="gracePeriodSecs" valueType="int">10</item>
