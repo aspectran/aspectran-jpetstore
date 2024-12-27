@@ -20,7 +20,7 @@ import app.jpetstore.user.UserSessionManager;
 import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.core.component.session.DefaultSession;
+import com.aspectran.core.component.session.ManagedSession;
 import com.aspectran.core.component.session.SessionHandler;
 import com.aspectran.core.component.session.SessionStatistics;
 import com.aspectran.undertow.server.TowServer;
@@ -181,7 +181,7 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
         List<String> currentSessions = new ArrayList<>();
         Set<String> sessionIds = sessionHandler.getActiveSessions();
         for (String sessionId : sessionIds) {
-            DefaultSession session = sessionHandler.getSession(sessionId);
+            ManagedSession session = sessionHandler.getSession(sessionId);
             if (session != null) {
                 UserSession userSession = session.getAttribute(UserSessionManager.USER_SESSION_KEY);
                 String loggedIn = (userSession != null && userSession.isAuthenticated() ? "1" : "0");
