@@ -90,10 +90,10 @@ public class AccountActivity {
     @Dispatch("account/EditAccountForm")
     public void editAccountForm(@NonNull Translet translet) {
         if (translet.getAttribute("account") == null) {
-            translet.setAttribute("account", sessionManager.getUserSession().getAccount());
+            translet.setAttribute("account", sessionManager.get().getAccount());
         } else {
             Account account = translet.getAttribute("account");
-            account.setUsername(sessionManager.getUserSession().getAccount().getUsername());
+            account.setUsername(sessionManager.get().getAccount().getUsername());
         }
     }
 
@@ -113,14 +113,16 @@ public class AccountActivity {
             return;
         }
 
-        String username = sessionManager.getUserSession().getAccount().getUsername();
+        String username = sessionManager.get().getAccount().getUsername();
         account.setUsername(username);
         accountService.updateAccount(account);
-        account = accountService.getAccount(account.getUsername());
-        List<Product> products = catalogService.getProductListByCategory(account.getFavouriteCategoryId());
-        UserSession userSession = sessionManager.getUserSession();
-        userSession.setAccount(account);
+
+        Account account2 = accountService.getAccount(account.getUsername());
+        List<Product> products = catalogService.getProductListByCategory(account2.getFavouriteCategoryId());
+        UserSession userSession = sessionManager.get();
+        userSession.setAccount(account2);
         userSession.setProducts(products);
+        sessionManager.save(userSession);
     }
 
     /**
@@ -146,7 +148,7 @@ public class AccountActivity {
         } else {
             account.setPassword(null);
             List<Product> products = catalogService.getProductListByCategory(account.getFavouriteCategoryId());
-            UserSession userSession = sessionManager.getUserSession();
+            UserSession userSession = sessionManager.get();
             userSession.setAccount(account);
             userSession.setProducts(products);
             userSession.setAuthenticated(true);

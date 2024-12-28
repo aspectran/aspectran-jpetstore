@@ -46,7 +46,7 @@ public class CartService {
     }
 
     public Cart getCart() {
-        return sessionManager.getUserSession().getCart();
+        return sessionManager.get().getCart();
     }
 
     public void addItemToCart(String itemId) {

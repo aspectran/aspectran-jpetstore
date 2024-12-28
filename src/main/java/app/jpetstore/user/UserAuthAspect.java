@@ -51,7 +51,7 @@ public class UserAuthAspect {
 
     @Before
     public void before() {
-        userSessionManager.checkUserAuthentication();
+        userSessionManager.checkAuthentication();
     }
 
     @ExceptionThrown(UserAuthRequiredException.class)

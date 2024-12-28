@@ -29,9 +29,6 @@ import com.aspectran.utils.annotation.jsr305.NonNull;
 @AvoidAdvice
 public class UserSessionManager implements ActivityContextAware {
 
-    /**
-     * The key used to store user sessions
-     */
     public static final String USER_SESSION_KEY = "user";
 
     private ActivityContext context;
@@ -48,26 +45,11 @@ public class UserSessionManager implements ActivityContextAware {
         this.context = context;
     }
 
-    public void save(UserSession userSession) {
-        getSessionAdapter().setAttribute(USER_SESSION_KEY, userSession);
+    public UserSession get() {
+        return get(true);
     }
 
-    public void expire() {
-        getSessionAdapter().invalidate();
-    }
-
-    public void checkUserAuthentication() {
-        UserSession userSession = getUserSession(false);
-        if (userSession == null || !userSession.isAuthenticated()) {
-            throw new UserAuthRequiredException();
-        }
-    }
-
-    public UserSession getUserSession() {
-        return getUserSession(true);
-    }
-
-    public UserSession getUserSession(boolean create) {
+    public UserSession get(boolean create) {
         try {
             UserSession userSession = getSessionAdapter().getAttribute(USER_SESSION_KEY);
             if (userSession == null && create) {
@@ -90,6 +72,21 @@ public class UserSessionManager implements ActivityContextAware {
                 expire();
                 return null;
             }
+        }
+    }
+
+    public void save(UserSession userSession) {
+        getSessionAdapter().setAttribute(USER_SESSION_KEY, userSession);
+    }
+
+    public void expire() {
+        getSessionAdapter().invalidate();
+    }
+
+    public void checkAuthentication() {
+        UserSession userSession = get(false);
+        if (userSession == null || !userSession.isAuthenticated()) {
+            throw new UserAuthRequiredException();
         }
     }
 

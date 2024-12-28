@@ -67,7 +67,7 @@ public class OrderActivity {
     @Dispatch("order/ListOrders")
     @Action("orderList")
     public List<Order> listOrders() {
-        Account account = sessionManager.getUserSession().getAccount();
+        Account account = sessionManager.get().getAccount();
         return orderService.getOrdersByUsername(account.getUsername());
     }
 
@@ -78,12 +78,12 @@ public class OrderActivity {
     @Dispatch("order/NewOrderForm")
     @Action("order")
     public Order newOrderForm() {
-        Account account = sessionManager.getUserSession().getAccount();
+        Account account = sessionManager.get().getAccount();
         Cart cart = cartService.getCart();
         if (cart != null && cart.getNumberOfItems() > 0) {
             Order order = new Order();
             order.initialize(account, cart);
-            sessionManager.getUserSession().setOrder(order);
+            sessionManager.get().setOrder(order);
             return order;
         } else {
             return null;
@@ -103,7 +103,7 @@ public class OrderActivity {
                          boolean confirmed,
                          BeanValidator beanValidator
     ) {
-        Order order2 = sessionManager.getUserSession().getOrder();
+        Order order2 = sessionManager.get().getOrder();
         if (order2 == null) {
             translet.redirect("/cart/viewCart");
             return;
@@ -135,7 +135,7 @@ public class OrderActivity {
         } else if (!confirmed) {
             translet.dispatch("order/ConfirmOrder");
         } else {
-            sessionManager.getUserSession().clearOrder();
+            sessionManager.get().clearOrder();
             translet.redirect("/cart/viewCart");
         }
     }
@@ -153,14 +153,14 @@ public class OrderActivity {
     )
     @Action("order")
     public Order submitOrder(Translet translet) {
-        Order order = sessionManager.getUserSession().getOrder();
+        Order order = sessionManager.get().getOrder();
         if (order == null) {
             translet.redirect("/cart/viewCart");
             return null;
         }
         orderService.insertOrder(order);
 
-        sessionManager.getUserSession().clearOrder();
+        sessionManager.get().clearOrder();
         cartService.getCart().clear();
 
         return order;
