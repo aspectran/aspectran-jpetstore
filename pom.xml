@@ -34,7 +34,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aspectran.version>8.2.0-SNAPSHOT</aspectran.version>
+        <aspectran.version>8.2.0</aspectran.version>
     </properties>
     <repositories>
         <repository>
