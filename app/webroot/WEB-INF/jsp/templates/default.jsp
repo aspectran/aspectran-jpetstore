@@ -31,24 +31,12 @@
     <link rel="icon" type="image/png" sizes="96x96" href="https://aspectran.com/assets/img/favicon-96x96.png"/>
     <meta name="msapplication-TileImage" content="https://aspectran.com/assets/img/ms-icon-144x144.png"/>
     <meta name="msapplication-TileColor" content="#4B555A"/>
-<%--    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PBGW9BF7P6"></script>--%>
-<%--    <script>--%>
-<%--        window.dataLayer = window.dataLayer || [];--%>
-<%--        function gtag(){dataLayer.push(arguments);}--%>
-<%--        gtag('js', new Date());--%>
-<%--        gtag('config', 'G-PBGW9BF7P6');--%>
-<%--    </script>--%>
 </head>
 <body id="top-of-page" class="plate solid" itemscope itemtype="http://schema.org/WebPage">
 <nav id="navigation" class="no-js">
     <div class="title-bar" data-responsive-toggle="gnb-menu" data-hide-for="large" style="display:none">
         <div class="title-bar-left">
-            <aspectran:profile expression="prod">
-                <a class="logo" href="https://public.aspectran.com" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
-            </aspectran:profile>
-            <aspectran:profile expression="!prod">
-                <a class="logo" href="/" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
-            </aspectran:profile>
+            <a class="logo" href="/" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
         </div>
         <div class="title-bar-center">
             <a href="#top-of-page">Aspectran</a>
@@ -61,12 +49,7 @@
         <div class="grid-container ${page.style}">
             <div class="top-bar-logo">
                 <div class="circle">
-                    <aspectran:profile expression="prod">
-                        <a class="logo" href="https://public.aspectran.com" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
-                    </aspectran:profile>
-                    <aspectran:profile expression="!prod">
-                        <a class="logo" href="/" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
-                    </aspectran:profile>
+                    <a class="logo" href="/" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
                 </div>
             </div>
             <div class="top-bar-left">
@@ -81,21 +64,11 @@
             </div>
             <div class="top-bar-right">
                 <ul class="dropdown menu" data-dropdown-menu>
-                    <aspectran:profile expression="prod">
-                        <li><a href="https://public.aspectran.com/monitoring/#jpetstore">Monitoring</a></li>
-                    </aspectran:profile>
-                    <aspectran:profile expression="!prod">
-                        <li><a href="/monitoring/#jpetstore">Monitoring</a></li>
-                    </aspectran:profile>
+                    <li><a href="/monitoring/#jpetstore">Monitoring</a></li>
                     <li>
                         <a title="Sample applications built on Aspectran">More Sample Apps</a>
                         <ul class="submenu menu vertical" data-submenu>
-                            <aspectran:profile expression="prod">
-                                <li><a href="https://demo.aspectran.com">Aspectran Demo</a></li>
-                            </aspectran:profile>
-                            <aspectran:profile expression="!prod">
-                                <li><a href="/demo/">Aspectran Demo</a></li>
-                            </aspectran:profile>
+                            <li><a href="https://demo.aspectran.com">Aspectran Demo</a></li>
                         </ul>
                     </li>
                 </ul>
