@@ -17,7 +17,7 @@
                         |-----------------------------------------------------------------------------------------
                         |#{currentTranslet^rootCauseOfRaisedException}
                         |-----------------------------------------------------------------------------------------
-                        |#{class:com.aspectran.core.Aspectran^poweredBy}
+                        |#{class:com.aspectran.core.AboutMe^poweredBy}
                         |
                     </template>
                 </transform>
@@ -30,7 +30,7 @@
                         |<hr/>
                         |<pre>#{currentTranslet^rootCauseOfRaisedException}</pre>
                         |<hr/>
-                        |<p align="right">#{class:com.aspectran.core.Aspectran^poweredByLink}</p>
+                        |<p align="right">#{class:com.aspectran.core.AboutMe^poweredByLink}</p>
                         |</body>
                         |</html>
                         ]]>

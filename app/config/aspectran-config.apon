@@ -45,7 +45,7 @@ shell: {
         |{{GREEN }} / /_/ / ____/  __/ /_ ___/ / /_/ /_/ / /  /  __/
         |{{CYAN  }} \____/_/    \___/\__//____/\__/\____/_/   \___/    Demo
         |{{CYAN  }}=========================================================
-        |{{RED   }}Welcome To JPetStore Demo #{class:com.aspectran.core.Aspectran^version}
+        |{{RED   }}Welcome To JPetStore Demo #{class:com.aspectran.core.AboutMe^version}
         |{{reset }}
         |If you want a list of all supported built-in commands, type '{{GREEN}}help{{reset}}'.
         |To get help on a specific command, type '{{GREEN}}command_name -h{{reset}}'.
