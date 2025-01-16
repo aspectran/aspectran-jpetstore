@@ -21,7 +21,7 @@ import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.session.ManagedSession;
-import com.aspectran.core.component.session.SessionHandler;
+import com.aspectran.core.component.session.SessionManager;
 import com.aspectran.core.component.session.SessionStatistics;
 import com.aspectran.undertow.server.TowServer;
 import com.aspectran.utils.annotation.jsr305.NonNull;
@@ -165,8 +165,8 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
 
     public SessionStatsPayload getSessionStats() {
         TowServer towServer = getBeanRegistry().getBean("tow.server");
-        SessionHandler sessionHandler = towServer.getSessionHandler("root.war");
-        SessionStatistics statistics = sessionHandler.getStatistics();
+        SessionManager sessionManager = towServer.getSessionManager("root.war");
+        SessionStatistics statistics = sessionManager.getStatistics();
 
         SessionStatsPayload stats = new SessionStatsPayload();
         stats.setCreatedSessionCount(statistics.getNumberOfCreated());
@@ -179,9 +179,9 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
 
         // Current Users
         List<String> currentSessions = new ArrayList<>();
-        Set<String> sessionIds = sessionHandler.getActiveSessions();
+        Set<String> sessionIds = sessionManager.getActiveSessions();
         for (String sessionId : sessionIds) {
-            ManagedSession session = sessionHandler.getSession(sessionId);
+            ManagedSession session = sessionManager.getSession(sessionId);
             if (session != null) {
                 UserSession userSession = session.getAttribute(UserSessionManager.USER_SESSION_KEY);
                 String loggedIn = (userSession != null && userSession.isAuthenticated() ? "1" : "0");
