@@ -32,7 +32,7 @@
     <meta name="msapplication-TileImage" content="https://aspectran.com/assets/img/ms-icon-144x144.png"/>
     <meta name="msapplication-TileColor" content="#4B555A"/>
 </head>
-<body id="top-of-page" class="plate solid" itemscope itemtype="http://schema.org/WebPage">
+<body id="top-of-page" class="plate solid" itemscope itemtype="https://schema.org/WebPage">
 <nav id="navigation" class="no-js">
     <div class="title-bar" data-responsive-toggle="gnb-menu" data-hide-for="large" style="display:none">
         <div class="title-bar-left">
@@ -96,7 +96,7 @@
         </div>
     </div>
 </nav>
-<section itemscope itemtype="http://schema.org/Article">
+<section itemscope itemtype="https://schema.org/Article">
     <div id="masthead">
         <div class="grid-container ${page.style}">
             <div class="grid-x">
