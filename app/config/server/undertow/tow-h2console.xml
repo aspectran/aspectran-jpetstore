@@ -10,7 +10,7 @@
     <bean id="tow.context.h2console.servletContext" class="com.aspectran.undertow.server.servlet.TowServletContext"
           scope="prototype">
         <properties>
-            <item name="deploymentName">h2console.war</item>
+            <item name="deploymentName">h2console</item>
             <item name="contextPath">/h2-console</item>
             <item name="initParams" type="map">
                 <entry name="db.url" value="jdbc:h2:~/jpetstore;DB_CLOSE_ON_EXIT=false"/>
