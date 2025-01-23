@@ -1,7 +1,6 @@
 package app.jpetstore.common.validation;
 
-import com.aspectran.core.component.bean.ablility.FactoryBean;
-import com.aspectran.core.component.bean.ablility.InitializableBean;
+import com.aspectran.core.component.bean.ablility.InitializableFactoryBean;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
@@ -14,7 +13,7 @@ import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpo
 
 @Component
 @Bean("validator")
-public class ValidatorFactoryBean implements InitializableBean, FactoryBean<Validator> {
+public class ValidatorFactoryBean implements InitializableFactoryBean<Validator> {
 
     private final MessageSource messageSource;
 
@@ -27,17 +26,19 @@ public class ValidatorFactoryBean implements InitializableBean, FactoryBean<Vali
 
     @Override
     public void initialize() {
-        MessageInterpolator messageInterpolator = null;
-        if (messageSource != null) {
-            messageInterpolator = new ResourceBundleMessageInterpolator(locale->
-                    new MessageSourceResourceBundle(messageSource, locale));
-        }
+        if (validator == null) {
+            MessageInterpolator messageInterpolator = null;
+            if (messageSource != null) {
+                messageInterpolator = new ResourceBundleMessageInterpolator(locale ->
+                        new MessageSourceResourceBundle(messageSource, locale));
+            }
 
-        this.validator = Validation.byDefaultProvider()
-                .configure()
-                .messageInterpolator(messageInterpolator)
-                .buildValidatorFactory()
-                .getValidator();
+            validator = Validation.byDefaultProvider()
+                    .configure()
+                    .messageInterpolator(messageInterpolator)
+                    .buildValidatorFactory()
+                    .getValidator();
+        }
     }
 
     @Override
