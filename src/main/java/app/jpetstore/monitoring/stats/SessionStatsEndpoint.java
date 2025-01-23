@@ -165,7 +165,7 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
 
     public SessionStatsPayload getSessionStats() {
         TowServer towServer = getBeanRegistry().getBean("tow.server");
-        SessionManager sessionManager = towServer.getSessionManager("root.war");
+        SessionManager sessionManager = towServer.getSessionManager("root");
         SessionStatistics statistics = sessionManager.getStatistics();
 
         SessionStatsPayload stats = new SessionStatsPayload();
