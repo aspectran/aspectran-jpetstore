@@ -24,6 +24,7 @@ import com.aspectran.core.component.session.ManagedSession;
 import com.aspectran.core.component.session.SessionManager;
 import com.aspectran.core.component.session.SessionStatistics;
 import com.aspectran.undertow.server.TowServer;
+import com.aspectran.utils.ExceptionUtils;
 import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.utils.logging.Logger;
 import com.aspectran.utils.logging.LoggerFactory;
@@ -38,6 +39,7 @@ import jakarta.websocket.server.ServerEndpoint;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.channels.ClosedChannelException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -49,6 +51,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeoutException;
 
 @Component
 @ServerEndpoint(
@@ -111,7 +114,9 @@ public class SessionStatsEndpoint extends InstantActivitySupport {
 
     @OnError
     public void onError(@NonNull Session session, Throwable error) {
-        logger.error("Error in websocket session: " + session.getId(), error);
+        if (!ExceptionUtils.hasCause(error, ClosedChannelException.class, TimeoutException.class)) {
+            logger.warn("Error in websocket session: " + session.getId(), error);
+        }
         try {
             removeSession(session);
             session.close(new CloseReason(CloseReason.CloseCodes.UNEXPECTED_CONDITION, null));

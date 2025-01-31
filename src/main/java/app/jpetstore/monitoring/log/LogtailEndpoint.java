@@ -18,6 +18,7 @@ package app.jpetstore.monitoring.log;
 import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.utils.ExceptionUtils;
 import com.aspectran.utils.StringUtils;
 import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.utils.logging.Logger;
@@ -33,9 +34,11 @@ import jakarta.websocket.server.ServerEndpoint;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.channels.ClosedChannelException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeoutException;
 
 @Component
 @ServerEndpoint(
@@ -93,7 +96,9 @@ public class LogtailEndpoint extends InstantActivitySupport {
 
     @OnError
     public void onError(@NonNull Session session, Throwable error) {
-        logger.error("Error in websocket session: " + session.getId(), error);
+        if (!ExceptionUtils.hasCause(error, ClosedChannelException.class, TimeoutException.class)) {
+            logger.warn("Error in websocket session: " + session.getId(), error);
+        }
         try {
             removeSession(session);
             session.close(new CloseReason(CloseReason.CloseCodes.UNEXPECTED_CONDITION, null));
