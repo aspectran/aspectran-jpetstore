@@ -39,14 +39,14 @@ shell: {
     }
     greetings: (
         |
-        |{{GREEN }}        ______       __  _____ __
-        |{{GREEN }}       / / __ \___  / /_/ ___// /_____  ________
-        |{{GREEN }}  __  / / /_/ / _ \/ __/\__ \/ __/ __ \/ ___/ _ \
-        |{{GREEN }} / /_/ / ____/  __/ /_ ___/ / /_/ /_/ / /  /  __/
-        |{{CYAN  }} \____/_/    \___/\__//____/\__/\____/_/   \___/    Demo
-        |{{CYAN  }}=========================================================
-        |{{RED   }}Welcome To JPetStore Demo #{class:com.aspectran.core.AboutMe^version}
-        |{{reset }}
+        |{{GREEN  }}        ______       __  _____ __
+        |{{GREEN  }}       / / __ \___  / /_/ ___// /_____  ________
+        |{{GREEN  }}  __  / / /_/ / _ \/ __/\__ \/ __/ __ \/ ___/ _ \
+        |{{GREEN  }} / /_/ / ____/  __/ /_ ___/ / /_/ /_/ / /  /  __/
+        |{{CYAN   }} \____/_/    \___/\__//____/\__/\____/_/   \___/    Demo
+        |{{CYAN   }}=========================================================
+        |{{MAGENTA}}Welcome To JPetStore Demo #{class:com.aspectran.core.AboutMe^version}
+        |{{reset  }}
         |If you want a list of all supported built-in commands, type '{{GREEN}}help{{reset}}'.
         |To get help on a specific command, type '{{GREEN}}command_name -h{{reset}}'.
         |If you want a list of all available translets, type '{{GREEN}}translet -l{{reset}}'.
