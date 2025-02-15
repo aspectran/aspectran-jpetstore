@@ -40,7 +40,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
  * </ul>
  */
 @Component
-@Bean
+@Bean(lazyDestroy = true)
 @Scope(ScopeType.PROTOTYPE)
 @Aspect(
         id = "simpleTxAspect",

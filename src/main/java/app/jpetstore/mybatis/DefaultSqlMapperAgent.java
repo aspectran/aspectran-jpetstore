@@ -22,7 +22,7 @@ import com.aspectran.mybatis.SqlMapperAgent;
 import org.apache.ibatis.session.SqlSession;
 
 @Component
-@Bean
+@Bean(lazyDestroy = true)
 public class DefaultSqlMapperAgent implements SqlMapperAgent {
 
     private final SqlSession simpleSqlSession;

@@ -26,7 +26,7 @@ import com.aspectran.mybatis.SqlSessionAgent;
  * </ul>
  */
 @Component
-@Bean("batchSqlSession")
+@Bean(id = "batchSqlSession", lazyDestroy = true)
 public class BatchSqlSession extends SqlSessionAgent {
 
     public BatchSqlSession() {

@@ -49,7 +49,7 @@
         <div class="grid-container ${page.style}">
             <div class="top-bar-logo">
                 <div class="circle">
-                    <a class="logo" href="/" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
+                    <a class="logo" href="<aspectran:url value="/"/>" title="Aspectran"><img src="https://aspectran.com/assets/img/aspectran-site-logo.png" alt="Aspectran"/></a>
                 </div>
             </div>
             <div class="top-bar-left">
@@ -60,17 +60,17 @@
                             <li><a href="https://github.com/aspectran/aspectran-jpetstore">GitHub</a></li>
                         </ul>
                     </li>
-                </ul>
-            </div>
-            <div class="top-bar-right">
-                <ul class="dropdown menu" data-dropdown-menu>
-                    <li><a href="/monitoring/#jpetstore">Monitoring</a></li>
                     <li>
-                        <a title="Sample applications built on Aspectran">More Sample Apps</a>
+                        <a href="https://public.aspectran.com/" title="Sample applications built on Aspectran">More Sample Apps</a>
                         <ul class="submenu menu vertical" data-submenu>
                             <li><a href="https://demo.aspectran.com">Aspectran Demo</a></li>
                         </ul>
                     </li>
+                </ul>
+            </div>
+            <div class="top-bar-right">
+                <ul class="dropdown menu" data-dropdown-menu>
+                    <li><a href="<aspectran:url value="/monitoring/#jpetstore"/>">Monitoring</a></li>
                 </ul>
                 <div class="quick-search-box">
                     <form name="google_quick_search">
