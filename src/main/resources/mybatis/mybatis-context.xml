@@ -7,7 +7,7 @@
         Configuration for database transactions
     </description>
 
-    <bean id="sqlSessionFactory" class="com.aspectran.mybatis.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="com.aspectran.mybatis.SqlSessionFactoryBean" lazyDestroy="true">
         <description>
             FactoryBean that creates an MyBatis SqlSessionFactory using default MyBatis Configuration.
         </description>

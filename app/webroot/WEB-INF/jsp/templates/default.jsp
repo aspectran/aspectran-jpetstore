@@ -70,6 +70,9 @@
             </div>
             <div class="top-bar-right">
                 <ul class="dropdown menu" data-dropdown-menu>
+                    <aspectran:profile expression="h2">
+                        <li><a href="<aspectran:url value="/h2-console/"/>" target="_blank">H2 Console</a></li>
+                    </aspectran:profile>
                     <li><a href="<aspectran:url value="/monitoring/#jpetstore"/>">Monitoring</a></li>
                 </ul>
                 <div class="quick-search-box">

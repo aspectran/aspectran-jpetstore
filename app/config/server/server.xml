@@ -4,8 +4,8 @@
 <aspectran>
 
     <append file="/config/server/undertow/tow-server.xml"/>
-    <append file="/config/server/undertow/tow-context.xml"/>
+    <append file="/config/server/undertow/tow-context-root.xml"/>
+    <append file="/config/server/undertow/tow-context-h2console.xml"/>
     <append file="/config/server/undertow/tow-support.xml"/>
-    <!--<append file="/config/server/undertow/tow-web-h2console.xml"/>-->
 
 </aspectran>

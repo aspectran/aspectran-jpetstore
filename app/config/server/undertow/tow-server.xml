@@ -42,10 +42,6 @@
             <item name="requestHandlerFactory">
                 <bean class="com.aspectran.undertow.server.handler.ServletRequestHandlerFactory">
                     <properties>
-                        <item name="servletContexts" type="array">
-                            <value>#{tow.context.root.servletContext}</value>
-                            <!--<value>#{tow.context.h2console.servletContext}</value>-->
-                        </item>
                         <item name="handlerChainWrappers" type="array">
                             <value>#{tow.server.handler.accessLogHandlerWrapper}</value>
                             <value>#{tow.server.handler.encodingHandlerWrapper}</value>

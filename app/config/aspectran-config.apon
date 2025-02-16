@@ -4,7 +4,7 @@ system: {
     }
 }
 context: {
-    rules: /config/app-context.xml
+    rules: /config/root-context.xml
     resources: [
         /lib/ext
     ]
@@ -14,6 +14,9 @@ context: {
     profiles: {
         default: [
             dev
+        ]
+        active: [
+            h2
         ]
     }
     autoReload: {

@@ -12,23 +12,11 @@
         <properties>
             <item name="deploymentName">h2console</item>
             <item name="contextPath">/h2-console</item>
-            <item name="initParams" type="map">
-                <entry name="db.url" value="jdbc:h2:~/jpetstore;DB_CLOSE_ON_EXIT=false"/>
-                <entry name="db.user" value="sa"/>
-                <entry name="db.password" value=""/>
-            </item>
-            <item name="listeners" type="array">
-                <bean class="com.aspectran.undertow.server.servlet.TowListener">
-                    <arguments>
-                        <item>org.h2.server.web.DbStarter</item>
-                    </arguments>
-                </bean>
-            </item>
             <item name="servlets" type="array">
                 <bean class="com.aspectran.undertow.server.servlet.TowServlet">
                     <arguments>
                         <item>H2Console</item>
-                        <item>org.h2.server.web.WebServlet</item>
+                        <item>org.h2.server.web.JakartaWebServlet</item>
                     </arguments>
                     <properties>
                         <item name="mappings" type="array">
