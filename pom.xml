@@ -50,7 +50,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aspectran.version>8.3.4-SNAPSHOT</aspectran.version>
+        <aspectran.version>8.4.0-SNAPSHOT</aspectran.version>
     </properties>
 
     <repositories>
@@ -69,9 +69,8 @@
     <dependencies>
         <dependency>
             <groupId>com.aspectran</groupId>
-            <artifactId>aspectran-with-logback</artifactId>
+            <artifactId>aspectran-logging</artifactId>
             <version>${aspectran.version}</version>
-            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>com.aspectran</groupId>
