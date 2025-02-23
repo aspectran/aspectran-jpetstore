@@ -12,11 +12,11 @@ context: {
         app.jpetstore
     ]
     profiles: {
+        essential: [
+            h2
+        ]
         default: [
             dev
-        ]
-        active: [
-            h2
         ]
     }
     autoReload: {

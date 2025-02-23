@@ -119,7 +119,7 @@ public class LogtailEndpoint extends InstantActivitySupport {
 
     private void addSession(Session session, String message) {
         if (sessions.add(session)) {
-            String[] names = StringUtils.splitCommaDelimitedString(message.substring(COMMAND_JOIN.length()));
+            String[] names = StringUtils.splitWithComma(message.substring(COMMAND_JOIN.length()));
             logTailerManager.join(session, names);
         }
     }
