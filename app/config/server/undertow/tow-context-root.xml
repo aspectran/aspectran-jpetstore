@@ -87,10 +87,11 @@
                         <item>
                             workerName: n0
                             maxActiveSessions: 9999
-                            minIdleSeconds: 30
                             maxIdleSeconds: 489
                             evictionIdleSeconds: 258
-                            scavengingIntervalSeconds: 180
+                            maxIdleSecondsForNew: 60
+                            evictionIdleSecondsForNew: 30
+                            scavengingIntervalSeconds: 90
                             clusterEnabled: false
                         </item>
                     </arguments>
