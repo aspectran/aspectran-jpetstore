@@ -27,31 +27,7 @@
 		</div>
 	</div>
 
-	<div id="Menu">
-		<div id="MenuContent">
-			<a href="<aspectran:url value="/cart/viewCart"/>">
-				<img align="middle" name="img_cart" src="<aspectran:url value="/images/cart.gif"/>"/>
-				${user.cart.numberOfItems}</a>
-			<c:if test="${not user.authenticated}">
-				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
-				<a href="<aspectran:url value="/account/signonForm"/>">Sign In</a>
-				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
-				<a href="<aspectran:url value="/account/newAccountForm"/>">Sign Up</a>
-			</c:if>
-			<c:if test="${user.authenticated}">
-				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
-				<a href="<aspectran:url value="/order/listOrders"/>">My Orders</a>
-				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
-				<a href="<aspectran:url value="/account/editAccountForm"/>">My Account</a>
-				<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
-				<a href="<aspectran:url value="/account/signoff"/>">Sign Out</a>
-			</c:if>
-			<img align="middle" src="<aspectran:url value="/images/separator.gif"/>"/>
-			<a href="<aspectran:url value="/help.html"/>">?</a>
-		</div>
-	</div>
-
-	<div id="Search" data-hide-for="large">
+	<div id="Search">
 		<div id="SearchContent">
 			<form action="<aspectran:url value="/catalog/searchProducts"/>">
 				<div class="input-group">
@@ -61,6 +37,38 @@
 					</div>
 				</div>
 			</form>
+		</div>
+	</div>
+
+	<div id="Menu">
+		<div class="MenuContent">
+			<a href="<aspectran:url value="/cart/viewCart"/>">
+				<img align="middle" name="img_cart" src="<aspectran:url value="/images/cart.gif"/>"/>
+				${user.cart.numberOfItems}</a>
+			<c:if test="${not user.authenticated}">
+				<span class="separator">|</span>
+				<a href="<aspectran:url value="/account/signonForm"/>">Sign In</a>
+				<span class="separator">|</span>
+				<a href="<aspectran:url value="/account/newAccountForm"/>">Sign Up</a>
+			</c:if>
+			<c:if test="${user.authenticated}">
+				<span class="separator">|</span>
+				<a href="<aspectran:url value="/order/listOrders"/>">My Orders</a>
+				<span class="separator">|</span>
+				<a href="<aspectran:url value="/account/editAccountForm"/>">My Account</a>
+				<span class="separator">|</span>
+				<a href="<aspectran:url value="/account/signoff"/>">Sign Out</a>
+			</c:if>
+		</div>
+		<div class="MenuContent Submenu">
+			<aspectran:profile expression="prod">
+				<a href="https://public.aspectran.com/monitoring/#jpetstore" target="_blank" title="View logs with AppMon"><i class="fi-foot"></i> AppMon</a>
+			</aspectran:profile>
+			<aspectran:profile expression="!prod">
+				<a href="<aspectran:url value="/../monitoring/#jpetstore"/>" target="_blank" title="View logs with AppMon"><i class="fi-foot"></i> AppMon</a>
+			</aspectran:profile>
+			<span class="separator">|</span>
+			<a href="<aspectran:url value="/help.html"/>">?</a>
 		</div>
 	</div>
 

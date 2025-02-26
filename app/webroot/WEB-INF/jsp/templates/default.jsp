@@ -141,7 +141,7 @@
     </div>
     </c:if>
     <c:if test="${page.style ne 'fluid'}">
-    <div id="window" class="grid-container" style="min-width:900px;padding:0;">
+    <div id="window" class="grid-container" style="padding:0;">
         <c:if test="${not empty INCLUDE_PAGE}">
             <jsp:include page="/WEB-INF/jsp/${INCLUDE_PAGE}.jsp"/>
         </c:if>

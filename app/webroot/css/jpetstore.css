@@ -28,21 +28,32 @@
     line-height: 9ex;
 }
 
+#Logo img {
+    max-width: none;
+}
+
 body > #Logo {
     height: 9ex;
 }
 
 #Menu {
-    width: 33%;
-    height: 9ex;
-    margin: 0;
+    clear: both;
+    margin: 0 auto 15px;
     padding: 0;
-    float: left;
     color: #eaac00;
     text-decoration: none;
     font-family: helvetica, tahoma, arial, verdana, sans-serif;
+    font-size: 1.1em;
     text-align: center;
-    line-height: 9ex;
+}
+
+#Menu .separator {
+    color: #677278;
+    font-weight: normal;
+}
+
+#Menu i {
+    color: #02b502;
 }
 
 #Menu, #Menu a, #Menu a:link, #Menu a:visited, #Menu a:hover {
@@ -51,13 +62,25 @@ body > #Logo {
     font-family: helvetica, tahoma, arial, verdana, sans-serif;
 }
 
+.MenuContent {
+    padding: 2px 6px;
+    border-bottom: 1px solid #677278;
+    width: fit-content;
+    margin: auto;
+}
+
+.MenuContent.Submenu {
+    border: none;
+    font-size: .85em;
+}
+
 body > #Menu {
     height: 9ex;
 }
 
 #Search {
     margin: 0;
-    padding: 15px 15px 0 0;
+    padding: 15px 15px 0 15px;
     float: right;
     text-align: center;
     color: #eaac00;
@@ -166,7 +189,8 @@ body > #Banner {
 }
 
 #Welcome {
-    text-align: right;
+    text-align: center;
+    padding-bottom: 10px;
 }
 
 #Sidebar {
@@ -188,6 +212,7 @@ body > #Banner {
     background: inherit;
     text-align: center;
     width: 40%;
+    padding: 10px;
 }
 
 #MainImageContent {
