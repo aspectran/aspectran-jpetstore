@@ -32,15 +32,20 @@
 	<div id="Sidebar">
 		<div id="SidebarContent">
 			<a href="<aspectran:url value="/categories/FISH"/>">Fish</a><br/>
-			Saltwater, Freshwater<br />
+			Saltwater, Freshwater
+			<hr/>
 			<a href="<aspectran:url value="/categories/DOGS"/>">Dogs</a><br/>
-			Various Breeds<br />
+			Various Breeds
+			<hr/>
 			<a href="<aspectran:url value="/categories/CATS"/>">Cats</a><br/>
-			Various Breeds, Exotic Varieties<br />
+			Various Breeds, Exotic Varieties
+			<hr/>
 			<a href="<aspectran:url value="/categories/REPTILES"/>">Reptiles</a><br/>
-			Lizards, Turtles, Snakes<br />
+			Lizards, Turtles, Snakes
+			<hr/>
 			<a href="<aspectran:url value="/categories/BIRDS"/>">Birds</a><br/>
-			Exotic Varieties<br />
+			Exotic Varieties
+			<hr/>
 		</div>
 	</div>
 	<div id="MainImage">

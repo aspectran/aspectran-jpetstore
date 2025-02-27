@@ -72,6 +72,7 @@ body > #Logo {
 .MenuContent.Submenu {
     border: none;
     font-size: .85em;
+    padding-top: 6px;
 }
 
 body > #Menu {
@@ -198,13 +199,17 @@ body > #Banner {
     width: 30%;
     line-height: 160%;
 }
+#Sidebar hr {
+    margin: 3px 0;
+}
+
 #RightSidebar {
-    float: right;
+    float: left;
     width: 30%;
 }
 #RightSidebar #MyList {
-    width: 96%;
-    float: right;
+    margin-left: 15px;
+    width: auto;
 }
 
 #MainImage {
@@ -212,13 +217,28 @@ body > #Banner {
     background: inherit;
     text-align: center;
     width: 40%;
-    padding: 10px;
 }
-
 #MainImageContent {
     border: 1px solid #ccc;
     background-color: #fff;
     margin-bottom: 15px;
+    padding: 10px;
+}
+
+@media (max-width: 700px) {
+    #Sidebar, #MainImage, #RightSidebar {
+        clear: both;
+        width: auto;
+        float: none;
+    }
+    #RightSidebar #MyList {
+        width: auto;
+        float: none;
+        margin: 0;
+    }
+    #MainImage {
+        margin-top: 15px;
+    }
 }
 
 #Catalog {
