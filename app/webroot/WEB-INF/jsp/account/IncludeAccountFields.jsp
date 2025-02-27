@@ -26,14 +26,14 @@
 	<tr>
 		<td>First name:</td>
 		<td>
-			<input type="text" name="firstName" value="${account.firstName}"/>
+			<input type="text" name="firstName" value="<c:out value="${account.firstName}" escapeXml="true"/>"/>
 			<span class="error-msg">${errors.firstName}</span>
 		</td>
 	</tr>
 	<tr>
 		<td>Last name:</td>
 		<td>
-			<input type="text" name="lastName" value="${account.lastName}"/>
+			<input type="text" name="lastName" value="<c:out value="${account.lastName}" escapeXml="true"/>"/>
 			<span class="error-msg">${errors.lastName}</span>
 		</td>
 	</tr>
