@@ -12,13 +12,13 @@
             FactoryBean that creates an MyBatis SqlSessionFactory using default MyBatis Configuration.
         </description>
         <properties>
-            <item name="configLocation" value="classpath:db/mybatis-config.xml"/>
+            <item name="configLocation" value="classpath:app/jpetstore/common/db/mybatis-config.xml"/>
             <item name="environment" value="default"/>
             <item name="properties" type="properties">
-                <entry name="driver">%{classpath:db/jpetstore.db.properties^driver}</entry>
-                <entry name="url">%{classpath:db/jpetstore.db.properties^url}</entry>
-                <entry name="username">%{classpath:db/jpetstore.db.properties^username}</entry>
-                <entry name="password">%{classpath:db/jpetstore.db.properties^password}</entry>
+                <entry name="driver">%{classpath:app/jpetstore/common/db/jpetstore.db.properties^driver}</entry>
+                <entry name="url">%{classpath:app/jpetstore/common/db/jpetstore.db.properties^url}</entry>
+                <entry name="username">%{classpath:app/jpetstore/common/db/jpetstore.db.properties^username}</entry>
+                <entry name="password">%{classpath:app/jpetstore/common/db/jpetstore.db.properties^password}</entry>
             </item>
         </properties>
     </bean>

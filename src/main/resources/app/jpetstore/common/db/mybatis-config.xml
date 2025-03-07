@@ -28,13 +28,13 @@
     </environments>
 
     <mappers>
-        <mapper resource="db/mapper/AccountMapper.xml"/>
-        <mapper resource="db/mapper/CategoryMapper.xml"/>
-        <mapper resource="db/mapper/ItemMapper.xml"/>
-        <mapper resource="db/mapper/LineItemMapper.xml"/>
-        <mapper resource="db/mapper/OrderMapper.xml"/>
-        <mapper resource="db/mapper/ProductMapper.xml"/>
-        <mapper resource="db/mapper/SequenceMapper.xml"/>
+        <mapper resource="app/jpetstore/common/db/mapper/AccountMapper.xml"/>
+        <mapper resource="app/jpetstore/common/db/mapper/CategoryMapper.xml"/>
+        <mapper resource="app/jpetstore/common/db/mapper/ItemMapper.xml"/>
+        <mapper resource="app/jpetstore/common/db/mapper/LineItemMapper.xml"/>
+        <mapper resource="app/jpetstore/common/db/mapper/OrderMapper.xml"/>
+        <mapper resource="app/jpetstore/common/db/mapper/ProductMapper.xml"/>
+        <mapper resource="app/jpetstore/common/db/mapper/SequenceMapper.xml"/>
     </mappers>
 
 </configuration>

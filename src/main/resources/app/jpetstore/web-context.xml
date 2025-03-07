@@ -14,8 +14,8 @@
         </description>
         <properties>
             <item name="basenames" type="array">
-                <value>web.i18n.messages</value>
-                <value>web.i18n.ValidationMessages</value>
+                <value>app.jpetstore.common.i18n.messages</value>
+                <value>app.jpetstore.common.i18n.ValidationMessages</value>
             </item>
         </properties>
     </bean>
@@ -89,8 +89,8 @@
         </advice>
     </aspect>
 
-    <append resource="web/common/xss-prevent.xml"/>
-    <append resource="web/common/static-codes.xml"/>
-    <append resource="web/monitoring/monitoring.xml"/>
+    <append resource="app/jpetstore/common/xss-prevent.xml"/>
+    <append resource="app/jpetstore/common/static-codes.xml"/>
+    <append resource="app/jpetstore/monitoring/monitoring.xml"/>
 
 </aspectran>

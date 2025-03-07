@@ -32,7 +32,7 @@
 
     <append file="/config/server/server.xml"/>
     <append file="/config/error-report-dev.xml" profile="dev"/>
-    <append resource="db/db-context.xml"/>
-    <append resource="web/web-context.xml"/>
+    <append resource="app/jpetstore/common/db/db-context.xml"/>
+    <append resource="app/jpetstore/web-context.xml"/>
 
 </aspectran>
