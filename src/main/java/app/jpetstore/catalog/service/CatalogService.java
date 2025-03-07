@@ -17,9 +17,9 @@ package app.jpetstore.catalog.service;
 
 import app.jpetstore.catalog.domain.Category;
 import app.jpetstore.catalog.domain.Product;
-import app.jpetstore.mybatis.mapper.CategoryMapper;
-import app.jpetstore.mybatis.mapper.ItemMapper;
-import app.jpetstore.mybatis.mapper.ProductMapper;
+import app.jpetstore.common.db.mapper.CategoryMapper;
+import app.jpetstore.common.db.mapper.ItemMapper;
+import app.jpetstore.common.db.mapper.ProductMapper;
 import app.jpetstore.order.domain.Item;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;

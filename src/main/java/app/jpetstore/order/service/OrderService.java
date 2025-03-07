@@ -15,10 +15,10 @@
  */
 package app.jpetstore.order.service;
 
-import app.jpetstore.mybatis.mapper.ItemMapper;
-import app.jpetstore.mybatis.mapper.LineItemMapper;
-import app.jpetstore.mybatis.mapper.OrderMapper;
-import app.jpetstore.mybatis.mapper.SequenceMapper;
+import app.jpetstore.common.db.mapper.ItemMapper;
+import app.jpetstore.common.db.mapper.LineItemMapper;
+import app.jpetstore.common.db.mapper.OrderMapper;
+import app.jpetstore.common.db.mapper.SequenceMapper;
 import app.jpetstore.order.domain.Item;
 import app.jpetstore.order.domain.Order;
 import app.jpetstore.order.domain.Sequence;

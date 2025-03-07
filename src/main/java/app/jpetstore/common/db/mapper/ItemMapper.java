@@ -13,43 +13,60 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.mybatis.mapper;
+package app.jpetstore.common.db.mapper;
 
-import app.jpetstore.order.domain.Sequence;
+import app.jpetstore.order.domain.Item;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlMapperAgent;
 import com.aspectran.mybatis.SqlMapperDao;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- * The Interface SequenceMapper.
+ * The Interface ItemMapper.
  *
  * @author Juho Jeong
  */
 @Mapper
-public interface SequenceMapper {
+public interface ItemMapper {
 
-    Sequence getSequence(Sequence sequence);
+    void updateInventoryQuantity(Map<String, Object> param);
 
-    void updateSequence(Sequence sequence);
+    int getInventoryQuantity(String itemId);
+
+    List<Item> getItemListByProduct(String productId);
+
+    Item getItem(String itemId);
 
     @Component
-    class Dao extends SqlMapperDao<SequenceMapper> implements SequenceMapper {
+    class Dao extends SqlMapperDao<ItemMapper> implements ItemMapper {
 
         @Autowired
         public Dao(SqlMapperAgent mapperAgent) {
-            super(mapperAgent, SequenceMapper.class);
+            super(mapperAgent, ItemMapper.class);
         }
 
         @Override
-        public Sequence getSequence(Sequence sequence) {
-            return simple().getSequence(sequence);
+        public void updateInventoryQuantity(Map<String, Object> params) {
+            simple().updateInventoryQuantity(params);
         }
 
         @Override
-        public void updateSequence(Sequence sequence) {
-            simple().updateSequence(sequence);
+        public int getInventoryQuantity(String itemId) {
+            return simple().getInventoryQuantity(itemId);
+        }
+
+        @Override
+        public List<Item> getItemListByProduct(String productId) {
+            return simple().getItemListByProduct(productId);
+        }
+
+        @Override
+        public Item getItem(String itemId) {
+            return simple().getItem(itemId);
         }
 
     }

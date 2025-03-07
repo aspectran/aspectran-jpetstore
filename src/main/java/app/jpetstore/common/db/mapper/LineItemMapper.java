@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.mybatis.mapper;
+package app.jpetstore.common.db.mapper;
 
-import app.jpetstore.catalog.domain.Category;
+import app.jpetstore.order.domain.LineItem;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlMapperAgent;
@@ -25,33 +25,33 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * The Interface CategoryMapper.
+ * The Interface LineItemMapper.
  *
  * @author Juho Jeong
  */
 @Mapper
-public interface CategoryMapper {
+public interface LineItemMapper {
 
-    List<Category> getCategoryList();
+    List<LineItem> getLineItemsByOrderId(int orderId);
 
-    Category getCategory(String categoryId);
+    void insertLineItem(LineItem lineItem);
 
     @Component
-    class Dao extends SqlMapperDao<CategoryMapper> implements CategoryMapper {
+    class Dao extends SqlMapperDao<LineItemMapper> implements LineItemMapper {
 
         @Autowired
         public Dao(SqlMapperAgent mapperAgent) {
-            super(mapperAgent, CategoryMapper.class);
+            super(mapperAgent, LineItemMapper.class);
         }
 
         @Override
-        public List<Category> getCategoryList() {
-            return simple().getCategoryList();
+        public List<LineItem> getLineItemsByOrderId(int orderId) {
+            return simple().getLineItemsByOrderId(orderId);
         }
 
         @Override
-        public Category getCategory(String categoryId) {
-            return simple().getCategory(categoryId);
+        public void insertLineItem(LineItem lineItem) {
+            simple().insertLineItem(lineItem);
         }
 
     }

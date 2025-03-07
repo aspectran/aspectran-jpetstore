@@ -28,13 +28,13 @@
     </environments>
 
     <mappers>
-        <mapper resource="mybatis/mapper/AccountMapper.xml"/>
-        <mapper resource="mybatis/mapper/CategoryMapper.xml"/>
-        <mapper resource="mybatis/mapper/ItemMapper.xml"/>
-        <mapper resource="mybatis/mapper/LineItemMapper.xml"/>
-        <mapper resource="mybatis/mapper/OrderMapper.xml"/>
-        <mapper resource="mybatis/mapper/ProductMapper.xml"/>
-        <mapper resource="mybatis/mapper/SequenceMapper.xml"/>
+        <mapper resource="db/mapper/AccountMapper.xml"/>
+        <mapper resource="db/mapper/CategoryMapper.xml"/>
+        <mapper resource="db/mapper/ItemMapper.xml"/>
+        <mapper resource="db/mapper/LineItemMapper.xml"/>
+        <mapper resource="db/mapper/OrderMapper.xml"/>
+        <mapper resource="db/mapper/ProductMapper.xml"/>
+        <mapper resource="db/mapper/SequenceMapper.xml"/>
     </mappers>
 
 </configuration>

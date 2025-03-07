@@ -19,24 +19,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="app.jpetstore.mybatis.mapper.LineItemMapper">
+<mapper namespace="app.jpetstore.common.db.mapper.SequenceMapper">
 
   <cache />
 
-  <select id="getLineItemsByOrderId" resultType="app.jpetstore.order.domain.LineItem">
-    SELECT
-      ORDERID,
-      LINENUM AS lineNumber,
-      ITEMID,
-      QUANTITY,
-      UNITPRICE
-    FROM LINEITEM
-    WHERE ORDERID = #{orderId}
+  <select id="getSequence" resultType="app.jpetstore.order.domain.Sequence">
+    SELECT name, nextid
+    FROM SEQUENCE
+    WHERE NAME = #{name}
   </select>
 
-  <insert id="insertLineItem">
-    INSERT INTO LINEITEM (ORDERID, LINENUM, ITEMID, QUANTITY, UNITPRICE)
-    VALUES (#{orderId}, #{lineNumber}, #{itemId}, #{quantity}, #{unitPrice})
-  </insert>
+  <update id="updateSequence">
+    UPDATE SEQUENCE
+    SET NEXTID = #{nextId}
+    WHERE NAME = #{name}
+  </update>
 
 </mapper>
