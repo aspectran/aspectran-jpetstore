@@ -15,15 +15,10 @@
  */
 package app.jpetstore.common.db;
 
-import com.aspectran.core.activity.InstantActivity;
-import com.aspectran.core.activity.InstantActivityException;
-import com.aspectran.core.component.bean.annotation.AvoidAdvice;
+import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.Destroy;
-import com.aspectran.core.component.bean.aware.ActivityContextAware;
-import com.aspectran.core.context.ActivityContext;
-import com.aspectran.utils.annotation.jsr305.NonNull;
 
 import java.sql.Statement;
 
@@ -33,30 +28,17 @@ import java.sql.Statement;
  */
 @Component
 @Bean(lazyDestroy = true)
-public class H2DatabaseShutdown implements ActivityContextAware {
-
-    private ActivityContext context;
-
-    @Override
-    @AvoidAdvice
-    public void setActivityContext(@NonNull ActivityContext context) {
-        this.context = context;
-    }
+public class H2DatabaseShutdown extends InstantActivitySupport {
 
     @Destroy(profile = "h2")
-    public void shutdown() {
-        try {
-            InstantActivity activity = new InstantActivity(context);
-            activity.perform(() -> {
-                SimpleSqlSession sqlSession = activity.getBean(SimpleSqlSession.class);
-                try (Statement statement = sqlSession.getConnection().createStatement()) {
-                    statement.execute("SHUTDOWN");
-                }
-                return null;
-            });
-        } catch (Exception e) {
-            throw new InstantActivityException(e);
-        }
+    public void shutdown() throws Exception {
+        instantActivity(() -> {
+            SimpleSqlSession sqlSession = getBeanRegistry().getBean(SimpleSqlSession.class);
+            try (Statement statement = sqlSession.getConnection().createStatement()) {
+                statement.execute("SHUTDOWN");
+            }
+            return null;
+        });
     }
 
 }
