@@ -35,9 +35,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.channels.ClosedChannelException;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeoutException;
 
 @Component
@@ -58,7 +57,7 @@ public class LogtailEndpoint extends InstantActivitySupport {
 
     private static final String HEARTBEAT_PONG_MSG = "--pong--";
 
-    private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<>());
+    private static final Set<Session> sessions = new CopyOnWriteArraySet<>();
 
     private LogTailerManager logTailerManager;
 
@@ -108,30 +107,32 @@ public class LogtailEndpoint extends InstantActivitySupport {
     }
 
     protected void broadcast(String message) {
-        synchronized (sessions) {
-            for (Session session : sessions) {
-                if (session.isOpen()) {
-                    session.getAsyncRemote().sendText(message);
-                }
+        for (Session session : sessions) {
+            if (session.isOpen()) {
+                session.getAsyncRemote().sendText(message);
             }
         }
     }
 
     private void addSession(Session session, String message) {
-        if (sessions.add(session)) {
-            String[] names = StringUtils.splitWithComma(message.substring(COMMAND_JOIN.length()));
-            logTailerManager.join(session, names);
+        synchronized (sessions) {
+            if (sessions.add(session)) {
+                String[] names = StringUtils.splitWithComma(message.substring(COMMAND_JOIN.length()));
+                logTailerManager.join(session, names);
+            }
         }
     }
 
     private void removeSession(Session session) {
-        if (sessions.remove(session)) {
-            logTailerManager.release(session);
+        synchronized (sessions) {
+            if (sessions.remove(session)) {
+                logTailerManager.release(session);
+            }
         }
     }
 
-    Set<Session> getSessions() {
-        return sessions;
+    Session[] getSessions() {
+        return sessions.toArray(new Session[0]);
     }
 
 }
