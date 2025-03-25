@@ -68,7 +68,7 @@ public class LogtailEndpoint extends InstantActivitySupport {
     @OnOpen
     public void onOpen(Session session) {
         if (logger.isDebugEnabled()) {
-            logger.debug("WebSocket connection established with session: {}", session.getId());
+            logger.debug("WebSocket connection established for session {}", session.getId());
         }
     }
 
