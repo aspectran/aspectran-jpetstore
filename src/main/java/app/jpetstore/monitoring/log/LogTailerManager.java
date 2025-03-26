@@ -15,6 +15,7 @@
  */
 package app.jpetstore.monitoring.log;
 
+import com.aspectran.utils.StringUtils;
 import com.aspectran.utils.annotation.jsr305.NonNull;
 import jakarta.websocket.Session;
 
@@ -104,15 +105,18 @@ public class LogTailerManager {
     }
 
     private boolean isUsingTailer(String name) {
-        for (Session session : endpoint.getSessions()) {
-            String[] names = (String[])session.getUserProperties().get(TAILERS_PROPERTY);
-            if (names != null) {
-                for (String name2 : names) {
-                    if (name.equals(name2)) {
-                        return true;
+        if (StringUtils.hasLength(name)) {
+            return endpoint.containsSession(session -> {
+                String[] names = (String[])session.getUserProperties().get(TAILERS_PROPERTY);
+                if (names != null) {
+                    for (String name2 : names) {
+                        if (name.equals(name2)) {
+                            return true;
+                        }
                     }
                 }
-            }
+                return false;
+            });
         }
         return false;
     }
