@@ -153,8 +153,7 @@ public class SessionStatsEndpoint extends SimplifiedEndpoint {
 
     @NonNull
     private String formatTime(long time) {
-        LocalDateTime date = LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault());
-        return date.toString();
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault()).toString();
     }
 
     @NonNull
