@@ -61,8 +61,10 @@ public class SessionStatsEndpoint extends SimplifiedEndpoint {
 
     @Override
     protected void registerMessageHandlers(@NonNull Session session) {
-        session.addMessageHandler(String.class, message
-                -> handleMessage(session, message));
+        session.addMessageHandler(String.class, message -> {
+            setLoggingGroup();
+            handleMessage(session, message);
+        });
     }
 
     public void handleMessage(Session session, String message) {
