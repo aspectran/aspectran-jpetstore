@@ -34,6 +34,7 @@
 				<td>
 					<input type="text" name="username" value="${account.username}"/>
 					<span class="error-msg">${errors.username}</span>
+					<span class="error-msg">${errors.usernameDuplicated}</span>
 				</td>
 			</tr>
 			<tr>

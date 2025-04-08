@@ -34,6 +34,7 @@ import com.aspectran.utils.StringUtils;
 import com.aspectran.utils.annotation.jsr305.NonNull;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * The Class AccountActivity.
@@ -80,7 +81,14 @@ public class AccountActivity {
             return;
         }
 
-        accountService.insertAccount(account);
+        try {
+            translet.setAttribute("account", account);
+            translet.setAttribute("errors", Map.of(
+                    "usernameDuplicated", translet.getMessage("common.validation.usernameDuplicated.message")));
+            accountService.insertAccount(account);
+        } catch (Exception e) {
+            translet.forward("/account/newAccountForm");
+        }
     }
 
     /**
