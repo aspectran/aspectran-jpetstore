@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2025 The Aspectran Project
+ * Copyright (c) 2018-2025 The Aspectran Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,24 @@
  */
 package app.jpetstore.common.db;
 
+import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.core.component.bean.annotation.Initialize;
 import com.aspectran.mybatis.SqlSessionAgent;
 
 @Component
-@Bean(id = "simpleSqlSession", lazyDestroy = true)
+@Bean(id = "simpleSqlSession", lazyDestroy = true, proxied = true)
 public class SimpleSqlSession extends SqlSessionAgent {
 
     public SimpleSqlSession() {
         super("simpleTxAspect");
+    }
+
+    @Initialize
+    @AvoidAdvice
+    public void registerSqlSessionTxAdvice() {
+        super.registerSqlSessionTxAdvice();
     }
 
 }

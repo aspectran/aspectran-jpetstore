@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2025 The Aspectran Project
+ * Copyright (c) 2018-2025 The Aspectran Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,26 @@
  */
 package app.jpetstore.common.db;
 
+import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
+import com.aspectran.core.component.bean.annotation.Initialize;
 import com.aspectran.mybatis.SqlSessionAgent;
+import org.apache.ibatis.session.ExecutorType;
 
 @Component
-@Bean(id = "reuseSqlSession", lazyDestroy = true)
+@Bean(id = "reuseSqlSession",lazyDestroy = true, proxied = true)
 public class ReuseSqlSession extends SqlSessionAgent {
 
     public ReuseSqlSession() {
         super("reuseTxAspect");
+    }
+
+    @Initialize
+    @AvoidAdvice
+    public void registerSqlSessionTxAdvice() {
+        setExecutorType(ExecutorType.REUSE);
+        super.registerSqlSessionTxAdvice();
     }
 
 }

@@ -55,19 +55,4 @@ public class DefaultSqlMapperAgent implements SqlMapperAgent {
         return reuseSqlSession;
     }
 
-    @Override
-    public <T> T simple(Class<T> type) {
-        return getSimpleSqlSession().getMapper(type);
-    }
-
-    @Override
-    public <T> T batch(Class<T> type) {
-        return getBatchSqlSession().getMapper(type);
-    }
-
-    @Override
-    public <T> T reuse(Class<T> type) {
-        return getReuseSqlSession().getMapper(type);
-    }
-
 }
