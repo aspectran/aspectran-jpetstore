@@ -18,8 +18,8 @@ package app.jpetstore.common.db.mapper;
 import app.jpetstore.account.domain.Account;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.mybatis.SqlMapperAgent;
-import com.aspectran.mybatis.SqlMapperDao;
+import com.aspectran.mybatis.SqlMapperProvider;
+import com.aspectran.mybatis.SqlMapperAccess;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -47,11 +47,11 @@ public interface AccountMapper {
     void updateSignon(Account account);
 
     @Component
-    class Dao extends SqlMapperDao<AccountMapper> implements AccountMapper {
+    class Dao extends SqlMapperAccess<AccountMapper> implements AccountMapper {
 
         @Autowired
-        public Dao(SqlMapperAgent mapperAgent) {
-            super(mapperAgent, AccountMapper.class);
+        public Dao(SqlMapperProvider sqlMapperProvider) {
+            super(sqlMapperProvider, AccountMapper.class);
         }
 
         @Override

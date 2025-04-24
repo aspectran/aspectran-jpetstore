@@ -18,8 +18,8 @@ package app.jpetstore.common.db.mapper;
 import app.jpetstore.order.domain.Order;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.mybatis.SqlMapperAgent;
-import com.aspectran.mybatis.SqlMapperDao;
+import com.aspectran.mybatis.SqlMapperProvider;
+import com.aspectran.mybatis.SqlMapperAccess;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -45,11 +45,11 @@ public interface OrderMapper {
     void deleteOrderStatus(int orderId);
 
     @Component
-    class Dao extends SqlMapperDao<OrderMapper> implements OrderMapper {
+    class Dao extends SqlMapperAccess<OrderMapper> implements OrderMapper {
 
         @Autowired
-        public Dao(SqlMapperAgent mapperAgent) {
-            super(mapperAgent, OrderMapper.class);
+        public Dao(SqlMapperProvider sqlMapperProvider) {
+            super(sqlMapperProvider, OrderMapper.class);
         }
 
         @Override

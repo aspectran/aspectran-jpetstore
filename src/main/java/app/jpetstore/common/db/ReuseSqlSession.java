@@ -15,10 +15,8 @@
  */
 package app.jpetstore.common.db;
 
-import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.core.component.bean.annotation.Initialize;
 import com.aspectran.mybatis.SqlSessionAgent;
 import org.apache.ibatis.session.ExecutorType;
 
@@ -28,13 +26,7 @@ public class ReuseSqlSession extends SqlSessionAgent {
 
     public ReuseSqlSession() {
         super("reuseTxAspect");
-    }
-
-    @Initialize
-    @AvoidAdvice
-    public void registerSqlSessionTxAdvice() {
         setExecutorType(ExecutorType.REUSE);
-        super.registerSqlSessionTxAdvice();
     }
 
 }

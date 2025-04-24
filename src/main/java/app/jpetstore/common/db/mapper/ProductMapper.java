@@ -18,8 +18,8 @@ package app.jpetstore.common.db.mapper;
 import app.jpetstore.catalog.domain.Product;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.mybatis.SqlMapperAgent;
-import com.aspectran.mybatis.SqlMapperDao;
+import com.aspectran.mybatis.SqlMapperProvider;
+import com.aspectran.mybatis.SqlMapperAccess;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -39,11 +39,11 @@ public interface ProductMapper {
     List<Product> searchProductList(String keywords);
 
     @Component
-    class Dao extends SqlMapperDao<ProductMapper> implements ProductMapper {
+    class Dao extends SqlMapperAccess<ProductMapper> implements ProductMapper {
 
         @Autowired
-        public Dao(SqlMapperAgent mapperAgent) {
-            super(mapperAgent, ProductMapper.class);
+        public Dao(SqlMapperProvider sqlMapperProvider) {
+            super(sqlMapperProvider, ProductMapper.class);
         }
         @Override
         public List<Product> getProductListByCategory(String categoryId) {

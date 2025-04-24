@@ -18,12 +18,12 @@ package app.jpetstore.common.db;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.mybatis.SqlMapperAgent;
+import com.aspectran.mybatis.SqlMapperProvider;
 import org.apache.ibatis.session.SqlSession;
 
 @Component
 @Bean(lazyDestroy = true)
-public class DefaultSqlMapperAgent implements SqlMapperAgent {
+public class DefaultSqlMapperProvider implements SqlMapperProvider {
 
     private final SqlSession simpleSqlSession;
 
@@ -32,9 +32,9 @@ public class DefaultSqlMapperAgent implements SqlMapperAgent {
     private final SqlSession reuseSqlSession;
 
     @Autowired
-    public DefaultSqlMapperAgent(SimpleSqlSession simpleSqlSession,
-                                 BatchSqlSession batchSqlSession,
-                                 ReuseSqlSession reuseSqlSession) {
+    public DefaultSqlMapperProvider(SimpleSqlSession simpleSqlSession,
+                                    BatchSqlSession batchSqlSession,
+                                    ReuseSqlSession reuseSqlSession) {
         this.simpleSqlSession = simpleSqlSession;
         this.batchSqlSession = batchSqlSession;
         this.reuseSqlSession = reuseSqlSession;
