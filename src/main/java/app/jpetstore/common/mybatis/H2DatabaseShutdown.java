@@ -13,18 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.db;
+package app.jpetstore.common.mybatis;
 
+import com.aspectran.core.activity.InstantActivitySupport;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.mybatis.SqlSessionAgent;
+import com.aspectran.core.component.bean.annotation.Destroy;
 
+import java.sql.Statement;
+
+/**
+ * Shutdown H2 database programmatically.
+ * <p>Created: 2025. 2. 15.</p>
+ */
 @Component
-@Bean(id = "simpleSqlSession", lazyDestroy = true, proxied = true)
-public class SimpleSqlSession extends SqlSessionAgent {
+@Bean(lazyDestroy = true)
+public class H2DatabaseShutdown extends InstantActivitySupport {
 
-    public SimpleSqlSession() {
-        super("simpleTxAspect");
+    @Destroy(profile = "h2")
+    public void shutdown() throws Exception {
+        instantActivity(() -> {
+            SimpleSqlSession sqlSession = getBeanRegistry().getBean(SimpleSqlSession.class);
+            try (Statement statement = sqlSession.getConnection().createStatement()) {
+                statement.execute("SHUTDOWN");
+            }
+            return null;
+        });
     }
 
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.db.mapper;
+package app.jpetstore.common.mybatis.mapper;
 
 import app.jpetstore.account.domain.Account;
 import com.aspectran.core.component.bean.annotation.Autowired;

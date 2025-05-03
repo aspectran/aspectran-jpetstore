@@ -16,7 +16,7 @@
 package app.jpetstore.account.service;
 
 import app.jpetstore.account.domain.Account;
-import app.jpetstore.common.db.mapper.AccountMapper;
+import app.jpetstore.common.mybatis.mapper.AccountMapper;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;

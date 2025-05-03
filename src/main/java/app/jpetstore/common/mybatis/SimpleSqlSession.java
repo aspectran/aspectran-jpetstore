@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.db;
+package app.jpetstore.common.mybatis;
 
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlSessionAgent;
-import org.apache.ibatis.session.ExecutorType;
 
 @Component
-@Bean(id = "batchSqlSession", lazyDestroy = true, proxied = true)
-public class BatchSqlSession extends SqlSessionAgent {
+@Bean(id = "simpleSqlSession", lazyDestroy = true, proxied = true)
+public class SimpleSqlSession extends SqlSessionAgent {
 
-    public BatchSqlSession() {
-        super("batchTxAspect");
-        setExecutorType(ExecutorType.BATCH);
+    public SimpleSqlSession() {
+        super("simpleTxAspect");
     }
 
 }

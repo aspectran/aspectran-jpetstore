@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.db;
+package app.jpetstore.common.mybatis;
 
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
@@ -21,12 +21,12 @@ import com.aspectran.mybatis.SqlSessionAgent;
 import org.apache.ibatis.session.ExecutorType;
 
 @Component
-@Bean(id = "reuseSqlSession",lazyDestroy = true, proxied = true)
-public class ReuseSqlSession extends SqlSessionAgent {
+@Bean(id = "batchSqlSession", lazyDestroy = true)
+public class BatchSqlSession extends SqlSessionAgent {
 
-    public ReuseSqlSession() {
-        super("reuseTxAspect");
-        setExecutorType(ExecutorType.REUSE);
+    public BatchSqlSession() {
+        super("batchTxAspect");
+        setExecutorType(ExecutorType.BATCH);
     }
 
 }

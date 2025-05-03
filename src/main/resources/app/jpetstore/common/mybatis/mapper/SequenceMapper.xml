@@ -19,41 +19,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="app.jpetstore.common.db.mapper.ProductMapper">
+<mapper namespace="app.jpetstore.common.mybatis.mapper.SequenceMapper">
 
   <cache />
 
-  <select id="getProduct" resultType="app.jpetstore.catalog.domain.Product">
-    SELECT
-      PRODUCTID,
-      NAME,
-      IMAGE,
-      DESCN AS description,
-      CATEGORY AS categoryId
-    FROM PRODUCT
-    WHERE PRODUCTID = #{productId}
+  <select id="getSequence" resultType="app.jpetstore.order.domain.Sequence">
+    SELECT name, nextid
+    FROM SEQUENCE
+    WHERE NAME = #{name}
   </select>
 
-  <select id="getProductListByCategory" resultType="app.jpetstore.catalog.domain.Product">
-    SELECT
-      PRODUCTID,
-      NAME,
-      IMAGE,
-      DESCN AS description,
-      CATEGORY AS categoryId
-    FROM PRODUCT
-    WHERE CATEGORY = #{value}
-  </select>
-
-  <select id="searchProductList" resultType="app.jpetstore.catalog.domain.Product">
-    SELECT
-      PRODUCTID,
-      NAME,
-      IMAGE,
-      DESCN AS description,
-      CATEGORY AS categoryId
-    FROM PRODUCT
-    WHERE lower(name) LIKE #{value}
-  </select>
+  <update id="updateSequence">
+    UPDATE SEQUENCE
+    SET NEXTID = #{nextId}
+    WHERE NAME = #{name}
+  </update>
 
 </mapper>

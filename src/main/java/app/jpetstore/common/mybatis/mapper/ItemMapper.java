@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.db.mapper;
+package app.jpetstore.common.mybatis.mapper;
 
-import app.jpetstore.order.domain.Order;
+import app.jpetstore.order.domain.Item;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlMapperProvider;
@@ -23,63 +23,50 @@ import com.aspectran.mybatis.SqlMapperAccess;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * The Interface OrderMapper.
+ * The Interface ItemMapper.
  *
  * @author Juho Jeong
  */
 @Mapper
-public interface OrderMapper {
+public interface ItemMapper {
 
-    List<Order> getOrdersByUsername(String username);
+    void updateInventoryQuantity(Map<String, Object> param);
 
-    Order getOrder(int orderId);
+    int getInventoryQuantity(String itemId);
 
-    void insertOrder(Order order);
+    List<Item> getItemListByProduct(String productId);
 
-    void insertOrderStatus(Order order);
-
-    void deleteOrder(int orderId);
-
-    void deleteOrderStatus(int orderId);
+    Item getItem(String itemId);
 
     @Component
-    class Dao extends SqlMapperAccess<OrderMapper> implements OrderMapper {
+    class Dao extends SqlMapperAccess<ItemMapper> implements ItemMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, OrderMapper.class);
+            super(sqlMapperProvider, ItemMapper.class);
         }
 
         @Override
-        public List<Order> getOrdersByUsername(String username) {
-            return simple().getOrdersByUsername(username);
+        public void updateInventoryQuantity(Map<String, Object> params) {
+            simple().updateInventoryQuantity(params);
         }
 
         @Override
-        public Order getOrder(int orderId) {
-            return simple().getOrder(orderId);
+        public int getInventoryQuantity(String itemId) {
+            return simple().getInventoryQuantity(itemId);
         }
 
         @Override
-        public void insertOrder(Order order) {
-            simple().insertOrder(order);
+        public List<Item> getItemListByProduct(String productId) {
+            return simple().getItemListByProduct(productId);
         }
 
         @Override
-        public void insertOrderStatus(Order order) {
-            simple().insertOrderStatus(order);
-        }
-
-        @Override
-        public void deleteOrder(int orderId) {
-            simple().deleteOrder(orderId);
-        }
-
-        @Override
-        public void deleteOrderStatus(int orderId) {
-            simple().deleteOrderStatus(orderId);
+        public Item getItem(String itemId) {
+            return simple().getItem(itemId);
         }
 
     }
