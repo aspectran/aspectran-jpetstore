@@ -33,6 +33,7 @@ import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
 import com.aspectran.core.component.bean.annotation.Required;
+import com.aspectran.web.support.http.HttpStatusSetter;
 
 import java.util.List;
 
@@ -101,8 +102,7 @@ public class OrderActivity {
                          boolean shippingForm,
                          boolean shippingAddressRequired,
                          boolean confirmed,
-                         BeanValidator beanValidator
-    ) {
+                         BeanValidator beanValidator) {
         Order order2 = sessionManager.get().getOrder();
         if (order2 == null) {
             translet.redirect("/cart/viewCart");
@@ -112,15 +112,16 @@ public class OrderActivity {
         translet.setAttribute("order", order2);
 
         if (paymentForm) {
-            beanValidator.validate(translet, order2, Order.Payment.class);
+            beanValidator.validate(order2, Order.Payment.class);
         }
         if (billingForm) {
-            beanValidator.validate(translet, order2, Order.Billing.class);
+            beanValidator.validate(order2, Order.Billing.class);
         }
         if (shippingForm) {
-            beanValidator.validate(translet, order2, Order.Shipping.class);
+            beanValidator.validate(order2, Order.Shipping.class);
         }
         if (beanValidator.hasErrors()) {
+            HttpStatusSetter.badRequest(translet);
             translet.setAttribute("errors", beanValidator.getErrors());
             if (shippingForm) {
                 translet.dispatch("/order/ShippingForm");

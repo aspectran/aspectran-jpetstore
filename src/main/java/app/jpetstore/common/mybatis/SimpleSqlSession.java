@@ -20,7 +20,7 @@ import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlSessionAgent;
 
 @Component
-@Bean(id = "simpleSqlSession", lazyDestroy = true, proxied = true)
+@Bean(id = "simpleSqlSession", lazyDestroy = true)
 public class SimpleSqlSession extends SqlSessionAgent {
 
     public SimpleSqlSession() {

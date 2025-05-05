@@ -32,6 +32,7 @@ import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
 import com.aspectran.utils.StringUtils;
 import com.aspectran.utils.annotation.jsr305.NonNull;
+import com.aspectran.web.support.http.HttpStatusSetter;
 
 import java.util.List;
 import java.util.Map;
@@ -73,8 +74,9 @@ public class AccountActivity {
     public void newAccount(Translet translet,
                            Account account,
                            @NonNull BeanValidator beanValidator) {
-        beanValidator.validate(translet, account, Account.Create.class);
+        beanValidator.validate(account, Account.Create.class);
         if (beanValidator.hasErrors()) {
+            HttpStatusSetter.badRequest(translet);
             translet.setAttribute("account", account);
             translet.setAttribute("errors", beanValidator.getErrors());
             translet.forward("/account/newAccountForm");
@@ -113,8 +115,9 @@ public class AccountActivity {
     public void editAccount(Translet translet,
                             Account account,
                             @NonNull BeanValidator beanValidator) {
-        beanValidator.validate(translet, account);
+        beanValidator.validate(account);
         if (beanValidator.hasErrors()) {
+            HttpStatusSetter.badRequest(translet);
             translet.setAttribute("account", account);
             translet.setAttribute("errors", beanValidator.getErrors());
             translet.forward("/account/editAccountForm");
