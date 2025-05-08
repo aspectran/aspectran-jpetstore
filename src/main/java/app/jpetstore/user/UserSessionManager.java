@@ -16,7 +16,6 @@
 package app.jpetstore.user;
 
 import com.aspectran.core.adapter.SessionAdapter;
-import com.aspectran.core.component.bean.annotation.AvoidAdvice;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.aware.ActivityContextAware;
@@ -26,7 +25,6 @@ import com.aspectran.utils.annotation.jsr305.NonNull;
 
 @Component
 @Bean("userSessionManager")
-@AvoidAdvice
 public class UserSessionManager implements ActivityContextAware {
 
     public static final String USER_SESSION_KEY = "user";
@@ -40,7 +38,6 @@ public class UserSessionManager implements ActivityContextAware {
     }
 
     @Override
-    @AvoidAdvice
     public void setActivityContext(@NonNull ActivityContext context) {
         this.context = context;
     }
