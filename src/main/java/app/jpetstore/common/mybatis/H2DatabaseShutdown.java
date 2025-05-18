@@ -15,12 +15,18 @@
  */
 package app.jpetstore.common.mybatis;
 
-import com.aspectran.core.activity.InstantActivitySupport;
+import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.Destroy;
+import com.aspectran.utils.annotation.jsr305.NonNull;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * Shutdown H2 database programmatically.
@@ -28,17 +34,37 @@ import java.sql.Statement;
  */
 @Component
 @Bean(lazyDestroy = true)
-public class H2DatabaseShutdown extends InstantActivitySupport {
+public final class H2DatabaseShutdown {
+
+    private static final Logger logger = LoggerFactory.getLogger(H2DatabaseShutdown.class);
+
+    private final SqlSessionFactory sqlSessionFactory;
+
+    @Autowired(required = false)
+    public H2DatabaseShutdown(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
+    }
 
     @Destroy(profile = "h2")
-    public void shutdown() throws Exception {
-        instantActivity(() -> {
-            SimpleSqlSession sqlSession = getBeanRegistry().getBean(SimpleSqlSession.class);
-            try (Statement statement = sqlSession.getConnection().createStatement()) {
-                statement.execute("SHUTDOWN");
+    public void shutdown() {
+        if (sqlSessionFactory != null) {
+            try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+                executeShutdown(sqlSession.getConnection());
+            } catch (SQLException e) {
+                if (!e.getMessage().contains("Database is already closed")) {
+                    logger.error("Failed to shutdown H2 database", e);
+                }
             }
-            return null;
-        });
+        }
+    }
+
+    public void executeShutdown(@NonNull Connection connection) throws SQLException {
+        if (connection.getMetaData().getDatabaseProductName().equals("H2")) {
+            logger.info("Shutting down H2 database");
+            connection.createStatement().execute("SHUTDOWN");
+        } else {
+            logger.info("Not shutting down non-H2 database");
+        }
     }
 
 }
