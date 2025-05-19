@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE aspectran PUBLIC "-//ASPECTRAN//DTD Aspectran 8.0//EN"
+        "https://aspectran.com/dtd/aspectran-8.dtd">
+<aspectran>
+
+    <append resource="app/jpetstore/common/web-context.xml"/>
+    <append resource="app/jpetstore/common/static-codes.xml"/>
+    <append resource="app/jpetstore/common/filter/xss-prevent.xml"/>
+    <append resource="app/jpetstore/common/i18n/i18n-context.xml"/>
+    <append resource="app/jpetstore/common/mybatis/mybatis-context.xml"/>
+    <append resource="app/jpetstore/monitoring/monitoring.xml"/>
+
+</aspectran>

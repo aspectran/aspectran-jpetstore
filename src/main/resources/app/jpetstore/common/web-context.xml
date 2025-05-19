@@ -8,43 +8,6 @@
         Note that names of translets that match the request URI always start with a forward slash (/).
     </description>
 
-    <bean id="messageSource" class="com.aspectran.core.support.i18n.message.ResourceBundleMessageSource">
-        <description>
-            Defines a bean for multilingual processing.
-        </description>
-        <properties>
-            <item name="basenames" type="array">
-                <value>app.jpetstore.common.i18n.messages</value>
-                <value>app.jpetstore.common.i18n.ValidationMessages</value>
-            </item>
-        </properties>
-    </bean>
-
-    <bean id="localeResolver" class="com.aspectran.web.support.i18n.locale.CookieLocaleResolver">
-        <description>
-            Use the cookie to determine the locale.
-        </description>
-        <properties>
-            <item name="supportedLocales" type="array">
-                <value>en</value>
-                <value>de</value>
-                <value>fr</value>
-                <value>ja</value>
-                <value>ko</value>
-            </item>
-            <item name="defaultLocale" value="en"/>
-        </properties>
-    </bean>
-
-    <bean id="localeChangeInterceptor" class="com.aspectran.core.support.i18n.locale.LocaleChangeInterceptor">
-        <description>
-            Defines an interceptor bean for changing the locale.
-        </description>
-        <properties>
-            <item name="ignoreInvalidLocale" valueType="boolean" value="true"/>
-        </properties>
-    </bean>
-
     <bean id="defaultJspTemplate" class="com.aspectran.web.support.view.JspTemplateViewDispatcher">
         <description>
             Register a JSP Template View Dispatcher.
@@ -88,9 +51,5 @@
             </before>
         </advice>
     </aspect>
-
-    <append resource="app/jpetstore/common/xss-prevent.xml"/>
-    <append resource="app/jpetstore/common/static-codes.xml"/>
-    <append resource="app/jpetstore/monitoring/monitoring.xml"/>
 
 </aspectran>

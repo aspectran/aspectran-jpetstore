@@ -32,7 +32,6 @@
 
     <append file="/config/server/server.xml"/>
     <append file="/config/error-report-dev.xml" profile="dev"/>
-    <append resource="app/jpetstore/common/mybatis/mybatis-context.xml"/>
-    <append resource="app/jpetstore/web-context.xml"/>
+    <append resource="app/jpetstore/jpetstore-context.xml"/>
 
 </aspectran>
