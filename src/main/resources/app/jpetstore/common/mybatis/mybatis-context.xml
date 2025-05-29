@@ -13,7 +13,7 @@
         </description>
         <properties>
             <item name="configLocation" value="classpath:app/jpetstore/common/mybatis/mybatis-config.xml"/>
-            <item name="environment" value="default"/>
+            <item name="environmentId" value="default"/>
             <item name="variables" type="properties">
                 <entry name="driver">%{classpath:app/jpetstore/common/mybatis/jpetstore.db.properties^driver}</entry>
                 <entry name="url">%{classpath:app/jpetstore/common/mybatis/jpetstore.db.properties^url}</entry>
