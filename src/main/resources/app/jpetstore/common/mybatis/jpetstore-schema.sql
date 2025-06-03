@@ -73,7 +73,7 @@ create table if not exists orders (
     shipcity varchar(80) not null,
     shipstate varchar(80) not null,
     shipzip varchar(20) not null,
-    shipcountry varchar(20) not null,
+    shipcountry varchar(30) not null,
     billaddr1 varchar(80) not null,
     billaddr2 varchar(80)  null,
     billcity varchar(80) not null,
