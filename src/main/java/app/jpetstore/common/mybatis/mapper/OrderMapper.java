@@ -15,12 +15,14 @@
  */
 package app.jpetstore.common.mybatis.mapper;
 
+import app.jpetstore.common.pagination.PageInfo;
 import app.jpetstore.order.domain.Order;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlMapperProvider;
 import com.aspectran.mybatis.SqlMapperAccess;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,7 +34,9 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
 
-    List<Order> getOrdersByUsername(String username);
+    List<Order> getOrdersByUsername(PageInfo pageInfo);
+
+    int getTotalOfOrdersByUsername(PageInfo pageInfo);
 
     Order getOrder(int orderId);
 
@@ -53,8 +57,13 @@ public interface OrderMapper {
         }
 
         @Override
-        public List<Order> getOrdersByUsername(String username) {
-            return simple().getOrdersByUsername(username);
+        public List<Order> getOrdersByUsername(PageInfo pageInfo) {
+            return simple().getOrdersByUsername(pageInfo);
+        }
+
+        @Override
+        public int getTotalOfOrdersByUsername(PageInfo pageInfo) {
+            return simple().getTotalOfOrdersByUsername(pageInfo);
         }
 
         @Override

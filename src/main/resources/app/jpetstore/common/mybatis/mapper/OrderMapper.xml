@@ -85,10 +85,17 @@
       USERID AS username,
       STATUS
     FROM ORDERS, ORDERSTATUS
-    WHERE ORDERS.USERID = #{value}
+    WHERE ORDERS.USERID = #{params.username}
       AND ORDERS.ORDERID = ORDERSTATUS.ORDERID
     ORDER BY ORDERDATE DESC
-    LIMIT 100
+    LIMIT #{size} OFFSET #{offset}
+  </select>
+
+  <select id="getTotalOfOrdersByUsername" resultType="int">
+    SELECT COUNT(1)
+    FROM ORDERS, ORDERSTATUS
+    WHERE ORDERS.USERID = #{params.username}
+      AND ORDERS.ORDERID = ORDERSTATUS.ORDERID
   </select>
 
   <insert id="insertOrder">

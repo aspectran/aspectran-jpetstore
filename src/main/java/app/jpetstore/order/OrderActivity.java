@@ -18,6 +18,7 @@ package app.jpetstore.order;
 import app.jpetstore.account.domain.Account;
 import app.jpetstore.cart.domain.Cart;
 import app.jpetstore.cart.service.CartService;
+import app.jpetstore.common.pagination.PageInfo;
 import app.jpetstore.common.validation.BeanValidator;
 import app.jpetstore.order.domain.Order;
 import app.jpetstore.order.service.OrderService;
@@ -67,9 +68,12 @@ public class OrderActivity {
     @Request("/order/listOrders")
     @Dispatch("order/ListOrders")
     @Action("orderList")
-    public List<Order> listOrders() {
+    public List<Order> listOrders(Translet translet) {
         Account account = sessionManager.get().getAccount();
-        return orderService.getOrdersByUsername(account.getUsername());
+        PageInfo pageInfo = PageInfo.of(translet, 10);
+        pageInfo.putParam("username", account.getUsername());
+        translet.setAttribute("pageInfo", pageInfo);
+        return orderService.getOrdersByUsername(pageInfo);
     }
 
     /**

@@ -74,6 +74,11 @@
 					<%@ include file="../cart/IncludeMyList.jsp"%>
 				</c:if>
 			</c:if>
+			<c:if test="${empty user.account}">
+				<h4><a href="https://petclinic.aspectran.com/" title="Visit a pet clinic with excellent non-profit veterinarians.">PetClinic Demo</a></h4>
+				<a href="https://petclinic.aspectran.com/" title="Visit a pet clinic with excellent non-profit veterinarians."><img src="https://petclinic.aspectran.com/images/pets.png"/></a>
+				<p>There's a new pet clinic with excellent non-profit veterinarians. Of course, it's just for demonstration purposes.</p>
+			</c:if>
 		</div>
 	</div>
 

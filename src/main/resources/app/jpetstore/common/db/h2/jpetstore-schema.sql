@@ -79,7 +79,7 @@ create table if not exists orders (
     billcity varchar(80) not null,
     billstate varchar(80) not null,
     billzip varchar(20) not null,
-    billcountry varchar(20) not null,
+    billcountry varchar(30) not null,
     courier varchar(80) not null,
     totalprice decimal(10,2) not null,
     billtofirstname varchar(80) not null,

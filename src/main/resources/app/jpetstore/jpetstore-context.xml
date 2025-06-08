@@ -7,7 +7,7 @@
     <append resource="app/jpetstore/common/static-codes.xml"/>
     <append resource="app/jpetstore/common/filter/xss-prevent.xml"/>
     <append resource="app/jpetstore/common/i18n/i18n-context.xml"/>
-    <append resource="app/jpetstore/common/mybatis/mybatis-context.xml"/>
+    <append resource="app/jpetstore/common/db/db-context.xml"/>
     <append resource="app/jpetstore/monitoring/monitoring.xml"/>
 
 </aspectran>

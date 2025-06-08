@@ -19,6 +19,7 @@ import app.jpetstore.common.mybatis.mapper.ItemMapper;
 import app.jpetstore.common.mybatis.mapper.LineItemMapper;
 import app.jpetstore.common.mybatis.mapper.OrderMapper;
 import app.jpetstore.common.mybatis.mapper.SequenceMapper;
+import app.jpetstore.common.pagination.PageInfo;
 import app.jpetstore.order.domain.Item;
 import app.jpetstore.order.domain.Order;
 import app.jpetstore.order.domain.Sequence;
@@ -30,6 +31,7 @@ import com.aspectran.utils.annotation.jsr305.NonNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.LongSupplier;
 
 /**
  * The Class OrderService.
@@ -110,11 +112,14 @@ public class OrderService {
 
     /**
      * Gets the orders by username.
-     * @param username the username
+     * @param pageInfo the paging info
      * @return the orders by username
      */
-    public List<Order> getOrdersByUsername(String username) {
-        return orderDao.getOrdersByUsername(username);
+    public List<Order> getOrdersByUsername(PageInfo pageInfo) {
+        List<Order> orders = orderDao.getOrdersByUsername(pageInfo);
+        LongSupplier totalSupplier = () -> orderDao.getTotalOfOrdersByUsername(pageInfo);
+        pageInfo.setTotalElements(orders.size(), totalSupplier);
+        return orders;
     }
 
     /**
