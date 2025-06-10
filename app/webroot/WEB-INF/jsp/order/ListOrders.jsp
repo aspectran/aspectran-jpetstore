@@ -67,7 +67,7 @@
 				<c:if test="${pageInfo.number > 5 and pageInfo.number % 5 == 1}">
 				<a href="<aspectran:url value="/order/listOrders?page={pageNumber}"><aspectran:param name="pageNumber" value="${pageInfo.number - 1}"/></aspectran:url>" title="Previous" aria-label="Previous page">&laquo;</a>
 				</c:if>
-				<c:if test="${pageInfo.number > 5 and pageInfo.number % 5 > 1}">
+				<c:if test="${pageInfo.number > 5 and pageInfo.number % 5 != 1}">
 				<a href="<aspectran:url value="/order/listOrders?page={pageNumber}"><aspectran:param name="pageNumber" value="${pageInfo.number - 5}"/></aspectran:url>" title="Previous" aria-label="Previous page">&laquo;</a>
 				</c:if>
 				<c:if test="${pageInfo.number <= 5}">
@@ -91,7 +91,7 @@
 					<c:if test="${pageInfo.number < pageInfo.totalPages - 5 and pageInfo.number % 5 == 0}">
 					<a href="<aspectran:url value="/order/listOrders?page={pageNumber}"><aspectran:param name="pageNumber" value="${pageInfo.number + 1}"/></aspectran:url>" title="Next" aria-label="Next page">&raquo;</a>
 					</c:if>
-					<c:if test="${pageInfo.number < pageInfo.totalPages - 5 and pageInfo.number % 5 > 0}">
+					<c:if test="${pageInfo.number < pageInfo.totalPages - 5 and pageInfo.number % 5 != 0}">
 					<a href="<aspectran:url value="/order/listOrders?page={pageNumber}"><aspectran:param name="pageNumber" value="${pageInfo.number + 5}"/></aspectran:url>" title="Next" aria-label="Next page">&raquo;</a>
 					</c:if>
 					<c:if test="${pageInfo.totalPages > 5 and pageInfo.number >= pageInfo.totalPages - 5}">
