@@ -70,8 +70,8 @@ public class OrderActivity {
     @Action("orderList")
     public List<Order> listOrders(Translet translet) {
         Account account = sessionManager.get().getAccount();
-        PageInfo pageInfo = PageInfo.of(translet, 10);
-        pageInfo.putParam("username", account.getUsername());
+        PageInfo pageInfo = PageInfo.of(translet, 10)
+                .withParam("username", account.getUsername());
         translet.setAttribute("pageInfo", pageInfo);
         return orderService.getOrdersByUsername(pageInfo);
     }

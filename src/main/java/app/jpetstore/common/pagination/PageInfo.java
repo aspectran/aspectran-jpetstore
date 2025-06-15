@@ -103,12 +103,13 @@ public class PageInfo {
         return (number > 1);
     }
 
-    public Map<String, Object> putParam(String name, Object value) {
+    public PageInfo withParam(String name, Object value) {
         touchParams().put(name, value);
-        return params;
+        return this;
     }
 
-    public Object getParams() {
+    @NonNull
+    public Map<String, Object> getParams() {
         return touchParams();
     }
 
