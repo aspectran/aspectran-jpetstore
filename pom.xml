@@ -51,7 +51,7 @@
 
         <maven.compiler.release>17</maven.compiler.release>
 
-        <aspectran.version>8.5.1</aspectran.version>
+        <aspectran.version>8.5.2</aspectran.version>
     </properties>
 
     <repositories>
