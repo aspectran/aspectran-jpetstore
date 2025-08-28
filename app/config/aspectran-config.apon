@@ -1,6 +1,7 @@
 system: {
     properties: {
         aspectran.encryption.password: 1234
+        aspectran.encryption.algorithm: PBEWithMD5AndTripleDES
     }
 }
 context: {
