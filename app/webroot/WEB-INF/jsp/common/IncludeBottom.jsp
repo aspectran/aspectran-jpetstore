@@ -19,7 +19,7 @@
 
 <div id="Footer">
 	<div id="PoweredBy">
-		<a href="https://aspectran.com/en/">aspectran.com</a><br/>
+		<a href="https://aspectran.com/">aspectran.com</a><br/>
 		<a href="https://www.mybatis.org">mybatis.org</a>
 	</div>
 	<div id="Banner">
