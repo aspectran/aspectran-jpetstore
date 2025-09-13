@@ -181,17 +181,17 @@
 <script src="https://assets.aspectran.com/foundation@6.9.0/js/foundation.min.js"></script>
 <script>
     $(document).foundation();
-    $(function() {
+    $(function () {
         let $win = $(window);
         let $nav = $("#navigation");
         let navHeight = Math.abs($("#masthead").height() - $nav.height());
         let lastScrollTop = 0;
         let scrolled;
         let navFixed;
-        $win.scroll(function() {
+        $win.scroll(function () {
             scrolled = true;
         });
-        setInterval(function() {
+        setInterval(function () {
             if (scrolled) {
                 let scrollTop = $win.scrollTop();
                 if (Math.abs(lastScrollTop - scrollTop) <= 10) {
@@ -230,21 +230,23 @@
     });
 </script>
 <script>
-    $(function() {
-        $("#masthead h1, article h1, article h2, article h3, article h4, article h5, article h6").each(function(index, item) {
+    $(function () {
+        $("#masthead h1, article h1, article h2, article h3").each(function (index, item) {
             let tagn = item.localName;
             let anchor = "top-of-page";
             if (tagn !== "h1") {
                 anchor = "anchor-" + (index + 1);
                 $(this).before("<a class='toc-anchor " + anchor + "' id='" + anchor + "' name='" + anchor + "'></a>");
             }
-            $("#toc ul").append("<li class='toc-" + tagn + "'><a anchor='" + anchor + "' href='#" + anchor + "'>" + $(item).text() + "</a></li>");
+            $("<li class='toc-" + tagn + "'></li>")
+                .append($("<a anchor='" + anchor + "' href='#" + anchor + "'/>").text($(item).text()))
+                .appendTo("#toc ul");
         });
     });
 </script>
 <script>
-    $(function() {
-        $(".lazy-sticky").each(function() {
+    $(function () {
+        $(".lazy-sticky").each(function () {
             const $win = $(window);
             const $this = $(this);
             const baseOffsetTop = $this.offset().top;
@@ -255,21 +257,21 @@
             let winHeight = $win.height();
             let scrollTimer = null;
             let immediate = false;
-            $this.find("#toc ul a").click(function(e) {
+            $this.find("#toc ul a").click(function () {
                 immediate = true;
                 let anchor = $(this).attr("anchor");
                 if (anchor !== "top-of-page") {
                     $("#navigation").addClass("immediate");
                 }
             });
-            $win.scroll(function() {
+            $win.scroll(function () {
                 let scrollTop = $win.scrollTop();
                 if (scrollTop < baseOffsetTop) {
                     if (scrollTimer) {
                         clearInterval(scrollTimer);
                         scrollTimer = null;
                     }
-                    scrollTimer = setInterval(function() {
+                    scrollTimer = setInterval(function () {
                         if (offsetTop !== 0) {
                             $this.css({
                                 top: 0
@@ -289,7 +291,7 @@
                                 clearInterval(scrollTimer);
                                 scrollTimer = null;
                             }
-                            scrollTimer = setInterval(function() {
+                            scrollTimer = setInterval(function () {
                                 topBarHeight = $("#navigation.fixed .top-bar").height()||0;
                                 scrollTop = $win.scrollTop();
                                 if (scrollTop < baseOffsetTop + topBarHeight) {
@@ -318,7 +320,7 @@
                     }
                 }
             });
-            $win.resize(function() {
+            $win.resize(function () {
                 if ($this.offset().left < 15 || $this.width() >= 500) {
                     clearInterval(scrollTimer);
                     $this.css("top", 0);
@@ -326,7 +328,7 @@
                     $win.scroll();
                 }
             });
-            setTimeout(function() {
+            setTimeout(function () {
                 if ($win.scrollTop() > baseOffsetTop) {
                     offsetTop = $win.scrollTop();
                     $win.scroll();
@@ -337,14 +339,14 @@
 </script>
 <script>
     /* Creating custom :external selector */
-    $.expr[':'].external = function(obj) {
+    $.expr[':'].external = function (obj) {
         return obj.href
             && !obj.href.match(/aspectran.com\//)
             && !obj.href.match(/^javascript:/)
             && !obj.href.match(/^mailto:/)
             && (obj.hostname !== location.hostname);
     };
-    $(function() {
+    $(function () {
         /* Add 'external' CSS class to all external links */
         $('a:external').addClass('external');
         /* turn target into target=_blank for elements w external class */
@@ -352,12 +354,12 @@
     })
 </script>
 <script>
-    $(function() {
+    $(function () {
         let menuitem = $("#gnb-menu .top-bar-left .dropdown li a[href='" + location.pathname + "']").last();
         if (menuitem.length > 0) {
             let arr = [];
             arr.push({'name': menuitem.text(), 'href': null});
-            menuitem.parentsUntil(".dropdown > li:eq(0)").each(function() {
+            menuitem.parentsUntil(".dropdown > li:eq(0)").each(function () {
                 if ($(this).hasClass("menu")) {
                     let a2 = $(this).prev();
                     if (a2.is("a")) {
