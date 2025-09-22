@@ -23,7 +23,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <name>JPetStore Demo</name>
-    <description>JPetStore Demo is a sample web application built on top of Aspectran 8 and MyBatis 3.</description>
+    <description>JPetStore Demo is a sample web application built on top of Aspectran and MyBatis.</description>
     <inceptionYear>2019</inceptionYear>
 
     <organization>

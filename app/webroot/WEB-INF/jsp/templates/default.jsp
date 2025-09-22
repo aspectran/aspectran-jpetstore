@@ -96,7 +96,7 @@
                 <div class="small-12 cell">
                     <header>
                         <p class="subheadline" itemprop="alternativeHeadline">
-                            A full-stack sample web application built on top of Aspectran 8 and MyBatis 3</p>
+                            A full-stack sample web application built on top of Aspectran and MyBatis</p>
                         <h1 itemprop="headline">JPetStore Demo</h1>
                         <p class="teaser" itemprop="description">
                             The goal of the JPetStore Demo App is to provide a fully functional web application that leverages Aspectran and MyBatis.
