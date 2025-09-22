@@ -49,9 +49,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
 
-        <aspectran.version>8.5.3</aspectran.version>
+        <aspectran.version>9.0.0</aspectran.version>
     </properties>
 
     <repositories>
