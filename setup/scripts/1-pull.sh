@@ -1,6 +1,7 @@
 #!/bin/sh
 
-. ./app.conf
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+. "$SCRIPT_DIR/app.conf"
 
 if [ ! -d "$REPO_DIR" ]; then
   [ ! -d "$BUILD_DIR" ] && mkdir "$BUILD_DIR"

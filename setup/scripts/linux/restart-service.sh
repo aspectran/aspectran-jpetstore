@@ -6,7 +6,8 @@ set -e
 # Check if systemctl is installed
 command -v systemctl >/dev/null || { echo "Error: systemctl is not installed."; exit 1; }
 
-. ./app.conf
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+. "$SCRIPT_DIR/app.conf"
 
 echo "Restarting service $APP_NAME ..."
 sudo systemctl restart "$APP_NAME"

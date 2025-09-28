@@ -1,6 +1,7 @@
 #!/bin/sh
 
-. ./app.conf
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+. "$SCRIPT_DIR/app.conf"
 
 echo "Uninstalling service $APP_NAME ..."
 

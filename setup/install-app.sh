@@ -3,7 +3,8 @@
 # Check if git is installed
 command -v git >/dev/null || { echo "Error: git is not installed. Please install git and try again."; exit 1; }
 
-. ./app.conf
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+. "$SCRIPT_DIR/app.conf"
 
 echo "Installing application to $BASE_DIR ..."
 

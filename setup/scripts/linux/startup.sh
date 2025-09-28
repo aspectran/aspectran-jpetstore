@@ -3,7 +3,8 @@
 
 set -e
 
-. ./app.conf
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+. "$SCRIPT_DIR/app.conf"
 
 case "$1" in
 -f | --force)
