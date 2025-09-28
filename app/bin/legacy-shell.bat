@@ -51,10 +51,7 @@ if "%1" == "debug" (
 )
 
 echo Using JAVA_HOME: %JAVA_HOME%
-if not "%JVM_MS_OPT%" == "" echo Using JVM_MS: %JVM_MS_OPT%
-if not "%JVM_MX_OPT%" == "" echo Using JVM_MX: %JVM_MX_OPT%
-if not "%JVM_SS_OPT%" == "" echo Using JVM_SS: %JVM_SS_OPT%
-echo Aspectran daemon running... To terminate the process press `CTRL+C`.
+if not "%JAVA_OPTS%" == "" echo Using JAVA_OPTS: %JAVA_OPTS%
 
 "%JAVA_EXE%"^
  %JVM_MS_OPT%^
@@ -66,9 +63,9 @@ echo Aspectran daemon running... To terminate the process press `CTRL+C`.
  -Djava.awt.headless=true^
  -Djava.net.preferIPv4Stack=true^
  -Dlogback.configurationFile="%LOGGING_CONFIG%"^
- -Daspectran.basePath="%BASE_DIR%"
+ -Daspectran.basePath="%BASE_DIR%"^
  %ASPECTRAN_OPTS%^
- com.aspectran.daemon.DefaultDaemon^
+ com.aspectran.shell.AspectranShell^
  "%ASPECTRAN_CONFIG%"
 
 :end
