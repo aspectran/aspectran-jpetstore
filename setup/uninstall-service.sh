@@ -13,7 +13,10 @@ fi
 
 sudo systemctl stop $APP_NAME
 sudo systemctl disable $APP_NAME
-sudo systemctl cat $APP_NAME | sudo gawk 'NR==1 && $1=="#"{system("rm -v "$2)}' || exit
+
+echo "Removing service file: $SERVICE_FILE"
+sudo rm -v "$SERVICE_FILE" || exit
+
 sudo systemctl daemon-reload || exit
 sudo systemctl reset-failed || exit
 echo "Service $APP_NAME has been uninstalled successfully."
