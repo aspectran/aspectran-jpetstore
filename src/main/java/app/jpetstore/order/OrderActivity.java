@@ -186,7 +186,7 @@ public class OrderActivity {
      */
     @Request("/order/deleteOrder/${orderId}")
     @Redirect("/order/listOrders")
-    public void deleteOrder(@Required int orderId) {
+    public void deleteOrder(@Required Integer orderId) {
         orderService.deleteOrder(orderId);
     }
 
