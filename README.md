@@ -22,12 +22,12 @@ The JPetStore demo is a fully functional e-commerce application that includes fe
 
 1.  **Clone the repository:**
     ```sh
-    git clone https://github.com/aspectran/jpetstore.git
+    git clone https://github.com/aspectran/aspectran-jpetstore.git
     ```
 
 2.  **Navigate to the project directory:**
     ```sh
-    cd jpetstore
+    cd aspectran-jpetstore
     ```
 
 3.  **Build the project with Maven:**
