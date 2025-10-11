@@ -16,7 +16,7 @@ The JPetStore demo is a fully functional e-commerce application that includes fe
 ## Requirements
 
 - Java 21 or later
-- Maven 3.6.3 or later
+- Maven 3.9.4 or later
 
 ## Building from Source
 
