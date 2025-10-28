@@ -2,6 +2,8 @@
 
 This project is a sample web application that demonstrates the integration of Aspectran with MyBatis 3, using the classic JPetStore model. It is a reimplementation of the original MyBatis JPetStore sample, showcasing how to build a database-driven web application with Aspectran.
 
+<img width="1042" alt="petclinic-screenshot" src="https://aspectran.com/images/projects/jpetstore.png">
+
 ## About this Demo
 
 The JPetStore demo is a fully functional e-commerce application that includes features like browsing product catalogs, managing a shopping cart, and processing orders. It serves as a practical example of how to use Aspectran for building real-world web applications.
