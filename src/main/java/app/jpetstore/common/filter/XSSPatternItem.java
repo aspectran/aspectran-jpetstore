@@ -16,11 +16,11 @@
 package app.jpetstore.common.filter;
 
 import com.aspectran.utils.StringUtils;
-import com.aspectran.utils.apon.AbstractParameters;
+import com.aspectran.utils.apon.DefaultParameters;
 import com.aspectran.utils.apon.ParameterKey;
 import com.aspectran.utils.apon.ValueType;
 
-public class XSSPatternItem extends AbstractParameters {
+public class XSSPatternItem extends DefaultParameters {
 
     private static final ParameterKey pattern;
     private static final ParameterKey caseInsensitive;
