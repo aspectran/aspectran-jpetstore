@@ -31,66 +31,68 @@
             <item name="canonicalize" valueType="boolean">false</item>
             <item name="patterns">
                 <![CDATA[
-                {
-                    pattern: <script>(.*?)</script>
-                    caseInsensitive: true
-                    multiline: false
-                    dotall: false
-                }
-                {
-                    pattern: src[\r\n]*=[\r\n]*\'(.*?)\'
-                    caseInsensitive: true
-                    multiline: true
-                    dotall: true
-                }
-                {
-                    pattern: src[\r\n]*=[\r\n]*\"(.*?)\"
-                    caseInsensitive: true
-                    multiline: true
-                    dotall: true
-                }
-                {
-                    pattern: </script>
-                    caseInsensitive: true
-                    multiline: false
-                    dotall: false
-                }
-                {
-                    pattern: <script(.*?)>
-                    caseInsensitive: true
-                    multiline: true
-                    dotall: true
-                }
-                {
-                    pattern: eval\((.*?)\)
-                    caseInsensitive: true
-                    multiline: true
-                    dotall: true
-                }
-                {
-                    pattern: expression\((.*?)\)
-                    caseInsensitive: true
-                    multiline: true
-                    dotall: true
-                }
-                {
-                    pattern: javascript:
-                    caseInsensitive: true
-                    multiline: false
-                    dotall: false
-                }
-                {
-                    pattern: vbscript:
-                    caseInsensitive: true
-                    multiline: false
-                    dotall: false
-                }
-                {
-                    pattern: onload(.*?)=
-                    caseInsensitive: true
-                    multiline: true
-                    dotall: true
-                }
+                [
+                    {
+                        pattern: <script>(.*?)</script>
+                        caseInsensitive: true
+                        multiline: false
+                        dotall: false
+                    }
+                    {
+                        pattern: src[\r\n]*=[\r\n]*\'(.*?)\'
+                        caseInsensitive: true
+                        multiline: true
+                        dotall: true
+                    }
+                    {
+                        pattern: src[\r\n]*=[\r\n]*\"(.*?)\"
+                        caseInsensitive: true
+                        multiline: true
+                        dotall: true
+                    }
+                    {
+                        pattern: </script>
+                        caseInsensitive: true
+                        multiline: false
+                        dotall: false
+                    }
+                    {
+                        pattern: <script(.*?)>
+                        caseInsensitive: true
+                        multiline: true
+                        dotall: true
+                    }
+                    {
+                        pattern: eval\((.*?)\)
+                        caseInsensitive: true
+                        multiline: true
+                        dotall: true
+                    }
+                    {
+                        pattern: expression\((.*?)\)
+                        caseInsensitive: true
+                        multiline: true
+                        dotall: true
+                    }
+                    {
+                        pattern: javascript:
+                        caseInsensitive: true
+                        multiline: false
+                        dotall: false
+                    }
+                    {
+                        pattern: vbscript:
+                        caseInsensitive: true
+                        multiline: false
+                        dotall: false
+                    }
+                    {
+                        pattern: onload(.*?)=
+                        caseInsensitive: true
+                        multiline: true
+                        dotall: true
+                    }
+                ]
                 ]]>
             </item>
         </properties>
