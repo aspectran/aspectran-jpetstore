@@ -35,7 +35,7 @@
 <nav id="navigation" class="no-js">
     <div class="title-bar" data-responsive-toggle="gnb-menu" data-hide-for="large" style="display:none">
         <div class="title-bar-left">
-            <a class="logo" href="/" title="Aspectran"><img src="https://assets.aspectran.com/img/aspectran-site-logo.png" alt="Aspectran"/></a>
+            <a class="logo" href="/" title="Aspectran"></a>
         </div>
         <div class="title-bar-center">
             <a href="#top-of-page">Aspectran</a>
@@ -47,9 +47,7 @@
     <div class="top-bar" id="gnb-menu" style="display:none">
         <div class="grid-container ${page.style}">
             <div class="top-bar-logo">
-                <div class="circle">
-                    <a class="logo" href="<aspectran:url value="/"/>" title="Aspectran"><img src="https://assets.aspectran.com/img/aspectran-site-logo.png" alt="Aspectran"/></a>
-                </div>
+                <a class="logo" href="<aspectran:url value="/"/>" title="Aspectran"></a>
             </div>
             <div class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu>
