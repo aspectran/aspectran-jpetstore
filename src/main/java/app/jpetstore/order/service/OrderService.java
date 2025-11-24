@@ -50,6 +50,8 @@ public class OrderService {
 
     private final SequenceMapper.Dao sequenceDao;
 
+    private final Object sequenceLock = new Object();
+
     @Autowired
     public OrderService(ItemMapper.Dao itemDao,
                         OrderMapper.Dao orderDao,
@@ -128,14 +130,18 @@ public class OrderService {
      * @return the next id
      */
     public int getNextId(String name) {
-        Sequence sequence = sequenceDao.getSequence(new Sequence(name, -1));
-        if (sequence == null) {
-            throw new RuntimeException(
-                    "Error: A null sequence was returned from the database (could not get next " + name + " sequence)");
+        int nextId;
+        synchronized (sequenceLock) {
+            Sequence sequence = sequenceDao.getSequence(new Sequence(name, -1));
+            if (sequence == null) {
+                throw new RuntimeException(
+                        "Error: A null sequence was returned from the database (could not get next " + name + " sequence)");
+            }
+            nextId = sequence.getNextId();
+            Sequence parameterObject = new Sequence(name, nextId + 1);
+            sequenceDao.updateSequence(parameterObject);
         }
-        Sequence parameterObject = new Sequence(name, sequence.getNextId() + 1);
-        sequenceDao.updateSequence(parameterObject);
-        return sequence.getNextId();
+        return nextId;
     }
 
 }
