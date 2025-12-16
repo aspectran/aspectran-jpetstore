@@ -18,8 +18,8 @@ package app.jpetstore.common.mybatis.mapper;
 import app.jpetstore.order.domain.LineItem;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.mybatis.SqlMapperProvider;
 import com.aspectran.mybatis.SqlMapperAccess;
+import com.aspectran.mybatis.SqlMapperProvider;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

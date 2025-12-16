@@ -15,11 +15,11 @@
  */
 package app.jpetstore.monitoring.log;
 
-import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.utils.lifecycle.AbstractLifeCycle;
 import org.apache.commons.io.input.ReversedLinesFileReader;
 import org.apache.commons.io.input.Tailer;
 import org.apache.commons.io.input.TailerListener;
+import org.jspecify.annotations.NonNull;
 
 import java.io.File;
 import java.io.IOException;

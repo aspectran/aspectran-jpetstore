@@ -31,8 +31,8 @@ import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
 import com.aspectran.utils.StringUtils;
-import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.web.support.http.HttpStatusSetter;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.Map;

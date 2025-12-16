@@ -23,8 +23,8 @@ import com.aspectran.core.component.bean.annotation.Before;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.Joinpoint;
 import com.aspectran.utils.StringUtils;
-import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.web.support.http.HttpStatus;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

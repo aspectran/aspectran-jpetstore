@@ -21,7 +21,7 @@ import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.aware.ActivityContextAware;
 import com.aspectran.core.context.ActivityContext;
 import com.aspectran.utils.Assert;
-import com.aspectran.utils.annotation.jsr305.NonNull;
+import org.jspecify.annotations.NonNull;
 
 @Component
 @Bean("userSessionManager")

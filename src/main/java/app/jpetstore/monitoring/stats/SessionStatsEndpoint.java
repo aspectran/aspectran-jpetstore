@@ -22,11 +22,11 @@ import com.aspectran.core.component.session.ManagedSession;
 import com.aspectran.core.component.session.SessionManager;
 import com.aspectran.core.component.session.SessionStatistics;
 import com.aspectran.undertow.server.TowServer;
-import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.web.websocket.jsr356.AspectranConfigurator;
 import com.aspectran.web.websocket.jsr356.SimplifiedEndpoint;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
+import org.jspecify.annotations.NonNull;
 
 import java.time.Duration;
 import java.time.Instant;

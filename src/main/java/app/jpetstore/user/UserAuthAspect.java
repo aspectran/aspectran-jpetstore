@@ -24,7 +24,7 @@ import com.aspectran.core.component.bean.annotation.Before;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.ExceptionThrown;
 import com.aspectran.core.component.bean.annotation.Joinpoint;
-import com.aspectran.utils.annotation.jsr305.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Map;
 

@@ -17,11 +17,11 @@ package app.jpetstore.monitoring.log;
 
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.utils.StringUtils;
-import com.aspectran.utils.annotation.jsr305.NonNull;
 import com.aspectran.web.websocket.jsr356.AspectranConfigurator;
 import com.aspectran.web.websocket.jsr356.SimplifiedEndpoint;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
+import org.jspecify.annotations.NonNull;
 
 @Component
 @ServerEndpoint(

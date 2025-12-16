@@ -16,7 +16,7 @@
 package app.jpetstore.order.domain;
 
 import app.jpetstore.cart.domain.CartItem;
-import com.aspectran.utils.annotation.jsr305.NonNull;
+import org.jspecify.annotations.NonNull;
 
 import java.io.Serial;
 import java.io.Serializable;
