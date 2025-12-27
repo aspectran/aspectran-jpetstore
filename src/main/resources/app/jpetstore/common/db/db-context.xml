@@ -11,16 +11,14 @@
         <description>
             FactoryBean that creates an MyBatis SqlSessionFactory using default MyBatis Configuration.
         </description>
-        <properties>
-            <item name="configLocation" value="classpath:app/jpetstore/common/mybatis/mybatis-config.xml"/>
-            <item name="environmentId" value="default"/>
-            <item name="variables" type="properties">
-                <entry name="driver">%{classpath:app/jpetstore/common/db/h2/jpetstore.db.properties^driver}</entry>
-                <entry name="url">%{classpath:app/jpetstore/common/db/h2/jpetstore.db.properties^url}</entry>
-                <entry name="username">%{classpath:app/jpetstore/common/db/h2/jpetstore.db.properties^username}</entry>
-                <entry name="password">%{classpath:app/jpetstore/common/db/h2/jpetstore.db.properties^password}</entry>
-            </item>
-        </properties>
+        <property name="configLocation" value="classpath:app/jpetstore/common/mybatis/mybatis-config.xml"/>
+        <property name="environmentId" value="default"/>
+        <property name="variables" type="properties">
+            <entry name="driver">%{classpath:app/jpetstore/common/db/h2/jpetstore.db.properties^driver}</entry>
+            <entry name="url">%{classpath:app/jpetstore/common/db/h2/jpetstore.db.properties^url}</entry>
+            <entry name="username">%{classpath:app/jpetstore/common/db/h2/jpetstore.db.properties^username}</entry>
+            <entry name="password">%{classpath:app/jpetstore/common/db/h2/jpetstore.db.properties^password}</entry>
+        </property>
     </bean>
 
 </aspectran>

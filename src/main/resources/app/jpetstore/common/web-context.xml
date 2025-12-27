@@ -12,21 +12,17 @@
         <description>
             Register a JSP Template View Dispatcher.
         </description>
-        <properties>
-            <item name="contentType">text/html</item>
-            <item name="template">/WEB-INF/jsp/templates/default.jsp</item>
-            <item name="includePageKey">INCLUDE_PAGE</item>
-        </properties>
+        <property name="contentType">text/html</property>
+        <property name="template">/WEB-INF/jsp/templates/default.jsp</property>
+        <property name="includePageKey">INCLUDE_PAGE</property>
     </bean>
 
     <bean id="jspView" class="com.aspectran.web.support.view.JspViewDispatcher">
         <description>
             Register a JSP View Dispatcher.
         </description>
-        <properties>
-            <item name="prefix">/WEB-INF/jsp/</item>
-            <item name="suffix">.jsp</item>
-        </properties>
+        <property name="prefix">/WEB-INF/jsp/</property>
+        <property name="suffix">.jsp</property>
     </bean>
 
     <aspect id="webTransletSettings">

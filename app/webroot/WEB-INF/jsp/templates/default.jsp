@@ -35,7 +35,7 @@
 <nav id="navigation" class="no-js">
     <div class="title-bar" data-responsive-toggle="gnb-menu" data-hide-for="large" style="display:none">
         <div class="title-bar-left">
-            <a class="logo" href="/" title="Aspectran"></a>
+            <a class="logo" href="/" title="Aspectran"><img src="https://assets.aspectran.com/img/aspectran-site-logo.png" alt="Aspectran"/></a>
         </div>
         <div class="title-bar-center">
             <a href="#top-of-page">Aspectran</a>
@@ -47,7 +47,9 @@
     <div class="top-bar" id="gnb-menu" style="display:none">
         <div class="grid-container ${page.style}">
             <div class="top-bar-logo">
-                <a class="logo" href="<aspectran:url value="/"/>" title="Aspectran"></a>
+                <div class="circle">
+                    <a class="logo" href="<aspectran:url value="/"/>" title="Aspectran"><img src="https://assets.aspectran.com/img/aspectran-site-logo.png" alt="Aspectran"/></a>
+                </div>
             </div>
             <div class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu>
@@ -61,6 +63,7 @@
                         <a href="https://public.aspectran.com/" title="Sample applications built on Aspectran">More Sample Apps</a>
                         <ul class="submenu menu vertical" data-submenu>
                             <li><a href="https://demo.aspectran.com">Aspectran Demo</a></li>
+                            <li><a href="https://petclinic.aspectran.com">PetClinic Demo</a></li>
                         </ul>
                     </li>
                 </ul>

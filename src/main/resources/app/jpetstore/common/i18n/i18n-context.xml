@@ -7,37 +7,31 @@
         <description>
             Defines a bean for multilingual processing.
         </description>
-        <properties>
-            <item name="basenames" type="array">
-                <value>app.jpetstore.common.i18n.messages</value>
-                <value>app.jpetstore.common.i18n.ValidationMessages</value>
-            </item>
-        </properties>
+        <property name="basenames" type="array">
+            <value>app.jpetstore.common.i18n.messages</value>
+            <value>app.jpetstore.common.i18n.ValidationMessages</value>
+        </property>
     </bean>
 
     <bean id="localeResolver" class="com.aspectran.web.support.i18n.locale.CookieLocaleResolver">
         <description>
             Use the cookie to determine the locale.
         </description>
-        <properties>
-            <item name="supportedLocales" type="array">
-                <value>en</value>
-                <value>de</value>
-                <value>fr</value>
-                <value>ja</value>
-                <value>ko</value>
-            </item>
-            <item name="defaultLocale" value="en"/>
-        </properties>
+        <property name="supportedLocales" type="array">
+            <value>en</value>
+            <value>de</value>
+            <value>fr</value>
+            <value>ja</value>
+            <value>ko</value>
+        </property>
+        <property name="defaultLocale" value="en"/>
     </bean>
 
     <bean id="localeChangeInterceptor" class="com.aspectran.core.support.i18n.locale.LocaleChangeInterceptor">
         <description>
             Defines an interceptor bean for changing the locale.
         </description>
-        <properties>
-            <item name="ignoreInvalidLocale" valueType="boolean" value="true"/>
-        </properties>
+        <property name="ignoreInvalidLocale" valueType="boolean" value="true"/>
     </bean>
 
 </aspectran>

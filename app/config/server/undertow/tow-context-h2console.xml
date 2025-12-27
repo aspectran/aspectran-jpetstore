@@ -7,26 +7,21 @@
         Servlet context configuration for H2 Console.
     </description>
 
-    <bean id="tow.context.h2console.servletContext" class="com.aspectran.undertow.server.servlet.TowServletContext"
+    <bean id="tow.context.h2console.servletContext"
+          class="com.aspectran.undertow.server.servlet.TowServletContext"
           scope="prototype">
-        <properties>
-            <item name="deploymentName">h2console</item>
-            <item name="contextPath">/h2-console</item>
-            <item name="servlets" type="array">
-                <bean class="com.aspectran.undertow.server.servlet.TowServlet">
-                    <arguments>
-                        <item>H2Console</item>
-                        <item>org.h2.server.web.JakartaWebServlet</item>
-                    </arguments>
-                    <properties>
-                        <item name="mappings" type="array">
-                            <value>/*</value>
-                        </item>
-                        <item name="loadOnStartup" valueType="int">1</item>
-                    </properties>
-                </bean>
-            </item>
-        </properties>
+        <property name="deploymentName">h2console</property>
+        <property name="contextPath">/h2-console</property>
+        <property name="servlets" type="array">
+            <bean class="com.aspectran.undertow.server.servlet.TowServlet">
+                <argument>H2Console</argument>
+                <argument>org.h2.server.web.JakartaWebServlet</argument>
+                <property name="mappings" type="array">
+                    <value>/*</value>
+                </property>
+                <property name="loadOnStartup" valueType="int">1</property>
+            </bean>
+        </property>
     </bean>
 
 </aspectran>

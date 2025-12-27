@@ -9,37 +9,33 @@
 
     <!-- Frequently used code bundles-->
     <environment>
-        <properties>
-            <item name="staticCodes" type="map">
-                <entry name="languages">%{languages}</entry>
-                <entry name="categories">%{categories}</entry>
-                <entry name="creditCardTypes">%{creditCardTypes}</entry>
-            </item>
-        </properties>
+        <property name="staticCodes" type="map">
+            <entry name="languages">%{languages}</entry>
+            <entry name="categories">%{categories}</entry>
+            <entry name="creditCardTypes">%{creditCardTypes}</entry>
+        </property>
     </environment>
 
     <environment>
-        <properties>
-            <item name="languages" type="map">
-                <entry name="english">English</entry>
-                <entry name="german">German</entry>
-                <entry name="french">French</entry>
-                <entry name="korean">Korean</entry>
-                <entry name="japanese">Japanese</entry>
-            </item>
-            <item name="categories" type="map">
-                <entry name="FISH">Fish</entry>
-                <entry name="DOGS">Dogs</entry>
-                <entry name="REPTILES">Reptiles</entry>
-                <entry name="CATS">Cats</entry>
-                <entry name="BIRDS">Birds</entry>
-            </item>
-            <item name="creditCardTypes" type="map">
-                <entry name="Visa">Visa</entry>
-                <entry name="MasterCard">MasterCard</entry>
-                <entry name="American Express">American Express</entry>
-            </item>
-        </properties>
+        <property name="languages" type="map">
+            <entry name="english">English</entry>
+            <entry name="german">German</entry>
+            <entry name="french">French</entry>
+            <entry name="korean">Korean</entry>
+            <entry name="japanese">Japanese</entry>
+        </property>
+        <property name="categories" type="map">
+            <entry name="FISH">Fish</entry>
+            <entry name="DOGS">Dogs</entry>
+            <entry name="REPTILES">Reptiles</entry>
+            <entry name="CATS">Cats</entry>
+            <entry name="BIRDS">Birds</entry>
+        </property>
+        <property name="creditCardTypes" type="map">
+            <entry name="Visa">Visa</entry>
+            <entry name="MasterCard">MasterCard</entry>
+            <entry name="American Express">American Express</entry>
+        </property>
     </environment>
 
 </aspectran>

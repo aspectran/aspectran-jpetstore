@@ -17,17 +17,13 @@
     </translet>
 
     <bean id="logTailerManager" class="app.jpetstore.monitoring.log.LogTailerManager">
-        <arguments>
-            <item>#{class:app.jpetstore.monitoring.log.LogtailEndpoint}</item>
-            <item type="array">
-                <bean class="app.jpetstore.monitoring.log.LogTailer">
-                    <arguments>
-                        <item>app-log</item>
-                        <item>#{basePath}/logs/app.log</item>
-                    </arguments>
-                </bean>
-            </item>
-        </arguments>
+        <argument>#{class:app.jpetstore.monitoring.log.LogtailEndpoint}</argument>
+        <argument type="array">
+            <bean class="app.jpetstore.monitoring.log.LogTailer">
+                <argument>app-log</argument>
+                <argument>#{basePath}/logs/app.log</argument>
+            </bean>
+        </argument>
     </bean>
 
 </aspectran>
