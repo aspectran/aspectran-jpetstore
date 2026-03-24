@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis.mapper;
+package app.jpetstore.common.db.mapper;
 
-import app.jpetstore.catalog.domain.Category;
+import app.jpetstore.catalog.domain.Product;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlMapperAccess;
@@ -25,33 +25,39 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * The Interface CategoryMapper.
+ * The Interface ProductMapper.
  *
  * @author Juho Jeong
  */
 @Mapper
-public interface CategoryMapper {
+public interface ProductMapper {
 
-    List<Category> getCategoryList();
+    List<Product> getProductListByCategory(String categoryId);
 
-    Category getCategory(String categoryId);
+    Product getProduct(String productId);
+
+    List<Product> searchProductList(String keywords);
 
     @Component
-    class Dao extends SqlMapperAccess<CategoryMapper> implements CategoryMapper {
+    class Dao extends SqlMapperAccess<ProductMapper> implements ProductMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, CategoryMapper.class);
+            super(sqlMapperProvider, ProductMapper.class);
+        }
+        @Override
+        public List<Product> getProductListByCategory(String categoryId) {
+            return simple().getProductListByCategory(categoryId);
         }
 
         @Override
-        public List<Category> getCategoryList() {
-            return simple().getCategoryList();
+        public Product getProduct(String productId) {
+            return simple().getProduct(productId);
         }
 
         @Override
-        public Category getCategory(String categoryId) {
-            return simple().getCategory(categoryId);
+        public List<Product> searchProductList(String keywords) {
+            return simple().searchProductList(keywords);
         }
 
     }

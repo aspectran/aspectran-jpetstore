@@ -13,43 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis.mapper;
+package app.jpetstore.common.db.mapper;
 
-import app.jpetstore.order.domain.Sequence;
+import app.jpetstore.catalog.domain.Category;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlMapperAccess;
 import com.aspectran.mybatis.SqlMapperProvider;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
- * The Interface SequenceMapper.
+ * The Interface CategoryMapper.
  *
  * @author Juho Jeong
  */
 @Mapper
-public interface SequenceMapper {
+public interface CategoryMapper {
 
-    Sequence getSequence(Sequence sequence);
+    List<Category> getCategoryList();
 
-    void updateSequence(Sequence sequence);
+    Category getCategory(String categoryId);
 
     @Component
-    class Dao extends SqlMapperAccess<SequenceMapper> implements SequenceMapper {
+    class Dao extends SqlMapperAccess<CategoryMapper> implements CategoryMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, SequenceMapper.class);
+            super(sqlMapperProvider, CategoryMapper.class);
         }
 
         @Override
-        public Sequence getSequence(Sequence sequence) {
-            return simple().getSequence(sequence);
+        public List<Category> getCategoryList() {
+            return simple().getCategoryList();
         }
 
         @Override
-        public void updateSequence(Sequence sequence) {
-            simple().updateSequence(sequence);
+        public Category getCategory(String categoryId) {
+            return simple().getCategory(categoryId);
         }
 
     }

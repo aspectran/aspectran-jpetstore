@@ -28,7 +28,7 @@
     </environments>
 
     <mappers>
-        <package name="app/jpetstore/common/mybatis/mapper"/>
+        <package name="app/jpetstore/common/db/mapper"/>
     </mappers>
 
 </configuration>

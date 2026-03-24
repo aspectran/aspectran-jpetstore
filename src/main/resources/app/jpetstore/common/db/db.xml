@@ -11,7 +11,7 @@
         <description>
             FactoryBean that creates an MyBatis SqlSessionFactory using default MyBatis Configuration.
         </description>
-        <property name="configLocation" value="classpath:app/jpetstore/common/mybatis/mybatis-config.xml"/>
+        <property name="configLocation" value="classpath:app/jpetstore/common/db/mybatis-config.xml"/>
         <property name="environmentId" value="default"/>
         <property name="variables" type="properties">
             <entry name="driver">%{classpath:app/jpetstore/common/db/h2/jpetstore.db.properties^driver}</entry>

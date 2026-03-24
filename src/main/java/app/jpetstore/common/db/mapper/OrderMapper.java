@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis.mapper;
+package app.jpetstore.common.db.mapper;
 
 import app.jpetstore.common.pagination.PageInfo;
 import app.jpetstore.order.domain.Order;

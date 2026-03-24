@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis.mapper;
+package app.jpetstore.common.db.mapper;
 
-import app.jpetstore.catalog.domain.Product;
+import app.jpetstore.order.domain.LineItem;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.mybatis.SqlMapperAccess;
@@ -25,39 +25,33 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * The Interface ProductMapper.
+ * The Interface LineItemMapper.
  *
  * @author Juho Jeong
  */
 @Mapper
-public interface ProductMapper {
+public interface LineItemMapper {
 
-    List<Product> getProductListByCategory(String categoryId);
+    List<LineItem> getLineItemsByOrderId(int orderId);
 
-    Product getProduct(String productId);
-
-    List<Product> searchProductList(String keywords);
+    void insertLineItem(LineItem lineItem);
 
     @Component
-    class Dao extends SqlMapperAccess<ProductMapper> implements ProductMapper {
+    class Dao extends SqlMapperAccess<LineItemMapper> implements LineItemMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, ProductMapper.class);
-        }
-        @Override
-        public List<Product> getProductListByCategory(String categoryId) {
-            return simple().getProductListByCategory(categoryId);
+            super(sqlMapperProvider, LineItemMapper.class);
         }
 
         @Override
-        public Product getProduct(String productId) {
-            return simple().getProduct(productId);
+        public List<LineItem> getLineItemsByOrderId(int orderId) {
+            return simple().getLineItemsByOrderId(orderId);
         }
 
         @Override
-        public List<Product> searchProductList(String keywords) {
-            return simple().searchProductList(keywords);
+        public void insertLineItem(LineItem lineItem) {
+            simple().insertLineItem(lineItem);
         }
 
     }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.jpetstore.common.mybatis;
+package app.jpetstore.common.db.tx;
 
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
@@ -32,9 +32,10 @@ public class DefaultSqlMapperProvider implements SqlMapperProvider {
     private final SqlSession reuseSqlSession;
 
     @Autowired
-    public DefaultSqlMapperProvider(SimpleSqlSession simpleSqlSession,
-                                    BatchSqlSession batchSqlSession,
-                                    ReuseSqlSession reuseSqlSession) {
+    public DefaultSqlMapperProvider(
+            SimpleSqlSession simpleSqlSession,
+            BatchSqlSession batchSqlSession,
+            ReuseSqlSession reuseSqlSession) {
         this.simpleSqlSession = simpleSqlSession;
         this.batchSqlSession = batchSqlSession;
         this.reuseSqlSession = reuseSqlSession;
