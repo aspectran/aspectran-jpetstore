@@ -27,6 +27,7 @@ public class BatchSqlSession extends SqlSessionAgent {
     public BatchSqlSession() {
         super("batchTxAspect");
         setExecutorType(ExecutorType.BATCH);
+        setSqlSessionFactoryBeanId("sqlSessionFactory");
     }
 
 }

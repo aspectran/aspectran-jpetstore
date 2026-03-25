@@ -25,6 +25,7 @@ public class SimpleSqlSession extends SqlSessionAgent {
 
     public SimpleSqlSession() {
         super("simpleTxAspect");
+        setSqlSessionFactoryBeanId("sqlSessionFactory");
     }
 
 }

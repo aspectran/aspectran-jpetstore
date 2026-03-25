@@ -27,6 +27,7 @@ public class ReuseSqlSession extends SqlSessionAgent {
     public ReuseSqlSession() {
         super("reuseTxAspect");
         setExecutorType(ExecutorType.REUSE);
+        setSqlSessionFactoryBeanId("sqlSessionFactory");
     }
 
 }
