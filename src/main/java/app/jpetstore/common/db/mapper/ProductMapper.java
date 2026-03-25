@@ -43,21 +43,21 @@ public interface ProductMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, ProductMapper.class);
+            super(sqlMapperProvider);
         }
         @Override
         public List<Product> getProductListByCategory(String categoryId) {
-            return simple().getProductListByCategory(categoryId);
+            return mapper().getProductListByCategory(categoryId);
         }
 
         @Override
         public Product getProduct(String productId) {
-            return simple().getProduct(productId);
+            return mapper().getProduct(productId);
         }
 
         @Override
         public List<Product> searchProductList(String keywords) {
-            return simple().searchProductList(keywords);
+            return mapper().searchProductList(keywords);
         }
 
     }

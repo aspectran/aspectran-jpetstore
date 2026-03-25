@@ -41,17 +41,17 @@ public interface CategoryMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, CategoryMapper.class);
+            super(sqlMapperProvider);
         }
 
         @Override
         public List<Category> getCategoryList() {
-            return simple().getCategoryList();
+            return mapper().getCategoryList();
         }
 
         @Override
         public Category getCategory(String categoryId) {
-            return simple().getCategory(categoryId);
+            return mapper().getCategory(categoryId);
         }
 
     }

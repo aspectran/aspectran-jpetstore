@@ -46,27 +46,27 @@ public interface ItemMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, ItemMapper.class);
+            super(sqlMapperProvider);
         }
 
         @Override
         public void updateInventoryQuantity(Map<String, Object> params) {
-            simple().updateInventoryQuantity(params);
+            mapper().updateInventoryQuantity(params);
         }
 
         @Override
         public int getInventoryQuantity(String itemId) {
-            return simple().getInventoryQuantity(itemId);
+            return mapper().getInventoryQuantity(itemId);
         }
 
         @Override
         public List<Item> getItemListByProduct(String productId) {
-            return simple().getItemListByProduct(productId);
+            return mapper().getItemListByProduct(productId);
         }
 
         @Override
         public Item getItem(String itemId) {
-            return simple().getItem(itemId);
+            return mapper().getItem(itemId);
         }
 
     }

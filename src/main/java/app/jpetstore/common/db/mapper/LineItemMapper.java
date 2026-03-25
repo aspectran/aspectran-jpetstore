@@ -41,17 +41,17 @@ public interface LineItemMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, LineItemMapper.class);
+            super(sqlMapperProvider);
         }
 
         @Override
         public List<LineItem> getLineItemsByOrderId(int orderId) {
-            return simple().getLineItemsByOrderId(orderId);
+            return mapper().getLineItemsByOrderId(orderId);
         }
 
         @Override
         public void insertLineItem(LineItem lineItem) {
-            simple().insertLineItem(lineItem);
+            mapper().insertLineItem(lineItem);
         }
 
     }

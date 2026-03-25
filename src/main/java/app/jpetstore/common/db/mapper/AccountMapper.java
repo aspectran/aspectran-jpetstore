@@ -51,47 +51,47 @@ public interface AccountMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, AccountMapper.class);
+            super(sqlMapperProvider);
         }
 
         @Override
         public Account getAccountByUsername(String username) {
-            return simple().getAccountByUsername(username);
+            return mapper().getAccountByUsername(username);
         }
 
         @Override
         public Account getAccountByUsernameAndPassword(String username, String password) {
-            return simple().getAccountByUsernameAndPassword(username, password);
+            return mapper().getAccountByUsernameAndPassword(username, password);
         }
 
         @Override
         public void insertAccount(Account account) {
-            simple().insertAccount(account);
+            mapper().insertAccount(account);
         }
 
         @Override
         public void insertProfile(Account account) {
-            simple().insertProfile(account);
+            mapper().insertProfile(account);
         }
 
         @Override
         public void insertSignon(Account account) {
-            simple().insertSignon(account);
+            mapper().insertSignon(account);
         }
 
         @Override
         public void updateAccount(Account account) {
-            simple().updateAccount(account);
+            mapper().updateAccount(account);
         }
 
         @Override
         public void updateProfile(Account account) {
-            simple().updateProfile(account);
+            mapper().updateProfile(account);
         }
 
         @Override
         public void updateSignon(Account account) {
-            simple().updateSignon(account);
+            mapper().updateSignon(account);
         }
 
     }

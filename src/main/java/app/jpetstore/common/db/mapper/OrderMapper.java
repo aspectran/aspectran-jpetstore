@@ -52,42 +52,42 @@ public interface OrderMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, OrderMapper.class);
+            super(sqlMapperProvider);
         }
 
         @Override
         public List<Order> getOrdersByUsername(PageInfo pageInfo) {
-            return simple().getOrdersByUsername(pageInfo);
+            return mapper().getOrdersByUsername(pageInfo);
         }
 
         @Override
         public int getTotalOfOrdersByUsername(PageInfo pageInfo) {
-            return simple().getTotalOfOrdersByUsername(pageInfo);
+            return mapper().getTotalOfOrdersByUsername(pageInfo);
         }
 
         @Override
         public Order getOrder(int orderId) {
-            return simple().getOrder(orderId);
+            return mapper().getOrder(orderId);
         }
 
         @Override
         public void insertOrder(Order order) {
-            simple().insertOrder(order);
+            mapper().insertOrder(order);
         }
 
         @Override
         public void insertOrderStatus(Order order) {
-            simple().insertOrderStatus(order);
+            mapper().insertOrderStatus(order);
         }
 
         @Override
         public void deleteOrder(int orderId) {
-            simple().deleteOrder(orderId);
+            mapper().deleteOrder(orderId);
         }
 
         @Override
         public void deleteOrderStatus(int orderId) {
-            simple().deleteOrderStatus(orderId);
+            mapper().deleteOrderStatus(orderId);
         }
 
     }

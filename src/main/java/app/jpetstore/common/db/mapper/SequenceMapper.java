@@ -39,17 +39,17 @@ public interface SequenceMapper {
 
         @Autowired
         public Dao(SqlMapperProvider sqlMapperProvider) {
-            super(sqlMapperProvider, SequenceMapper.class);
+            super(sqlMapperProvider);
         }
 
         @Override
         public Sequence getSequence(Sequence sequence) {
-            return simple().getSequence(sequence);
+            return mapper().getSequence(sequence);
         }
 
         @Override
         public void updateSequence(Sequence sequence) {
-            simple().updateSequence(sequence);
+            mapper().updateSequence(sequence);
         }
 
     }
