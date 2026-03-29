@@ -33,61 +33,61 @@
                 <![CDATA[
                 [
                     {
-                        pattern: <script>(.*?)</script>
+                        pattern: "<script>(.*?)</script>"
                         caseInsensitive: true
                         multiline: false
                         dotall: false
                     }
                     {
-                        pattern: src[\r\n]*=[\r\n]*\'(.*?)\'
+                        pattern: "src[\r\n]*=[\r\n]*\'(.*?)\'"
                         caseInsensitive: true
                         multiline: true
                         dotall: true
                     }
                     {
-                        pattern: src[\r\n]*=[\r\n]*\"(.*?)\"
+                        pattern: "src[\r\n]*=[\r\n]*\"(.*?)\""
                         caseInsensitive: true
                         multiline: true
                         dotall: true
                     }
                     {
-                        pattern: </script>
+                        pattern: "</script>"
                         caseInsensitive: true
                         multiline: false
                         dotall: false
                     }
                     {
-                        pattern: <script(.*?)>
+                        pattern: "<script(.*?)>"
                         caseInsensitive: true
                         multiline: true
                         dotall: true
                     }
                     {
-                        pattern: eval\((.*?)\)
+                        pattern: "eval\((.*?)\)"
                         caseInsensitive: true
                         multiline: true
                         dotall: true
                     }
                     {
-                        pattern: expression\((.*?)\)
+                        pattern: "expression\((.*?)\)"
                         caseInsensitive: true
                         multiline: true
                         dotall: true
                     }
                     {
-                        pattern: javascript:
+                        pattern: "javascript:"
                         caseInsensitive: true
                         multiline: false
                         dotall: false
                     }
                     {
-                        pattern: vbscript:
+                        pattern: "vbscript:"
                         caseInsensitive: true
                         multiline: false
                         dotall: false
                     }
                     {
-                        pattern: onload(.*?)=
+                        pattern: "onload(.*?)="
                         caseInsensitive: true
                         multiline: true
                         dotall: true
