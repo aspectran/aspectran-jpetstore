@@ -33,8 +33,8 @@ import com.aspectran.core.component.bean.annotation.ParamItem;
 import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
-import com.aspectran.core.component.bean.annotation.Required;
 import com.aspectran.web.support.http.HttpStatusSetter;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -186,7 +186,7 @@ public class OrderActivity {
      */
     @Request("/order/deleteOrder/${orderId}")
     @Redirect("/order/listOrders")
-    public void deleteOrder(@Required Integer orderId) {
+    public void deleteOrder(@NonNull Integer orderId) {
         orderService.deleteOrder(orderId);
     }
 

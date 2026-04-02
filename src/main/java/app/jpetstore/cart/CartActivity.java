@@ -27,7 +27,7 @@ import com.aspectran.core.component.bean.annotation.Dispatch;
 import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
-import com.aspectran.core.component.bean.annotation.Required;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Iterator;
 
@@ -53,7 +53,7 @@ public class CartActivity {
     @Request("/cart/addItemToCart")
     @Redirect("/cart/viewCart")
     @Action("cart")
-    public Cart addItemToCart(@Required String itemId) {
+    public Cart addItemToCart(@NonNull String itemId) {
         cartService.addItemToCart(itemId);
         return cartService.getCart();
     }
@@ -64,7 +64,7 @@ public class CartActivity {
     @RequestToPost("/cart/removeItemFromCart")
     @Dispatch(name = "cart/Cart", dispatcher = "jspView")
     @Action("cart")
-    public Cart removeItemFromCart(@Required String cartItem) {
+    public Cart removeItemFromCart(@NonNull String cartItem) {
         cartService.removeItemFromCart(cartItem);
         return cartService.getCart();
     }
