@@ -21,7 +21,7 @@ import com.aspectran.utils.ResourceUtils;
 
 import java.io.File;
 
-import static com.aspectran.core.context.config.AspectranConfig.BASE_PATH_PROPERTY_NAME;
+import static com.aspectran.core.context.config.AspectranConfig.BASE_PATH_PROPERTY;
 
 /**
  * Application server for Aspectran Demo.
@@ -30,10 +30,10 @@ public class JPetStoreDaemon {
 
     public static void main(String[] args) {
         try {
-            System.setProperty(EnvironmentProfiles.ACTIVE_PROFILES_PROPERTY_NAME, "daemon");
+            System.setProperty(EnvironmentProfiles.ACTIVE_PROFILES_PROPERTY, "daemon");
             File current = ResourceUtils.getResourceAsFile(".");
             File root = new File(current, "../../app");
-            System.setProperty(BASE_PATH_PROPERTY_NAME, root.getCanonicalPath()); // for logback
+            System.setProperty(BASE_PATH_PROPERTY, root.getCanonicalPath()); // for logback
             String[] args2 = { root.getCanonicalPath(), "config/aspectran-config.apon" };
             DefaultDaemon.main(args2);
         } catch (Exception e) {
