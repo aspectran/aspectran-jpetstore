@@ -12,7 +12,7 @@
     <description style="apon">
         |
         |{{CYAN}}Undertow Server is active and listening at:{{reset}}
-        |   {{81}}http://localhost:8081/{{reset}}
+        |   {{81}}http://localhost:%{system:tow.server.listener.http.port:8081}/{{reset}}
         |
         |Use the '{{GREEN}}undertow{{reset}}' command to manage server operations.
         |
