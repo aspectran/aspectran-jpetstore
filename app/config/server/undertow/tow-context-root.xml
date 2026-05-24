@@ -21,7 +21,7 @@
                 <property name="base">/webroot</property>
             </bean>
         </property>
-        <property name="scratchDir">/work/_webroot</property>
+        <property name="scratchDir">%{system:aspectran.workPath:/work}/_webroot</property>
         <property name="sessionManager">#{tow.context.root.sessionManager}</property>
         <property name="servletSessionConfig">
             <bean class="io.undertow.servlet.api.ServletSessionConfig">
@@ -78,7 +78,7 @@
         </property>
         <property name="sessionStore">
             <bean class="com.aspectran.core.component.session.FileSessionStoreFactoryBean">
-                <property name="storeDir">/work/_sessions/%{tow.context.root.name}</property>
+                <property name="storeDir">%{system:aspectran.workPath:/work}/_sessions/%{tow.context.root.name}</property>
                 <property name="gracePeriodSecs" valueType="int">10</property>
             </bean>
         </property>
