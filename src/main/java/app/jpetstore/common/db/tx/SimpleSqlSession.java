@@ -17,11 +17,11 @@ package app.jpetstore.common.db.tx;
 
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
-import com.aspectran.mybatis.SqlSessionAgent;
+import com.aspectran.mybatis.DefaultSqlSessionAgent;
 
 @Component
 @Bean(id = "simpleSqlSession", lazyDestroy = true)
-public class SimpleSqlSession extends SqlSessionAgent {
+public class SimpleSqlSession extends DefaultSqlSessionAgent {
 
     public SimpleSqlSession() {
         super("simpleTxAspect");
