@@ -30,7 +30,6 @@ public class XSSPreventionFilter {
 
     /**
      * It is recommended to canonicalize using the ESAPI library to avoid encoded attacks.
-     *
      * @param canonicalize true if enabling canonicalization of the input using the
      *                     ESAPI library, false otherwise
      */
@@ -126,7 +125,7 @@ public class XSSPreventionFilter {
             }
 
             // Avoid null characters
-            value = value.replaceAll("\0", "");
+            value = value.replace("\0", "");
 
             // Remove all sections that match a pattern
             if (patterns != null) {

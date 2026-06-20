@@ -46,7 +46,6 @@ public class LineItem implements Serializable {
 
     /**
      * Instantiates a new line item.
-     *
      * @param lineNumber the line number
      * @param cartItem the cart item
      */
