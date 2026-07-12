@@ -28,7 +28,7 @@
     </environments>
 
     <mappers>
-        <package name="app/jpetstore/common/db/mapper"/>
+        <package name="com/aspectran/aspectow/demo/jpetstore/common/db/mapper"/>
     </mappers>
 
 </configuration>
