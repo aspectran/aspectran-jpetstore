@@ -9,7 +9,7 @@
 
     <bean id="sqlSessionFactory" class="com.aspectran.mybatis.SqlSessionFactoryBean" lazyDestroy="true">
         <description>
-            FactoryBean that creates an MyBatis SqlSessionFactory using default MyBatis Configuration.
+            FactoryBean that creates a MyBatis SqlSessionFactory using default MyBatis Configuration.
         </description>
         <property name="configLocation" value="classpath:app/jpetstore/common/db/mybatis-config.xml"/>
         <property name="environmentId" value="default"/>
