@@ -21,12 +21,9 @@ if %errorlevel% neq 0 (
 
 rem --- Git Clone/Pull ---
 if not exist "%REPO_DIR%" (
-  if not exist "%BUILD_DIR%" mkdir "%BUILD_DIR%"
-  cd /d "%BUILD_DIR%"
-  git clone "%REPO_URL%" "%APP_NAME%"
+  git clone "%REPO_URL%" "%REPO_DIR%"
 ) else (
-  cd /d "%REPO_DIR%"
-  git pull
+  git -C "%REPO_DIR%" pull
 )
 if errorlevel 1 (
     echo Git operation failed.
@@ -54,9 +51,11 @@ if exist "%REPO_DIR%\app\webapps" if not exist "%DEPLOY_DIR%\webapps" mkdir "%DE
 
 rem --- Deploy bin and sample commands ---
 echo Deploying bin to %DEPLOY_DIR%\bin ...
-if exist "%DEPLOY_DIR%\bin" rmdir /s /q "%DEPLOY_DIR%\bin"
-mkdir "%DEPLOY_DIR%\bin"
-if exist "%REPO_DIR%\app\bin" xcopy /s /e /i /q /y "%REPO_DIR%\app\bin\*" "%DEPLOY_DIR%\bin"
+if exist "%REPO_DIR%\app\bin" (
+    if exist "%DEPLOY_DIR%\bin" rmdir /s /q "%DEPLOY_DIR%\bin"
+    mkdir "%DEPLOY_DIR%\bin"
+    xcopy /s /e /i /q /y "%REPO_DIR%\app\bin\*" "%DEPLOY_DIR%\bin"
+)
 
 if exist "%REPO_DIR%\app\cmd\sample" (
     if exist "%DEPLOY_DIR%\cmd\sample" rmdir /s /q "%DEPLOY_DIR%\cmd\sample"
@@ -66,15 +65,18 @@ if exist "%REPO_DIR%\app\cmd\sample" (
 
 rem --- Copy operational scripts ---
 copy /y "%SETUP_DIR%setenv.bat" "%BASE_DIR%"
-xcopy /s /e /i /q /y "%REPO_DIR%\setup\scripts\windows\*.bat" "%BASE_DIR%"
+if exist "%REPO_DIR%\setup\scripts\windows\*.bat" (
+    xcopy /s /e /i /q /y "%REPO_DIR%\setup\scripts\windows\*.bat" "%BASE_DIR%"
+)
 
 echo.
 echo --------------------------------------------------------------------------
 echo Your application initial setup is complete in "%BASE_DIR%".
 echo.
 echo To build and deploy the application, run one of the following scripts:
-echo   - 5-pull_build_deploy.bat (for full update)
+echo   - 5-pull_build_deploy.bat (recommended for full update)
 echo   - 8-pull_deploy_webapps_only.bat (for webapps update only)
+echo   (Scripts 1 through 9 are available in "%BASE_DIR%" for specific deployment needs)
 echo.
 echo After deployment, you can run the application interactively:
 echo   %DEPLOY_DIR%\bin\shell.bat
