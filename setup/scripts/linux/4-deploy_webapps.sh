@@ -7,6 +7,12 @@ set -e
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 . "$SCRIPT_DIR/app.conf"
 
+if [ "$DEV_MODE" = "true" ]; then
+  echo "Development environment detected."
+  echo "Skipping webapps deployment to preserve version-controlled files in $DEPLOY_DIR/webapps."
+  exit 0
+fi
+
 echo "Deploying web applications to $DEPLOY_DIR/webapps ..."
 if [ -d "$REPO_DIR/app/webapps" ]; then
   [ ! -d "$DEPLOY_DIR/webapps" ] && mkdir -p "$DEPLOY_DIR/webapps"

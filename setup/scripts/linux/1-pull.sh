@@ -10,6 +10,13 @@ command -v git >/dev/null || { echo "Error: git is not installed. Please install
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 . "$SCRIPT_DIR/app.conf"
 
+if [ "$DEV_MODE" = "true" ]; then
+  echo "Development environment detected."
+  echo "Pulling latest changes in the current Git working tree ($SCRIPT_DIR) ..."
+  git -C "$SCRIPT_DIR" pull
+  exit 0
+fi
+
 if [ ! -d "$REPO_DIR" ]; then
   [ ! -d "$BUILD_DIR" ] && mkdir -p "$BUILD_DIR"
   cd "$BUILD_DIR"
