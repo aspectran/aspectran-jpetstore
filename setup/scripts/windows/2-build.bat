@@ -34,7 +34,7 @@ echo ========================================================================
 if "%DEV_MODE%"=="true" (
     echo Development environment detected. Building in %~dp0 ...
     pushd "%~dp0"
-    call mvn %MAVEN_ARGS% clean package -U -Dmaven.test.skip=true %*
+    call mvn %MAVEN_ARGS% clean package -Dmaven.test.skip=true %*
     popd
     exit /b 0
 )

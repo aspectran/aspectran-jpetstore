@@ -17,8 +17,7 @@ fi
 
 if [ "$DEV_MODE" = "true" ]; then
   echo "Development environment detected."
-  echo "Pulling latest changes in the current Git working tree ($SCRIPT_DIR) ..."
-  git -C "$SCRIPT_DIR" pull
+  echo "Skipping git pull in development mode to preserve local working tree."
   exit 0
 fi
 

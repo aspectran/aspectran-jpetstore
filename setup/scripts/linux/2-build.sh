@@ -25,7 +25,7 @@ echo "========================================================================"
 if [ "$DEV_MODE" = "true" ]; then
   echo "Development environment detected. Building in $SCRIPT_DIR ..."
   cd "$SCRIPT_DIR"
-  mvn $MAVEN_ARGS clean package -U -Dmaven.test.skip=true "$@"
+  mvn $MAVEN_ARGS clean package -Dmaven.test.skip=true "$@"
   exit 0
 fi
 

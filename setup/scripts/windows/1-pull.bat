@@ -20,10 +20,7 @@ if not defined DEV_MODE (
 
 if "%DEV_MODE%"=="true" (
   echo Development environment detected.
-  echo Pulling latest changes in the current Git working tree (%~dp0^) ...
-  pushd "%~dp0"
-  git pull
-  popd
+  echo Skipping git pull in development mode to preserve local working tree.
   exit /b 0
 )
 
