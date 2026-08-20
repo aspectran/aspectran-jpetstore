@@ -3,11 +3,19 @@
 
 set -e
 
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+. "$SCRIPT_DIR/app.conf"
+
 # Check if mvn is installed
 command -v mvn >/dev/null || { echo "Error: Maven (mvn) is not installed. Please install it and try again."; exit 1; }
 
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-. "$SCRIPT_DIR/app.conf"
+echo "========================================================================"
+echo "Build Environment"
+echo "------------------------------------------------------------------------"
+[ -n "$JAVA_HOME" ] && echo "JAVA_HOME: $JAVA_HOME"
+echo "which mvn: $(command -v mvn)"
+mvn -version
+echo "========================================================================"
 
 cd "$REPO_DIR"
 
