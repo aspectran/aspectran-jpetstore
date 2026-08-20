@@ -10,6 +10,23 @@ if %errorlevel% neq 0 exit /b 1
 rem Load environment variables
 call "%~dp0\setenv.bat"
 
+rem Auto-detect development mode if not explicitly set
+if not defined DEV_MODE (
+  if exist "%~dp0pom.xml" (
+    git -C "%~dp0." rev-parse --is-inside-work-tree >nul 2>nul
+    if not errorlevel 1 set "DEV_MODE=true"
+  )
+)
+
+if "%DEV_MODE%"=="true" (
+  echo Development environment detected.
+  echo Pulling latest changes in the current Git working tree (%~dp0^) ...
+  pushd "%~dp0"
+  git pull
+  popd
+  exit /b 0
+)
+
 if not exist "%REPO_DIR%" (
   if not exist "%BUILD_DIR%" mkdir "%BUILD_DIR%"
   pushd "%BUILD_DIR%"

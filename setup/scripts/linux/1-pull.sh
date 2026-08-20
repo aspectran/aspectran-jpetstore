@@ -10,6 +10,11 @@ command -v git >/dev/null || { echo "Error: git is not installed. Please install
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 . "$SCRIPT_DIR/app.conf"
 
+# Auto-detect development mode if not explicitly set
+if [ -z "$DEV_MODE" ] && [ -f "$SCRIPT_DIR/pom.xml" ] && git -C "$SCRIPT_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  DEV_MODE=true
+fi
+
 if [ "$DEV_MODE" = "true" ]; then
   echo "Development environment detected."
   echo "Pulling latest changes in the current Git working tree ($SCRIPT_DIR) ..."

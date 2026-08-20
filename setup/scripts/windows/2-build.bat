@@ -4,6 +4,14 @@ rem Builds the application using Maven and deploys the libraries.
 rem Load environment variables
 call "%~dp0\setenv.bat"
 
+rem Auto-detect development mode if not explicitly set
+if not defined DEV_MODE (
+    if exist "%~dp0pom.xml" (
+        git -C "%~dp0." rev-parse --is-inside-work-tree >nul 2>nul
+        if not errorlevel 1 set "DEV_MODE=true"
+    )
+)
+
 rem Check if mvn is installed
 where mvn >nul 2>nul
 if %errorlevel% neq 0 (
@@ -22,6 +30,14 @@ for /f "tokens=*" %%i in ('where mvn') do (
 :mvn_checked
 call mvn -version
 echo ========================================================================
+
+if "%DEV_MODE%"=="true" (
+    echo Development environment detected. Building in %~dp0 ...
+    pushd "%~dp0"
+    call mvn %MAVEN_ARGS% clean package -U -Dmaven.test.skip=true %*
+    popd
+    exit /b 0
+)
 
 pushd "%REPO_DIR%"
 call mvn %MAVEN_ARGS% clean package -U -Dmaven.test.skip=true %*

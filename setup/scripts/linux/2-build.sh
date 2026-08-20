@@ -6,6 +6,11 @@ set -e
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 . "$SCRIPT_DIR/app.conf"
 
+# Auto-detect development mode if not explicitly set
+if [ -z "$DEV_MODE" ] && [ -f "$SCRIPT_DIR/pom.xml" ] && git -C "$SCRIPT_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  DEV_MODE=true
+fi
+
 # Check if mvn is installed
 command -v mvn >/dev/null || { echo "Error: Maven (mvn) is not installed. Please install it and try again."; exit 1; }
 
@@ -31,4 +36,3 @@ mvn $MAVEN_ARGS clean package -U -Dmaven.test.skip=true "$@"
 echo "Deploying libraries to $DEPLOY_DIR/lib ..."
 rm -rf "${DEPLOY_DIR:?}"/lib/*
 [ -d "$REPO_DIR/app/lib" ] && cp -pR "$REPO_DIR"/app/lib/* "$DEPLOY_DIR/lib"
-rm -f "$DEPLOY_DIR/lib/.ignore"
