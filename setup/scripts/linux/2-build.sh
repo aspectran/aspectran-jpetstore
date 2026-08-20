@@ -11,7 +11,7 @@ SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
 cd "$REPO_DIR"
 
-mvn clean package -U -Dmaven.test.skip=true "$@"
+mvn $MAVEN_ARGS clean package -U -Dmaven.test.skip=true "$@"
 
 echo "Deploying libraries to $DEPLOY_DIR/lib ..."
 rm -rf "${DEPLOY_DIR:?}"/lib/*

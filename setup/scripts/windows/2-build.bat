@@ -10,7 +10,7 @@ rem Load environment variables
 call "%~dp0\setenv.bat"
 
 pushd "%REPO_DIR%"
-call mvn clean package -U -Dmaven.test.skip=true %1
+call mvn %MAVEN_ARGS% clean package -U -Dmaven.test.skip=true %*
 popd
 
 echo Deploying libraries to %DEPLOY_DIR%\lib ...
