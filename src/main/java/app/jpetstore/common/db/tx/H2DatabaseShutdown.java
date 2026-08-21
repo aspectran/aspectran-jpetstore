@@ -60,6 +60,11 @@ public final class H2DatabaseShutdown {
 
     public void executeShutdown(@NonNull Connection connection) throws SQLException {
         if (connection.getMetaData().getDatabaseProductName().equals("H2")) {
+            String url = connection.getMetaData().getURL();
+            if (url != null && (url.toUpperCase().contains("AUTO_SERVER=TRUE") || url.startsWith("jdbc:h2:tcp:"))) {
+                logger.debug("Skipping explicit H2 SHUTDOWN command in shared server mode: {}", url);
+                return;
+            }
             logger.info("Shutting down H2 database");
             connection.createStatement().execute("SHUTDOWN");
         } else {
