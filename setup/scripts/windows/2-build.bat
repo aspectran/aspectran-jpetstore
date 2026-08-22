@@ -56,7 +56,7 @@ if %errorlevel% neq 0 (
 if "%DEV_MODE%"=="true" (
     echo Development environment detected. Building in %~dp0 ...
     pushd "%~dp0"
-    call mvn %MAVEN_ARGS% clean package -Dmaven.test.skip=true %*
+    call mvn %MAVEN_ARGS% package -Dmaven.test.skip=true %*
     set "BUILD_EXIT_CODE=%errorlevel%"
     popd
     if %BUILD_EXIT_CODE% equ 0 (
@@ -68,7 +68,7 @@ if "%DEV_MODE%"=="true" (
 )
 
 pushd "%REPO_DIR%"
-call mvn %MAVEN_ARGS% clean package -Dmaven.test.skip=true %*
+call mvn %MAVEN_ARGS% -U clean package -Dmaven.test.skip=true %*
 set "BUILD_EXIT_CODE=%errorlevel%"
 popd
 if %BUILD_EXIT_CODE% equ 0 (

@@ -115,7 +115,7 @@ fi
 
 cd "$REPO_DIR"
 
-mvn $MAVEN_ARGS clean package -Dmaven.test.skip=true "$@"
+mvn $MAVEN_ARGS -U clean package -Dmaven.test.skip=true "$@"
 mark_build_success
 
 echo "Deploying libraries to $DEPLOY_DIR/lib ..."
