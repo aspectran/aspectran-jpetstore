@@ -21,8 +21,8 @@
 
 <mapper namespace="app.jpetstore.common.db.mapper.CategoryMapper">
 
-  <cache />
-  
+  <cache flushInterval="60000" size="512" readOnly="true" />
+
   <select id="getCategory" resultType="app.jpetstore.catalog.domain.Category">
     SELECT
       CATID AS categoryId,

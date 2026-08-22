@@ -21,8 +21,6 @@
 
 <mapper namespace="app.jpetstore.common.db.mapper.OrderMapper">
 
-  <cache />
-
   <select id="getOrder" resultType="app.jpetstore.order.domain.Order">
     SELECT
       BILLADDR1 AS billAddress1,

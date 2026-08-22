@@ -21,8 +21,6 @@
 
 <mapper namespace="app.jpetstore.common.db.mapper.LineItemMapper">
 
-  <cache />
-
   <select id="getLineItemsByOrderId" resultType="app.jpetstore.order.domain.LineItem">
     SELECT
       ORDERID,

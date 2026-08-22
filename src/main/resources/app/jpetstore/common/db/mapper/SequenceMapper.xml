@@ -21,8 +21,6 @@
 
 <mapper namespace="app.jpetstore.common.db.mapper.SequenceMapper">
 
-  <cache />
-
   <select id="getSequence" resultType="app.jpetstore.order.domain.Sequence">
     SELECT name, nextid
     FROM SEQUENCE

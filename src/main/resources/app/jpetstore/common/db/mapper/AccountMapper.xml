@@ -21,8 +21,6 @@
 
 <mapper namespace="app.jpetstore.common.db.mapper.AccountMapper">
 
-  <cache />
-
   <select id="getAccountByUsername" resultType="app.jpetstore.account.domain.Account">
     SELECT
       SIGNON.USERNAME,

@@ -5,7 +5,16 @@
 
     <settings>
         <!-- http://www.mybatis.org/mybatis-3/configuration.html -->
+        <!--
+            Granular Caching Strategy for Multi-Node Clustered Environment:
+            1) cacheEnabled=true & localCacheScope=SESSION: Enables selective L2 caching for high-traffic,
+               read-heavy catalog data (CategoryMapper, ProductMapper, ItemMapper) to maximize TPS during
+               performance benchmark tests.
+            2) Transaction-sensitive and sequence mappers (OrderMapper, SequenceMapper, AccountMapper) do not
+               declare <cache />, ensuring zero cache inconsistency or PK conflicts across cluster nodes.
+        -->
         <setting name="cacheEnabled" value="true"/>
+        <setting name="localCacheScope" value="SESSION"/>
         <setting name="lazyLoadingEnabled" value="false"/>
         <setting name="useColumnLabel" value="true"/>
         <setting name="useGeneratedKeys" value="false"/>

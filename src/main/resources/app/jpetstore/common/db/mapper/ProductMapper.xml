@@ -21,7 +21,7 @@
 
 <mapper namespace="app.jpetstore.common.db.mapper.ProductMapper">
 
-  <cache />
+  <cache flushInterval="60000" size="512" readOnly="true" />
 
   <select id="getProduct" resultType="app.jpetstore.catalog.domain.Product">
     SELECT
