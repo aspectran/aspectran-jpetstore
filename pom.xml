@@ -182,40 +182,29 @@
                         <fileset>
                             <directory>app/lib</directory>
                             <includes>
-                                <include>**</include>
+                                <include>**/*</include>
                             </includes>
-                            <excludes>
-                                <exclude>.gitignore</exclude>
-                            </excludes>
                         </fileset>
                         <fileset>
-                            <directory>app/logs</directory>
+                            <directory>app/config</directory>
                             <includes>
-                                <include>**</include>
+                                <include>**/*.xml.apon</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>app/work</directory>
+                            <includes>
+                                <include>**/*</include>
                             </includes>
                             <excludes>
-                                <exclude>.gitignore</exclude>
+                                <exclude>_sessions/**</exclude>
                             </excludes>
                         </fileset>
                         <fileset>
                             <directory>app/temp</directory>
                             <includes>
-                                <include>**</include>
+                                <include>**/*</include>
                             </includes>
-                            <excludes>
-                                <exclude>.gitignore</exclude>
-                            </excludes>
-                        </fileset>
-                        <fileset>
-                            <directory>app/work</directory>
-                            <includes>
-                                <include>_resource_*/</include>
-                                <include>_webroot/</include>
-                                <include>_webapps/</include>
-                            </includes>
-                            <excludes>
-                                <exclude>.gitignore</exclude>
-                            </excludes>
                         </fileset>
                     </filesets>
                 </configuration>
