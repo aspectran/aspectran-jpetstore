@@ -3,7 +3,7 @@ rem Deploys web application (front-end) files.
 rem It also restores specific web application files from the restore directory.
 
 rem Load environment variables
-call "%~dp0\setenv.bat"
+call "%~dp0setenv.bat"
 
 rem Auto-detect development mode if not explicitly set
 if not defined DEV_MODE (

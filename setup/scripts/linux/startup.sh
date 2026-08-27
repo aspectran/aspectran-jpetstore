@@ -4,6 +4,7 @@
 set -e
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+cd "$SCRIPT_DIR"
 . "$SCRIPT_DIR/app.conf"
 
 case "$1" in

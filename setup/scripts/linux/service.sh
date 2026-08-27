@@ -7,6 +7,7 @@ set -e
 command -v systemctl >/dev/null || { echo "Error: systemctl is not installed."; exit 1; }
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+cd "$SCRIPT_DIR"
 . "$SCRIPT_DIR/app.conf"
 
 case "$1" in

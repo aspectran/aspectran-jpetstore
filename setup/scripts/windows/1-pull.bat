@@ -8,7 +8,7 @@ if %errorlevel% neq 0 echo Error: git is not installed. Please install it and tr
 if %errorlevel% neq 0 exit /b 1
 
 rem Load environment variables
-call "%~dp0\setenv.bat"
+call "%~dp0setenv.bat"
 
 rem Auto-detect development mode if not explicitly set
 if not defined DEV_MODE (

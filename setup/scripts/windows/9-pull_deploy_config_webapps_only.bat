@@ -1,9 +1,9 @@
 @echo off
 rem Pulls the latest source and deploys configuration and webapps files.
 
-call "%~dp0\1-pull.bat" %*
+call "%~dp01-pull.bat" %*
 if errorlevel 1 exit /b 1
-call "%~dp0\3-deploy_config.bat"
+call "%~dp03-deploy_config.bat"
 if errorlevel 1 exit /b 1
-call "%~dp0\4-deploy_webapps.bat"
+call "%~dp04-deploy_webapps.bat"
 if errorlevel 1 exit /b 1
