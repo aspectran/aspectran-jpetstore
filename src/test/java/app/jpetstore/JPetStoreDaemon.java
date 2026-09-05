@@ -32,9 +32,9 @@ public class JPetStoreDaemon {
         try {
             System.setProperty(EnvironmentProfiles.ACTIVE_PROFILES_PROPERTY, "daemon");
             File current = ResourceUtils.getResourceAsFile(".");
-            File root = new File(current, "../../app");
-            System.setProperty(BASE_PATH_PROPERTY, root.getCanonicalPath()); // for logback
-            String[] args2 = { root.getCanonicalPath(), "config/aspectran-config.apon" };
+            File baseDir = new File(current, "../../app");
+            System.setProperty(BASE_PATH_PROPERTY, baseDir.getCanonicalPath()); // for logback
+            String[] args2 = { baseDir.getCanonicalPath(), "config/aspectran-config.apon" };
             DefaultDaemon.main(args2);
         } catch (Exception e) {
             e.printStackTrace(System.err);
