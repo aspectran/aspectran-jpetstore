@@ -37,7 +37,6 @@
         <settings>
             <setting name="characterEncoding" value="utf-8"/>
             <setting name="viewDispatcher" value="defaultJspTemplate"/>
-            <setting name="proxyProtocolAware" value="true"/>
         </settings>
         <advice>
             <before>
