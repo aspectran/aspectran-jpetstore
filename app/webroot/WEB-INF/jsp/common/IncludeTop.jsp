@@ -30,7 +30,7 @@
 	<div id="Search">
 		<div id="SearchContent">
 			<form action="<aspectran:url value="/catalog/searchProducts"/>">
-				<div class="input-group">
+				<div class="input-group flex-nowrap">
 					<input class="input-group-field" type="text" name="keyword" placeholder="Product Search">
 					<div class="input-group-button">
 						<button type="submit" class="button">Search</button>

@@ -77,7 +77,7 @@
                 </ul>
                 <div class="quick-search-box">
                     <form name="google_quick_search">
-                        <div class="input-group">
+                        <div class="input-group flex-nowrap">
                             <input class="input-group-field" type="text" name="keyword" placeholder="Search">
                             <div class="input-group-button">
                                 <button type="submit" class="button hollow"><i class="fi-magnifying-glass"></i></button>
