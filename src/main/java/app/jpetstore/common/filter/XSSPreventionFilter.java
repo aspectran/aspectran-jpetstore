@@ -2,6 +2,7 @@ package app.jpetstore.common.filter;
 
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.adapter.RequestAdapter;
+import com.aspectran.utils.MultiValueMap;
 import com.aspectran.utils.apon.ArrayParameters;
 import org.owasp.esapi.Encoder;
 import org.owasp.esapi.reference.DefaultEncoder;
@@ -103,8 +104,9 @@ public class XSSPreventionFilter {
     public void filter(Translet translet) {
         if (translet != null && translet.getRequestAdapter() != null) {
             RequestAdapter requestAdapter = translet.getRequestAdapter();
-            if (requestAdapter.hasHeaders()) {
-                for (List<String> list : requestAdapter.getHeaderMap().values()) {
+            MultiValueMap<String, String> headerMap = requestAdapter.getHeaderMap();
+            if (headerMap != null && !headerMap.isEmpty()) {
+                for (List<String> list : headerMap.values()) {
                     list.replaceAll(this::stripXSS);
                 }
             }
