@@ -45,31 +45,59 @@ public final class H2DatabaseShutdown {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
+    /**
+     * Executes the H2 database shutdown command.
+     * This method is invoked when the bean is destroyed.
+     */
     @Destroy(profile = "h2")
     public void shutdown() {
         if (sqlSessionFactory != null) {
             try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
                 executeShutdown(sqlSession.getConnection());
             } catch (SQLException e) {
-                if (!e.getMessage().contains("Database is already closed")) {
+                if (isIgnorableException(e)) {
+                    logger.debug("H2 database closed: {}", e.getMessage());
+                } else {
                     logger.error("Failed to shutdown H2 database", e);
                 }
             }
         }
     }
 
+    /**
+     * Executes the 'SHUTDOWN' command on the given database connection if it is an H2 database.
+     * @param connection the database connection
+     * @throws SQLException if a database access error occurs
+     */
     public void executeShutdown(@NonNull Connection connection) throws SQLException {
-        if (connection.getMetaData().getDatabaseProductName().equals("H2")) {
+        if ("H2".equals(connection.getMetaData().getDatabaseProductName())) {
             String url = connection.getMetaData().getURL();
-            if (url != null && (url.toUpperCase().contains("AUTO_SERVER=TRUE") || url.startsWith("jdbc:h2:tcp:"))) {
-                logger.debug("Skipping explicit H2 SHUTDOWN command in shared server mode: {}", url);
-                return;
+            if (url != null) {
+                String upperUrl = url.toUpperCase();
+                if (upperUrl.contains("AUTO_SERVER=TRUE") || upperUrl.contains(":H2:TCP:") || upperUrl.contains(":H2:SSL:")) {
+                    logger.debug("Skipping explicit H2 SHUTDOWN command in shared server mode: {}", url);
+                    return;
+                }
             }
             logger.info("Shutting down H2 database");
             connection.createStatement().execute("SHUTDOWN");
         } else {
             logger.info("Not shutting down non-H2 database");
         }
+    }
+
+    private boolean isIgnorableException(@NonNull SQLException e) {
+        int errorCode = e.getErrorCode();
+        // 90067: CONNECTION_BROKEN_1 ("Connection is broken: session closed")
+        // 90098: DATABASE_CALLED_AT_SHUTDOWN ("The database has been closed")
+        // 90007: DATABASE_ALREADY_CLOSED ("The database is already closed")
+        if (errorCode == 90067 || errorCode == 90098 || errorCode == 90007) {
+            return true;
+        }
+        String message = e.getMessage();
+        return (message != null && (message.contains("Database is already closed") ||
+                message.contains("session closed") ||
+                message.contains("Connection is broken")));
     }
 
 }
