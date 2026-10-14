@@ -44,12 +44,7 @@
             </bean>
         </property>
         <property name="servletContainerInitializers" type="array">
-            <bean class="com.aspectran.undertow.server.servlet.TowJasperInitializer">
-                <property name="tldResources" type="array">
-                    <value>classpath:com/aspectran/web/support/tags/aspectran.tld</value>
-                    <value>/webroot/WEB-INF/taglibs/</value>
-                </property>
-            </bean>
+            <bean class="com.aspectran.undertow.server.servlet.TowJasperInitializer"/>
         </property>
         <property name="webSocketServerContainerInitializer">
             <bean class="com.aspectran.undertow.server.servlet.TowWebSocketServerContainerInitializer">
