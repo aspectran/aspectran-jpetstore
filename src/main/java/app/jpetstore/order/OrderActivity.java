@@ -177,7 +177,7 @@ public class OrderActivity {
     @Request("/order/viewOrder")
     @Dispatch("order/ViewOrder")
     @Action("order")
-    public Order viewOrder(int orderId) {
+    public Order viewOrder(@NonNull Integer orderId) {
         return orderService.getOrder(orderId);
     }
 
