@@ -25,6 +25,7 @@
     SELECT name, nextid
     FROM SEQUENCE
     WHERE NAME = #{name}
+    FOR UPDATE
   </select>
 
   <update id="updateSequence">

@@ -26,6 +26,8 @@ import app.jpetstore.order.domain.Sequence;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
@@ -39,7 +41,6 @@ import java.util.function.LongSupplier;
  * @author Juho Jeong
  */
 @Component
-@Bean("orderService")
 public class OrderService {
 
     private final ItemMapper.Dao itemDao;
@@ -48,7 +49,7 @@ public class OrderService {
 
     private final LineItemMapper.Dao lineItemDao;
 
-    private final SequenceMapper.Dao sequenceDao;
+    private final SqlSessionFactory sqlSessionFactory;
 
     private final Object sequenceLock = new Object();
 
@@ -56,11 +57,11 @@ public class OrderService {
     public OrderService(ItemMapper.Dao itemDao,
                         OrderMapper.Dao orderDao,
                         LineItemMapper.Dao lineItemDao,
-                        SequenceMapper.Dao sequenceDao) {
+                        SqlSessionFactory sqlSessionFactory) {
         this.itemDao = itemDao;
         this.orderDao = orderDao;
         this.lineItemDao = lineItemDao;
-        this.sequenceDao = sequenceDao;
+        this.sqlSessionFactory = sqlSessionFactory;
     }
 
     /**
@@ -105,8 +106,10 @@ public class OrderService {
             order.setLineItems(lineItemDao.getLineItemsByOrderId(orderId));
             order.getLineItems().forEach(lineItem -> {
                 Item item = itemDao.getItem(lineItem.getItemId());
-                item.setQuantity(itemDao.getInventoryQuantity(lineItem.getItemId()));
-                lineItem.setItem(item);
+                if (item != null) {
+                    item.setQuantity(itemDao.getInventoryQuantity(lineItem.getItemId()));
+                    lineItem.setItem(item);
+                }
             });
         }
         return order;
@@ -132,14 +135,18 @@ public class OrderService {
     public int getNextId(String name) {
         int nextId;
         synchronized (sequenceLock) {
-            Sequence sequence = sequenceDao.getSequence(new Sequence(name, -1));
-            if (sequence == null) {
-                throw new RuntimeException(
-                        "Error: A null sequence was returned from the database (could not get next " + name + " sequence)");
+            try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+                SequenceMapper sequenceMapper = sqlSession.getMapper(SequenceMapper.class);
+                Sequence sequence = sequenceMapper.getSequence(new Sequence(name, -1));
+                if (sequence == null) {
+                    throw new RuntimeException(
+                            "Error: A null sequence was returned from the database (could not get next " + name + " sequence)");
+                }
+                nextId = sequence.getNextId();
+                Sequence parameterObject = new Sequence(name, nextId + 1);
+                sequenceMapper.updateSequence(parameterObject);
+                sqlSession.commit();
             }
-            nextId = sequence.getNextId();
-            Sequence parameterObject = new Sequence(name, nextId + 1);
-            sequenceDao.updateSequence(parameterObject);
         }
         return nextId;
     }

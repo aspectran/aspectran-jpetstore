@@ -26,7 +26,6 @@ import app.jpetstore.user.UserSessionManager;
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.component.bean.annotation.Action;
 import com.aspectran.core.component.bean.annotation.Autowired;
-import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.bean.annotation.Dispatch;
 import com.aspectran.core.component.bean.annotation.ParamItem;
@@ -34,7 +33,6 @@ import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
 import com.aspectran.web.support.http.HttpStatusSetter;
-import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -44,7 +42,6 @@ import java.util.List;
  * @author Juho Jeong
  */
 @Component
-@Bean
 public class OrderActivity {
 
     private final OrderService orderService;
@@ -177,8 +174,17 @@ public class OrderActivity {
     @Request("/order/viewOrder")
     @Dispatch("order/ViewOrder")
     @Action("order")
-    public Order viewOrder(@NonNull Integer orderId) {
-        return orderService.getOrder(orderId);
+    public Order viewOrder(Translet translet, Integer orderId) {
+        if (orderId == null) {
+            translet.redirect("/order/listOrders");
+            return null;
+        }
+        Order order = orderService.getOrder(orderId);
+        if (order == null) {
+            translet.redirect("/order/listOrders");
+            return null;
+        }
+        return order;
     }
 
     /**
@@ -186,8 +192,10 @@ public class OrderActivity {
      */
     @Request("/order/deleteOrder/${orderId}")
     @Redirect("/order/listOrders")
-    public void deleteOrder(@NonNull Integer orderId) {
-        orderService.deleteOrder(orderId);
+    public void deleteOrder(Integer orderId) {
+        if (orderId != null) {
+            orderService.deleteOrder(orderId);
+        }
     }
 
 }
