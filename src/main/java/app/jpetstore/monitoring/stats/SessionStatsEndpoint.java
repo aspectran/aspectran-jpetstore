@@ -131,7 +131,6 @@ public class SessionStatsEndpoint extends SimplifiedEndpoint {
         stats.setExpiredSessionCount(statistics.getNumberOfExpired());
         stats.setActiveSessionCount(statistics.getNumberOfActives());
         stats.setHighestActiveSessionCount(statistics.getHighestNumberOfActives());
-        stats.setEvictedSessionCount(statistics.getNumberOfUnmanaged());
         stats.setRejectedSessionCount(statistics.getNumberOfRejected());
         stats.setElapsedTime(formatDuration(statistics.getStartTime()));
 
