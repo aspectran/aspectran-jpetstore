@@ -85,6 +85,12 @@
     FROM ORDERS, ORDERSTATUS
     WHERE ORDERS.USERID = #{params.username}
       AND ORDERS.ORDERID = ORDERSTATUS.ORDERID
+      <if test="params.orderDateFrom != null">
+        AND ORDERDATE &gt;= #{params.orderDateFrom}
+      </if>
+      <if test="params.orderDateTo != null">
+        AND ORDERDATE &lt;= #{params.orderDateTo}
+      </if>
     ORDER BY ORDERDATE DESC
     LIMIT #{size} OFFSET #{offset}
   </select>
@@ -94,6 +100,12 @@
     FROM ORDERS, ORDERSTATUS
     WHERE ORDERS.USERID = #{params.username}
       AND ORDERS.ORDERID = ORDERSTATUS.ORDERID
+      <if test="params.orderDateFrom != null">
+        AND ORDERS.ORDERDATE &gt;= #{params.orderDateFrom}
+      </if>
+      <if test="params.orderDateTo != null">
+        AND ORDERS.ORDERDATE &lt;= #{params.orderDateTo}
+      </if>
   </select>
 
   <insert id="insertOrder">

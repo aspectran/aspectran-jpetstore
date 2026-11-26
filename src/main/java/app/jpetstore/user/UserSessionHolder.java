@@ -24,8 +24,8 @@ import com.aspectran.utils.Assert;
 import org.jspecify.annotations.NonNull;
 
 @Component
-@Bean("userSessionManager")
-public class UserSessionManager implements ActivityContextAware {
+@Bean("userSessionHolder")
+public class UserSessionHolder implements ActivityContextAware {
 
     public static final String USER_SESSION_KEY = "user";
 
@@ -78,13 +78,6 @@ public class UserSessionManager implements ActivityContextAware {
 
     public void expire() {
         getSessionAdapter().invalidate();
-    }
-
-    public void checkAuthentication() {
-        UserSession userSession = get(false);
-        if (userSession == null || !userSession.isAuthenticated()) {
-            throw new UserAuthRequiredException();
-        }
     }
 
     @NonNull

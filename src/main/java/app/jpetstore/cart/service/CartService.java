@@ -19,7 +19,7 @@ import app.jpetstore.cart.domain.Cart;
 import app.jpetstore.cart.domain.CartItem;
 import app.jpetstore.catalog.service.CatalogService;
 import app.jpetstore.order.domain.Item;
-import app.jpetstore.user.UserSessionManager;
+import app.jpetstore.user.UserSessionHolder;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
 import com.aspectran.core.component.bean.annotation.Component;
@@ -37,10 +37,10 @@ public class CartService {
 
     private final CatalogService catalogService;
 
-    private final UserSessionManager sessionManager;
+    private final UserSessionHolder sessionManager;
 
     @Autowired
-    public CartService(CatalogService catalogService, UserSessionManager sessionManager) {
+    public CartService(CatalogService catalogService, UserSessionHolder sessionManager) {
         this.catalogService = catalogService;
         this.sessionManager = sessionManager;
     }

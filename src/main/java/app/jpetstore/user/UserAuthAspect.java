@@ -16,7 +16,6 @@
 package app.jpetstore.user;
 
 import com.aspectran.core.activity.Translet;
-import com.aspectran.core.component.bean.annotation.Action;
 import com.aspectran.core.component.bean.annotation.Aspect;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
@@ -42,23 +41,24 @@ import java.util.Map;
 )
 public class UserAuthAspect {
 
-    private final UserSessionManager userSessionManager;
+    private final UserSessionHolder userSessionHolder;
 
     @Autowired
-    public UserAuthAspect(UserSessionManager userSessionManager) {
-        this.userSessionManager = userSessionManager;
+    public UserAuthAspect(UserSessionHolder userSessionHolder) {
+        this.userSessionHolder = userSessionHolder;
     }
 
     @Before
     public void before() {
-        userSessionManager.checkAuthentication();
+        UserSession userSession = userSessionHolder.get(false);
+        if (userSession == null || !userSession.isAuthenticated()) {
+            throw new UserAuthRequiredException();
+        }
     }
 
     @ExceptionThrown(UserAuthRequiredException.class)
-    @Action("msg")
-    public String exceptionThrown(@NonNull Translet translet) {
+    public void exceptionThrown(@NonNull Translet translet) {
         translet.redirect("/account/signonForm", Map.of("referer", translet.getRequestName()));
-        return "User Authentication Required";
     }
 
 }

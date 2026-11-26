@@ -21,7 +21,7 @@ import app.jpetstore.catalog.domain.Product;
 import app.jpetstore.catalog.service.CatalogService;
 import app.jpetstore.common.validation.BeanValidator;
 import app.jpetstore.user.UserSession;
-import app.jpetstore.user.UserSessionManager;
+import app.jpetstore.user.UserSessionHolder;
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.component.bean.annotation.Autowired;
 import com.aspectran.core.component.bean.annotation.Bean;
@@ -50,12 +50,12 @@ public class AccountActivity {
 
     public CatalogService catalogService;
 
-    public UserSessionManager sessionManager;
+    public UserSessionHolder sessionManager;
 
     @Autowired
     public AccountActivity(AccountService accountService,
                            CatalogService catalogService,
-                           UserSessionManager sessionManager) {
+                           UserSessionHolder sessionManager) {
         this.accountService = accountService;
         this.catalogService = catalogService;
         this.sessionManager = sessionManager;

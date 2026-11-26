@@ -22,7 +22,7 @@ import app.jpetstore.common.pagination.PageInfo;
 import app.jpetstore.common.validation.BeanValidator;
 import app.jpetstore.order.domain.Order;
 import app.jpetstore.order.service.OrderService;
-import app.jpetstore.user.UserSessionManager;
+import app.jpetstore.user.UserSessionHolder;
 import com.aspectran.core.activity.Translet;
 import com.aspectran.core.component.bean.annotation.Action;
 import com.aspectran.core.component.bean.annotation.Autowired;
@@ -32,8 +32,13 @@ import com.aspectran.core.component.bean.annotation.ParamItem;
 import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
+import com.aspectran.utils.StringUtils;
 import com.aspectran.web.support.http.HttpStatusSetter;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
@@ -48,12 +53,12 @@ public class OrderActivity {
 
     private final CartService cartService;
 
-    private final UserSessionManager sessionManager;
+    private final UserSessionHolder sessionManager;
 
     @Autowired
     public OrderActivity(OrderService orderService,
                          CartService cartService,
-                         UserSessionManager sessionManager) {
+                         UserSessionHolder sessionManager) {
         this.orderService = orderService;
         this.cartService = cartService;
         this.sessionManager = sessionManager;
@@ -65,10 +70,24 @@ public class OrderActivity {
     @Request("/order/listOrders")
     @Dispatch("order/ListOrders")
     @Action("orderList")
-    public List<Order> listOrders(Translet translet) {
+    public List<Order> listOrders(Translet translet, String startDate, String endDate) {
         Account account = sessionManager.get().getAccount();
         PageInfo pageInfo = PageInfo.of(translet, 10)
                 .withParam("username", account.getUsername());
+        if (StringUtils.hasText(startDate)) {
+            try {
+                LocalDate start = LocalDate.parse(startDate);
+                pageInfo.withParam("orderDateFrom", Timestamp.valueOf(start.atStartOfDay()));
+            } catch (DateTimeParseException ignored) {
+            }
+        }
+        if (StringUtils.hasText(endDate)) {
+            try {
+                LocalDate end = LocalDate.parse(endDate);
+                pageInfo.withParam("orderDateTo", Timestamp.valueOf(end.atTime(LocalTime.MAX)));
+            } catch (DateTimeParseException ignored) {
+            }
+        }
         translet.setAttribute("pageInfo", pageInfo);
         return orderService.getOrdersByUsername(pageInfo);
     }

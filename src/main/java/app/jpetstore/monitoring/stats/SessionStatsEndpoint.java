@@ -16,7 +16,7 @@
 package app.jpetstore.monitoring.stats;
 
 import app.jpetstore.user.UserSession;
-import app.jpetstore.user.UserSessionManager;
+import app.jpetstore.user.UserSessionHolder;
 import com.aspectran.core.component.bean.annotation.Component;
 import com.aspectran.core.component.session.ManagedSession;
 import com.aspectran.core.component.session.SessionManager;
@@ -140,7 +140,7 @@ public class SessionStatsEndpoint extends SimplifiedEndpoint {
         for (String sessionId : sessionIds) {
             ManagedSession session = sessionManager.getSession(sessionId);
             if (session != null) {
-                UserSession userSession = session.getAttribute(UserSessionManager.USER_SESSION_KEY);
+                UserSession userSession = session.getAttribute(UserSessionHolder.USER_SESSION_KEY);
                 String loggedIn = (userSession != null && userSession.isAuthenticated() ? "1" : "0");
                 String username = (userSession != null && userSession.getAccount() != null ?
                         "(" + userSession.getAccount().getUsername() + ") " : "");
