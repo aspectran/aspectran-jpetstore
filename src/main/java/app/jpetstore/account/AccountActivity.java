@@ -50,15 +50,15 @@ public class AccountActivity {
 
     public CatalogService catalogService;
 
-    public UserSessionHolder sessionManager;
+    public UserSessionHolder userSessionHolder;
 
     @Autowired
     public AccountActivity(AccountService accountService,
                            CatalogService catalogService,
-                           UserSessionHolder sessionManager) {
+                           UserSessionHolder userSessionHolder) {
         this.accountService = accountService;
         this.catalogService = catalogService;
-        this.sessionManager = sessionManager;
+        this.userSessionHolder = userSessionHolder;
     }
 
     @Request("/account/newAccountForm")
@@ -100,10 +100,10 @@ public class AccountActivity {
     @Dispatch("account/EditAccountForm")
     public void editAccountForm(@NonNull Translet translet) {
         if (translet.getAttribute("account") == null) {
-            translet.setAttribute("account", sessionManager.get().getAccount());
+            translet.setAttribute("account", userSessionHolder.get().getAccount());
         } else {
             Account account = translet.getAttribute("account");
-            account.setUsername(sessionManager.get().getAccount().getUsername());
+            account.setUsername(userSessionHolder.get().getAccount().getUsername());
         }
     }
 
@@ -124,16 +124,16 @@ public class AccountActivity {
             return;
         }
 
-        String username = sessionManager.get().getAccount().getUsername();
+        String username = userSessionHolder.get().getAccount().getUsername();
         account.setUsername(username);
         accountService.updateAccount(account);
 
         Account account2 = accountService.getAccount(account.getUsername());
         List<Product> products = catalogService.getProductListByCategory(account2.getFavouriteCategoryId());
-        UserSession userSession = sessionManager.get();
+        UserSession userSession = userSessionHolder.get();
         userSession.setAccount(account2);
         userSession.setProducts(products);
-        sessionManager.save(userSession);
+        userSessionHolder.save(userSession);
     }
 
     /**
@@ -159,11 +159,11 @@ public class AccountActivity {
         } else {
             account.setPassword(null);
             List<Product> products = catalogService.getProductListByCategory(account.getFavouriteCategoryId());
-            UserSession userSession = sessionManager.get();
+            UserSession userSession = userSessionHolder.get();
             userSession.setAccount(account);
             userSession.setProducts(products);
             userSession.setAuthenticated(true);
-            sessionManager.save(userSession);
+            userSessionHolder.save(userSession);
             if (StringUtils.hasLength(referer)) {
                 translet.redirect(referer);
             }
@@ -176,7 +176,7 @@ public class AccountActivity {
     @Request("/account/signoff")
     @Redirect("/")
     public void signoff() {
-        sessionManager.expire();
+        userSessionHolder.expire();
     }
 
 }
