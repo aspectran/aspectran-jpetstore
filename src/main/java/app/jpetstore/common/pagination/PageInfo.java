@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.function.LongSupplier;
 
 /**
- * <p>Created: 2025-04-21</p>
+ * Paging information helper class.
  */
 public class PageInfo {
 

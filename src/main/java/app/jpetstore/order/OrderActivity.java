@@ -53,15 +53,15 @@ public class OrderActivity {
 
     private final CartService cartService;
 
-    private final UserSessionHolder sessionManager;
+    private final UserSessionHolder userSessionHolder;
 
     @Autowired
     public OrderActivity(OrderService orderService,
                          CartService cartService,
-                         UserSessionHolder sessionManager) {
+                         UserSessionHolder userSessionHolder) {
         this.orderService = orderService;
         this.cartService = cartService;
-        this.sessionManager = sessionManager;
+        this.userSessionHolder = userSessionHolder;
     }
 
     /**
@@ -71,7 +71,7 @@ public class OrderActivity {
     @Dispatch("order/ListOrders")
     @Action("orderList")
     public List<Order> listOrders(Translet translet, String startDate, String endDate) {
-        Account account = sessionManager.get().getAccount();
+        Account account = userSessionHolder.get().getAccount();
         PageInfo pageInfo = PageInfo.of(translet, 10)
                 .withParam("username", account.getUsername());
         if (StringUtils.hasText(startDate)) {
@@ -99,12 +99,12 @@ public class OrderActivity {
     @Dispatch("order/NewOrderForm")
     @Action("order")
     public Order newOrderForm() {
-        Account account = sessionManager.get().getAccount();
+        Account account = userSessionHolder.get().getAccount();
         Cart cart = cartService.getCart();
         if (cart != null && cart.getNumberOfItems() > 0) {
             Order order = new Order();
             order.initialize(account, cart);
-            sessionManager.get().setOrder(order);
+            userSessionHolder.get().setOrder(order);
             return order;
         } else {
             return null;
@@ -123,7 +123,7 @@ public class OrderActivity {
                          boolean shippingAddressRequired,
                          boolean confirmed,
                          BeanValidator beanValidator) {
-        Order order2 = sessionManager.get().getOrder();
+        Order order2 = userSessionHolder.get().getOrder();
         if (order2 == null) {
             translet.redirect("/cart/viewCart");
             return;
@@ -156,7 +156,7 @@ public class OrderActivity {
         } else if (!confirmed) {
             translet.dispatch("order/ConfirmOrder");
         } else {
-            sessionManager.get().clearOrder();
+            userSessionHolder.get().clearOrder();
             translet.redirect("/cart/viewCart");
         }
     }
@@ -174,14 +174,14 @@ public class OrderActivity {
     )
     @Action("order")
     public Order submitOrder(Translet translet) {
-        Order order = sessionManager.get().getOrder();
+        Order order = userSessionHolder.get().getOrder();
         if (order == null) {
             translet.redirect("/cart/viewCart");
             return null;
         }
         orderService.insertOrder(order);
 
-        sessionManager.get().clearOrder();
+        userSessionHolder.get().clearOrder();
         cartService.getCart().clear();
 
         return order;

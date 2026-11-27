@@ -37,16 +37,16 @@ public class CartService {
 
     private final CatalogService catalogService;
 
-    private final UserSessionHolder sessionManager;
+    private final UserSessionHolder userSessionHolder;
 
     @Autowired
-    public CartService(CatalogService catalogService, UserSessionHolder sessionManager) {
+    public CartService(CatalogService catalogService, UserSessionHolder userSessionHolder) {
         this.catalogService = catalogService;
-        this.sessionManager = sessionManager;
+        this.userSessionHolder = userSessionHolder;
     }
 
     public Cart getCart() {
-        return sessionManager.get().getCart();
+        return userSessionHolder.get().getCart();
     }
 
     public void addItemToCart(String itemId) {
