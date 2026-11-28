@@ -30,10 +30,12 @@ import com.aspectran.core.component.bean.annotation.Dispatch;
 import com.aspectran.core.component.bean.annotation.Redirect;
 import com.aspectran.core.component.bean.annotation.Request;
 import com.aspectran.core.component.bean.annotation.RequestToPost;
+import com.aspectran.utils.ExceptionUtils;
 import com.aspectran.utils.StringUtils;
 import com.aspectran.web.support.http.HttpStatusSetter;
 import org.jspecify.annotations.NonNull;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
@@ -84,12 +86,17 @@ public class AccountActivity {
         }
 
         try {
-            translet.setAttribute("account", account);
-            translet.setAttribute("errors", Map.of(
-                    "usernameDuplicated", translet.getMessage("common.validation.usernameDuplicated.message")));
             accountService.insertAccount(account);
         } catch (Exception e) {
-            translet.forward("/account/newAccountForm");
+            if (ExceptionUtils.hasCause(e, SQLIntegrityConstraintViolationException.class)) {
+                HttpStatusSetter.badRequest(translet);
+                translet.setAttribute("account", account);
+                translet.setAttribute("errors", Map.of(
+                        "usernameDuplicated", translet.getMessage("common.validation.usernameDuplicated.message")));
+                translet.forward("/account/newAccountForm");
+                return;
+            }
+            throw e;
         }
     }
 
